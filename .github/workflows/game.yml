@@ -11,67 +11,79 @@ jobs:
   download-games:
     name: Download and extract J2ME games
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y unzip
-          python -m pip install --upgrade huggingface_hub
+          sudo apt-get install -y unzip curl
 
-      - name: Download J2ME Vault
+      - name: Download J2ME archives from Internet Archive
         run: |
-          hf download M5-Dev/j2me-vault \
-            --repo-type dataset \
-            --local-dir vault
+          mkdir -p downloads
+
+          curl -L --fail --retry 10 --retry-all-errors \
+            --retry-delay 10 --continue-at - \
+            "https://archive.org/download/j2me-vault/Games.zip" \
+            -o downloads/Games.zip
+
+          curl -L --fail --retry 10 --retry-all-errors \
+            --retry-delay 10 --continue-at - \
+            "https://archive.org/download/j2me-vault/J2ME_Roms.zip" \
+            -o downloads/J2ME_Roms.zip
 
       - name: Extract ZIP archives
         run: |
           mkdir -p extracted
 
-          find vault -type f -iname '*.zip' -print0 |
-          while IFS= read -r -d '' archive; do
+          for archive in downloads/*.zip; do
             echo "Extracting: $archive"
-            unzip -oq "$archive" -d extracted || true
+            unzip -oq "$archive" -d extracted
           done
 
       - name: Collect and verify JAR files
         run: |
-          mkdir -p output/games
+          mkdir -p app/src/main/assets/games
 
-          find vault extracted -type f -iname '*.jar' -print0 |
+          find extracted -type f -iname '*.jar' -print0 |
           while IFS= read -r -d '' jar; do
             if unzip -tqq "$jar"; then
               hash=$(sha256sum "$jar" | cut -c1-12)
               name=$(basename "$jar")
-              target="output/games/${hash}_${name}"
+              target="app/src/main/assets/games/${hash}_${name}"
 
               if [ ! -f "$target" ]; then
                 cp "$jar" "$target"
               fi
+            else
+              echo "Invalid JAR skipped: $jar"
             fi
           done
 
       - name: Generate game manifest
         run: |
-          cd output
-          find games -type f -name '*.jar' -print0 |
+          mkdir -p output
+
+          find app/src/main/assets/games \
+            -type f -name '*.jar' -print0 |
             sort -z |
-            xargs -0 sha256sum > SHA256SUMS.txt
+            xargs -0 -r sha256sum > output/SHA256SUMS.txt
 
           echo "Total games:"
-          find games -type f -name '*.jar' | wc -l
+          find app/src/main/assets/games -type f -name '*.jar' | wc -l
 
-          du -sh games
+          du -sh app/src/main/assets/games
 
       - name: Upload personal game archive
         uses: actions/upload-artifact@v4
         with:
           name: J2ME-Personal-Game-Archive
           path: |
-            output/games/
+            app/src/main/assets/games/
             output/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 3
