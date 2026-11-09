@@ -1,3 +1,4 @@
+
 name: Automated CI builds
 
 on:
@@ -18,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          submodules: 'true'
+          submodules: true
           fetch-depth: 0
 
       - name: Set up JDK 21
@@ -34,47 +35,53 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', 'gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle-
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-      - name: Decode Android keystore
+      - name: Decode Android keystore (optional)
         env:
           ENCODED_KEYSTORE: ${{ secrets.SIGNING_KEY }}
           ENCODED_PROPS: ${{ secrets.KEYSTORE_PROPERTIES }}
         run: |
-          if [ -z "$ENCODED_KEYSTORE" ] || [ -z "$ENCODED_PROPS" ]; then
-            echo "::error::Set repository secrets SIGNING_KEY and KEYSTORE_PROPERTIES"
-            exit 1
+          if [ -n "$ENCODED_KEYSTORE" ] && [ -n "$ENCODED_PROPS" ]; then
+            echo "$ENCODED_KEYSTORE" | base64 -di > app/keystore.jks
+            echo "$ENCODED_PROPS" | base64 -di > keystore.properties
+            echo "Custom release signing enabled."
+          else
+            echo "No signing secrets found. Building unsigned release APK."
           fi
-          printf '%s' "$ENCODED_KEYSTORE" | base64 -di > app/keystore.jks
-          printf '%s' "$ENCODED_PROPS" | base64 -di > keystore.properties
 
       - name: Build release APKs
         run: |
           chmod +x gradlew
-          ./gradlew assembleDevRelease
+          ./gradlew --no-daemon :app:assembleDevRelease
 
       - name: Collect APK
         run: |
           mkdir -p dist
           cp app/build/outputs/apk/dev/release/*.apk dist/
+          ls -lh dist/
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
         with:
           name: apks
           path: dist/*.apk
+          if-no-files-found: error
 
       - name: Move continuous tag
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           base="repos/$GITHUB_REPOSITORY/git"
+
           if gh api "$base/ref/tags/continuous" >/dev/null 2>&1; then
             gh api -X PATCH "$base/refs/tags/continuous" \
               -f sha="$GITHUB_SHA" -F force=true >/dev/null
           else
             gh api -X POST "$base/refs" \
-              -f ref="refs/tags/continuous" -f sha="$GITHUB_SHA" >/dev/null
+              -f ref="refs/tags/continuous" \
+              -f sha="$GITHUB_SHA" >/dev/null
           fi
 
       - name: Update GitHub release
@@ -83,9 +90,13 @@ jobs:
           tag: continuous
           commit: ${{ github.sha }}
           name: Automated CI builds
-          body: Automated builds from the latest commits on master.
+          body: |
+            Automated builds from the latest commits on master.
+
+            These APKs are built without a custom signing key when signing secrets are not configured.
           prerelease: true
           allowUpdates: true
           removeArtifacts: true
           artifactErrorsFailBuild: true
-          artifacts: dist/*.apk
+          artifa
+          cts: dist/*.apk
