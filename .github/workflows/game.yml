@@ -14,12 +14,6 @@ jobs:
     timeout-minutes: 120
 
     steps:
-      - name: Check repository privacy
-        run: |
-          if [ "${{ github.event.repository.private }}" != "true" ]; then
-            echo "::error::This workflow must run in a private repository."
-            exit 1
-          fi
 
       - name: Install tools
         run: |
