@@ -1,40 +1,118 @@
-# J2ME-Loader 
+J2ME-Bloat
 
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/j2me-loader/localized.svg)](https://crowdin.com/project/j2me-loader)
-[![GitHub release](https://img.shields.io/github/release/nikita36078/J2ME-Loader.svg)](https://github.com/nikita36078/J2ME-Loader/releases)
+<p align="center">
+  <img src="screenshots/screen.jpg" width="180">
+</p><h3 align="center">Java ME Gaming, Ready to Go.</h3><p align="center">
+  <a href="https://github.com/mesflit/J2ME-Bloat">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?logo=github" alt="GitHub">
+  </a>
+  <a href="https://github.com/mesflit/J2ME-Bloat/releases">
+    <img src="https://img.shields.io/github/v/release/mesflit/J2ME-Bloat?display_name=tag" alt="Latest Release">
+  </a>
+  <a href="https://github.com/mesflit/J2ME-Bloat/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/mesflit/J2ME-Bloat" alt="License">
+  </a>
+</p>J2ME-Bloat is an Android-based Java ME (J2ME) emulator derived from "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader).
 
-J2ME-Loader is a J2ME emulator for Android. It supports most 2D and 3D games (including Mascot Capsule 3D ones). Emulator has a virtual keyboard, individual settings for each application, scaling support.
-This project is a fork of [J2meLoader](https://github.com/NaikSoftware/J2meLoader).  
-Special thanks to [woesss](https://github.com/woesss), the author of [JL-Mod](https://github.com/woesss/JL-Mod), for creating open-source Mascot Capsule implementation, soundbank support and many other improvements.
+It allows you to play classic Java mobile games on modern Android devices, with built-in game support, virtual controls, customizable settings and compatibility features.
 
-System requirements: Android 4.0+  
-[4PDA discussion](https://4pda.to/forum/index.php?showtopic=824201)  
-[XDA-Developers](https://forum.xda-developers.com/android/apps-games/app-j2me-loader-t3777889)  
-[EmuGen wiki](https://emulation.gametechwiki.com/index.php/J2ME_Loader)  
-[Discord](https://discord.gg/Ag4rcpz)  
-[Automated builds](https://github.com/nikita36078/J2ME-Loader/releases/tag/continuous)
+Features
 
-<a href="https://play.google.com/store/apps/details?id=ru.playsoftware.j2meloader">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a>
-<a href="https://f-droid.org/app/ru.playsoftware.j2meloader">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="75"></a>
+- Java ME (J2ME) game emulation.
+- Support for many 2D and 3D games.
+- Built-in game collection.
+- Games bundled directly into the APK.
+- Automatic game installation on first launch.
+- Virtual keyboard and touchscreen controls.
+- Individual settings for each game.
+- Screen scaling and display customization.
+- Support for Mascot Capsule 3D games.
 
-## Compatibility
-[List of the tested Java Games (Touchscreen)](https://github.com/nikita36078/J2ME-Loader/wiki/List-of-Tested-Java-Games-(Touchscreen))  
-[List of the tested Java Games (Non Touchscreen)](https://github.com/nikita36078/J2ME-Loader/wiki/List-of-Tested-Java-Games-(Non-Touchscreen))  
-[List of the Java Games with Bugs](https://github.com/nikita36078/J2ME-Loader/wiki/List-of-Java-Games-with-Bugs)
+Bundled Games
 
-## Tips
- - Enabling filtering in some cases can greatly reduce performance. Disable this option if game is too slow.
- - Image flickering issues can be fixed by enabling the "Immediate processing mode" option.
+J2ME-Bloat supports including games directly in the application package.
 
-## Screenshots
+To add games to your own build, place your ".jar" files inside:
 
-<img src="/screenshots/screen.jpg" width="288" height="512"> <img src="/screenshots/screen2.jpg" width="288" height="512">
-<img src="/screenshots/screen3.jpg" width="288" height="512"> <img src="/screenshots/screen4.jpg" width="288" height="512">
-* For more screenshots check out the [wiki](https://emulation.gametechwiki.com/index.php/J2ME_Loader#Screenshots)
+app/src/main/assets/games/
 
-## License
-> Copyright 2017-2026 Nikita Shakarun.
-> Licensed under the [Apache License, Version 2.0.](http://www.apache.org/licenses/LICENSE-2.0)  
-> (See the [LICENSE](https://github.com/nikita36078/J2ME-Loader/blob/master/LICENSE) file for the whole license text.)
+Example:
+
+games/
+├── Game1.jar
+├── Game2.jar
+├── Game3.jar
+└── Game4.jar
+
+During the build process, these files are packaged into the APK.
+
+On the first launch, bundled games are automatically imported into the emulator's game library.
+
+No manual JAR installation is required.
+
+Build Instructions
+
+Requirements
+
+- Android Studio or Android SDK
+- JDK compatible with the project
+- Gradle wrapper
+
+Build Debug APK
+
+git clone https://github.com/mesflit/J2ME-Bloat.git
+cd J2ME-Bloat
+
+./gradlew :app:assembleOpenDebug
+
+Build Release APK
+
+./gradlew :app:assembleOpenRelease
+
+Generated APK files:
+
+app/build/outputs/apk/open/
+
+Compatibility
+
+J2ME-Bloat is designed to run Java ME games from classic mobile phones, including devices from:
+
+- Nokia
+- Sony Ericsson
+- Samsung
+- Motorola
+- LG
+
+Game compatibility depends on the original JAR, Java ME APIs and device-specific implementations.
+
+Screenshots
+
+<!-- Add your screenshots here -->Downloads
+
+All releases and downloadable builds are available on GitHub.
+
+<p align="center">
+  <a href="https://github.com/mesflit/J2ME-Bloat/releases">
+    <img src="https://img.shields.io/badge/Download-GitHub%20Releases-blue?style=for-the-badge&logo=github" alt="Download from GitHub">
+  </a>
+</p>Repository: https://github.com/mesflit/J2ME-Bloat
+
+Releases: https://github.com/mesflit/J2ME-Bloat/releases
+
+Credits
+
+J2ME-Bloat is based on the open-source "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader) project.
+
+Special thanks to:
+
+- "Nikita Shakarun" (https://github.com/nikita36078)
+- "woesss" (https://github.com/woesss)
+- "NaikSoftware" (https://github.com/NaikSoftware)
+
+Thanks to all contributors who helped make Java ME emulation possible on Android.
+
+License
+
+This project retains the original project's Apache License 2.0 licensing terms.
+
+See "LICENSE" (LICENSE) for details.
