@@ -1,3 +1,4 @@
+
 import com.android.build.api.variant.ResValue
 
 plugins {
@@ -5,6 +6,10 @@ plugins {
 }
 
 def midletArchivesBaseName
+
+// Release signing configuration
+def keystorePropsFile = rootProject.file("keystore.properties")
+def hasReleaseKeystore = keystorePropsFile.exists()
 
 android {
     compileSdk COMPILE_SDK
@@ -17,7 +22,9 @@ android {
         targetSdk TARGET_SDK
         versionCode 101
         versionName "1.8.2"
+
         resValue 'string', 'app_name', rootProject.name
+
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,10 +35,13 @@ android {
 
     signingConfigs {
         release {
-            Properties keystoreProps = new Properties()
-            File keystorePropsFile = rootProject.file("keystore.properties")
-            if (keystorePropsFile.exists()) {
-                keystoreProps.load(new FileInputStream(keystorePropsFile))
+            if (hasReleaseKeystore) {
+                Properties keystoreProps = new Properties()
+
+                keystorePropsFile.withInputStream {
+                    keystoreProps.load(it)
+                }
+
                 keyAlias keystoreProps['keyAlias']
                 keyPassword keystoreProps['keyPassword']
                 storeFile file(keystoreProps['storeFile'])
@@ -44,8 +54,14 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.release
+
+            // Use custom signing key when available.
+            // Otherwise, use Gradle's default debug key.
+            signingConfig hasReleaseKeystore
+                    ? signingConfigs.release
+                    : signingConfigs.debug
         }
+
         debug {
             applicationIdSuffix '.debug'
             jniDebuggable true
@@ -59,42 +75,57 @@ android {
     }
 
     flavorDimensions 'default'
+
     productFlavors {
         play {
             buildConfigField 'boolean', 'FULL_EMULATOR', 'true'
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro', 'proguard-common.pro'
+
             versionNameSuffix "-play"
         }
+
         open {
             buildConfigField 'boolean', 'FULL_EMULATOR', 'true'
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro', 'proguard-common.pro'
+
             versionNameSuffix "-open"
         }
+
         fdroid {
             buildConfigField 'boolean', 'FULL_EMULATOR', 'true'
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro', 'proguard-common.pro'
         }
+
         dev {
             buildConfigField 'boolean', 'FULL_EMULATOR', 'true'
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro', 'proguard-common.pro'
+
             versionNameSuffix "-dev-" + generateVersionCode()
         }
-        // variant dimension for create android port from J2ME app source
+
+        // Variant dimension for creating an Android port from J2ME app source.
         midlet {
             buildConfigField 'boolean', 'FULL_EMULATOR', 'false'
-            // configure midlet's port project params here, as default it read from app manifest,
-            // placed to 'app/src/midlet/resources/MIDLET-META-INF/MANIFEST.MF'
+
             def props = getMidletManifestProperties()
             def midletName = props.getValue('MIDlet-Name').trim()
-            def apkName = midletName.replaceAll('[/\\\\:*?\"<>|]', '').replace(' ', '_')
+            def apkName = midletName.replaceAll('[/\\\\:*?"<>|]', '').replace(' ', '_')
+
             applicationId "com.example.androidlet.${apkName.toLowerCase()}"
             versionName = props.getValue('MIDlet-Version')
+
             resValue 'string', 'app_name', midletName
+
             midletArchivesBaseName = apkName
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-midlet.pro', 'proguard-common.pro'
         }
@@ -104,9 +135,11 @@ android {
         language {
             enableSplit = false
         }
+
         density {
             enableSplit = false
         }
+
         abi {
             enableSplit = true
         }
@@ -133,17 +166,26 @@ android {
 
 androidComponents {
     onVariants(selector().all()) { variant ->
+
         if (variant.buildType == 'debug' && variant.flavorName != 'midlet') {
             variant.resValues.put(
                     variant.makeResValueKey('string', 'app_name'),
-                    new ResValue('JL-Debug', null))
+                    new ResValue('JL-Debug', null)
+            )
         }
-        def baseName = variant.flavorName == 'midlet' ? "${midletArchivesBaseName}-" : "${rootProject.name}-"
+
+        def baseName = variant.flavorName == 'midlet'
+                ? "${midletArchivesBaseName}-"
+                : "${rootProject.name}-"
+
         variant.outputs.each { output ->
-            output.outputFileName.set(output.versionName.map { versionName ->
-                "${baseName}${versionName}-${variant.buildType}.apk"
-                        .replaceAll('--+', '-').replaceAll(' +', '_')
-            })
+            output.outputFileName.set(
+                    output.versionName.map { versionName ->
+                        "${baseName}${versionName}-${variant.buildType}.apk"
+                                .replaceAll('--+', '-')
+                                .replaceAll(' +', '_')
+                    }
+            )
         }
     }
 }
@@ -156,15 +198,20 @@ static def generateVersionCode() {
 def getMidletManifestProperties() {
     def file = project.file('src/midlet/resources/MIDLET-META-INF/MANIFEST.MF')
     def mf = new java.util.jar.Manifest()
+
     if (file.exists()) {
         def is = null
+
         try {
             is = new FileInputStream(file)
             mf.read(is)
         } finally {
-            if (is != null) is.close()
+            if (is != null) {
+                is.close()
+            }
         }
     }
+
     return mf.mainAttributes
 }
 
@@ -183,7 +230,7 @@ dependencies {
     implementation "androidx.activity:activity:1.13.0"
     implementation 'androidx.appcompat:appcompat:1.8.0'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
-    implementation 'com.google.android.material:material:1.13.0' // api21
+    implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.preference:preference:1.2.1'
 
     // Networking && APIs
@@ -216,6 +263,7 @@ dependencies {
     implementation 'ch.acra:acra-dialog:5.14.2'
 
     def kotlinMetadataVersion = "2.4.21"
+
     annotationProcessor("org.jetbrains.kotlin:kotlin-metadata-jvm:$kotlinMetadataVersion")
     compileOnly "com.google.auto.service:auto-service-annotations:$autoServiceVersion"
     annotationProcessor "com.google.auto.service:auto-service:$autoServiceVersion"
