@@ -80,5 +80,4 @@ jobs:
             output/games/
             output/SHA256SUMS.txt
           if-no-files-found: error
-          re
-          tention-days: 3
+          retention-days: 3
