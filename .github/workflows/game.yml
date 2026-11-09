@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   download-games:
-    name: Download and extract J2ME games
+    name: Download and import J2ME games
     runs-on: ubuntu-latest
     timeout-minutes: 180
 
@@ -22,7 +22,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y unzip curl
 
-      - name: Download J2ME archives from Internet Archive
+      - name: Download J2ME archives
         run: |
           mkdir -p downloads
 
@@ -77,6 +77,20 @@ jobs:
           find app/src/main/assets/games -type f -name '*.jar' | wc -l
 
           du -sh app/src/main/assets/games
+
+      - name: Commit games to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -f app/src/main/assets/games/
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Add J2ME game archive"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          else
+            echo "No new games to commit."
+          fi
 
       - name: Upload personal game archive
         uses: actions/upload-artifact@v4
