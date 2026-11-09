@@ -44,14 +44,14 @@ jobs:
           ENCODED_PROPS: ${{ secrets.KEYSTORE_PROPERTIES }}
         run: |
           if [ -n "$ENCODED_KEYSTORE" ] && [ -n "$ENCODED_PROPS" ]; then
-            echo "$ENCODED_KEYSTORE" | base64 -di > app/keystore.jks
-            echo "$ENCODED_PROPS" | base64 -di > keystore.properties
+            printf '%s' "$ENCODED_KEYSTORE" | base64 -di > app/keystore.jks
+            printf '%s' "$ENCODED_PROPS" | base64 -di > keystore.properties
             echo "Custom release signing enabled."
           else
-            echo "No signing secrets found. Building unsigned release APK."
+            echo "No signing secrets found. Gradle debug signing key will be used."
           fi
 
-      - name: Build release APKs
+      - name: Build release APK
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleDevRelease
@@ -77,7 +77,8 @@ jobs:
 
           if gh api "$base/ref/tags/continuous" >/dev/null 2>&1; then
             gh api -X PATCH "$base/refs/tags/continuous" \
-              -f sha="$GITHUB_SHA" -F force=true >/dev/null
+              -f sha="$GITHUB_SHA" \
+              -F force=true >/dev/null
           else
             gh api -X POST "$base/refs" \
               -f ref="refs/tags/continuous" \
@@ -93,10 +94,10 @@ jobs:
           body: |
             Automated builds from the latest commits on master.
 
-            These APKs are built without a custom signing key when signing secrets are not configured.
+            APKs use the custom release signing key when configured.
+            Otherwise, Gradle's debug signing key is used.
           prerelease: true
           allowUpdates: true
           removeArtifacts: true
           artifactErrorsFailBuild: true
-          artifa
-          cts: dist/*.apk
+          artifacts: "dist/*.apk"
