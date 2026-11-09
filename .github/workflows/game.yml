@@ -1,0 +1,84 @@
+
+name: Download J2ME Game Archive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  download-games:
+    name: Download and extract J2ME games
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check repository privacy
+        run: |
+          if [ "${{ github.event.repository.private }}" != "true" ]; then
+            echo "::error::This workflow must run in a private repository."
+            exit 1
+          fi
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          python -m pip install --upgrade huggingface_hub
+
+      - name: Download J2ME Vault
+        run: |
+          hf download M5-Dev/j2me-vault \
+            --repo-type dataset \
+            --local-dir vault
+
+      - name: Extract ZIP archives
+        run: |
+          mkdir -p extracted
+
+          find vault -type f -iname '*.zip' -print0 |
+          while IFS= read -r -d '' archive; do
+            echo "Extracting: $archive"
+            unzip -oq "$archive" -d extracted || true
+          done
+
+      - name: Collect and verify JAR files
+        run: |
+          mkdir -p output/games
+
+          find vault extracted -type f -iname '*.jar' -print0 |
+          while IFS= read -r -d '' jar; do
+            if unzip -tqq "$jar"; then
+              hash=$(sha256sum "$jar" | cut -c1-12)
+              name=$(basename "$jar")
+              target="output/games/${hash}_${name}"
+
+              if [ ! -f "$target" ]; then
+                cp "$jar" "$target"
+              fi
+            fi
+          done
+
+      - name: Generate game manifest
+        run: |
+          cd output
+          find games -type f -name '*.jar' -print0 |
+            sort -z |
+            xargs -0 sha256sum > SHA256SUMS.txt
+
+          echo "Total games:"
+          find games -type f -name '*.jar' | wc -l
+
+          du -sh games
+
+      - name: Upload personal game archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: J2ME-Personal-Game-Archive
+          path: |
+            output/games/
+            output/SHA256SUMS.txt
+          if-no-files-found: error
+          re
+          tention-days: 3
