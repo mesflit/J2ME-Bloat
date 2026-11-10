@@ -36,9 +36,11 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 
 import ru.playsoftware.j2meloader.R;
 import ru.playsoftware.j2meloader.config.Config;
@@ -63,6 +65,10 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	private final AppFilter appFilter = new AppFilter();
 	private CharSequence filterConstraint;
 	private EmptyStateListener emptyStateListener;
+	/** Ids of the games picked in multi-select mode. */
+	private final Set<Integer> selectedIds = new HashSet<>();
+	private boolean selectionMode;
+	private SelectionListener selectionListener;
 	private int layout = LAYOUT_TYPE_LIST;
 
 	AppsListAdapter(View.OnCreateContextMenuListener contextMenuListener) {
@@ -77,7 +83,8 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 				return Objects.equals(oldItem.getTitle(), newItem.getTitle()) &&
 						Objects.equals(oldItem.getVersion(), newItem.getVersion()) &&
 						Objects.equals(oldItem.getAuthor(), newItem.getAuthor()) &&
-						Objects.equals(oldItem.getImagePath(), newItem.getImagePath());
+						Objects.equals(oldItem.getImagePath(), newItem.getImagePath()) &&
+						oldItem.isFavorite() == newItem.isFavorite();
 			}
 		});
 		this.contextMenuListener = contextMenuListener;
@@ -105,6 +112,117 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
 		AppItem item = getItem(position);
 		holder.onBind(item, loadIcon(item));
+		holder.itemView.setActivated(selectedIds.contains(item.getId()));
+	}
+
+	/** Called when the set of selected games changes. */
+	interface SelectionListener {
+		void onSelectionChanged(int count);
+	}
+
+	void setSelectionListener(SelectionListener listener) {
+		selectionListener = listener;
+	}
+
+	boolean isSelectionMode() {
+		return selectionMode;
+	}
+
+	/** Enters multi-select mode with one game selected. */
+	void startSelection(AppItem item) {
+		selectionMode = true;
+		selectedIds.clear();
+		selectedIds.add(item.getId());
+		refreshSelection();
+	}
+
+	/** Leaves multi-select mode. */
+	void clearSelection() {
+		if (!selectionMode && selectedIds.isEmpty()) {
+			return;
+		}
+		selectionMode = false;
+		selectedIds.clear();
+		notifyItemRangeChanged(0, getItemCount());
+	}
+
+	/** Selects every game that is shown, or none if all of them are selected already. */
+	void toggleSelectAll() {
+		List<AppItem> shown = getCurrentList();
+		boolean all = !shown.isEmpty();
+		for (AppItem item : shown) {
+			if (!selectedIds.contains(item.getId())) {
+				all = false;
+				break;
+			}
+		}
+		if (all) {
+			selectedIds.clear();
+		} else {
+			for (AppItem item : shown) {
+				selectedIds.add(item.getId());
+			}
+		}
+		refreshSelection();
+	}
+
+	List<AppItem> getSelectedItems() {
+		ArrayList<AppItem> result = new ArrayList<>();
+		for (AppItem item : list) {
+			if (selectedIds.contains(item.getId())) {
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
+	/** First letter of the title at this position, for the fast scroll bar. */
+	String getSectionLetter(int position) {
+		List<AppItem> shown = getCurrentList();
+		if (position < 0 || position >= shown.size()) {
+			return "";
+		}
+		String title = shown.get(position).getTitle();
+		if (title == null) {
+			return "";
+		}
+		title = title.trim();
+		if (title.isEmpty()) {
+			return "";
+		}
+		int codePoint = title.codePointAt(0);
+		if (!Character.isLetterOrDigit(codePoint)) {
+			return "#";
+		}
+		return new String(Character.toChars(codePoint)).toUpperCase(Locale.getDefault());
+	}
+
+	/**
+	 * Handles a tap while in multi-select mode.
+	 *
+	 * @return false if not in that mode, the tap then starts the game
+	 */
+	boolean onItemClick(AppItem item, int position) {
+		if (!selectionMode) {
+			return false;
+		}
+		if (!selectedIds.remove(item.getId())) {
+			selectedIds.add(item.getId());
+		}
+		if (position >= 0 && position < getItemCount()) {
+			notifyItemChanged(position);
+		}
+		if (selectionListener != null) {
+			selectionListener.onSelectionChanged(selectedIds.size());
+		}
+		return true;
+	}
+
+	private void refreshSelection() {
+		notifyItemRangeChanged(0, getItemCount());
+		if (selectionListener != null) {
+			selectionListener.onSelectionChanged(selectedIds.size());
+		}
 	}
 
 	private Bitmap loadIcon(AppItem item) {
@@ -124,6 +242,16 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 
 	void setItems(List<AppItem> items) {
 		list = items == null ? new ArrayList<>() : items;
+		if (!selectedIds.isEmpty()) {
+			// Forget selected games that no longer exist.
+			Set<Integer> present = new HashSet<>();
+			for (AppItem item : list) {
+				present.add(item.getId());
+			}
+			if (selectedIds.retainAll(present) && selectionListener != null) {
+				selectionListener.onSelectionChanged(selectedIds.size());
+			}
+		}
 		// A reinstalled game keeps its icon path but may have a new icon.
 		iconCache.evictAll();
 		appFilter.filter(filterConstraint);
@@ -174,16 +302,20 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	static class AppViewHolder extends RecyclerView.ViewHolder {
 		private final ImageView icon;
 		private final TextView name;
+		private final View favorite;
 
 		AppViewHolder(ListRowGridJarBinding binding, View.OnCreateContextMenuListener contextMenuListener) {
-			this(binding.getRoot(), binding.listTitle, binding.listImage, contextMenuListener);
+			this(binding.getRoot(), binding.listTitle, binding.listImage, binding.listFavorite,
+					contextMenuListener);
 		}
 
 		AppViewHolder(View itemView,
 					  TextView listTitle,
 					  ImageView listImage,
+					  View listFavorite,
 					  View.OnCreateContextMenuListener contextMenuListener) {
 			super(itemView);
+			favorite = listFavorite;
 			icon = listImage;
 			name = listTitle;
 
@@ -192,6 +324,11 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 				Object tag = v.getTag();
 				if (tag instanceof AppItem) {
 					AppItem item = (AppItem) tag;
+					RecyclerView.Adapter<?> adapter = getBindingAdapter();
+					if (adapter instanceof AppsListAdapter && ((AppsListAdapter) adapter)
+							.onItemClick(item, getBindingAdapterPosition())) {
+						return;
+					}
 					Config.startApp(v.getContext(), item.getTitle(), item.getPathExt(), false);
 				}
 			});
@@ -207,6 +344,7 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 				this.icon.setImageResource(R.mipmap.ic_launcher);
 			}
 			name.setText(item.getTitle());
+			favorite.setVisibility(item.isFavorite() ? View.VISIBLE : View.GONE);
 			itemView.setTag(item);
 		}
 	}
@@ -216,7 +354,8 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 		private final TextView version;
 
 		AppListViewHolder(ListRowJarBinding binding, View.OnCreateContextMenuListener contextMenuListener) {
-			super(binding.getRoot(), binding.listTitle, binding.listImage, contextMenuListener);
+			super(binding.getRoot(), binding.listTitle, binding.listImage, binding.listFavorite,
+					contextMenuListener);
 			author = binding.listAuthor;
 			version = binding.listVersion;
 		}

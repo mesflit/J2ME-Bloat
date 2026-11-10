@@ -30,7 +30,7 @@ import ru.playsoftware.j2meloader.EmulatorApplication;
 import ru.playsoftware.j2meloader.R;
 
 class MutableSortSQLiteQuery implements SupportSQLiteQuery {
-	private static final String SELECT = "SELECT * FROM apps ORDER BY ";
+	private static final String SELECT = "SELECT * FROM apps ORDER BY favorite DESC, ";
 	private final String[] orderTerms;
 	private int sortVariant;
 

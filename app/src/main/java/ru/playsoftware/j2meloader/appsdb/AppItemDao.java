@@ -51,6 +51,9 @@ public interface AppItemDao {
 	@Update
 	Completable update(AppItem item);
 
+	@Update
+	Completable update(List<AppItem> items);
+
 	@Delete
 	Completable delete(AppItem item);
 

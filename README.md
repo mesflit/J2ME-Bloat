@@ -14,6 +14,8 @@ J2ME-Bloat is a Java ME (J2ME) emulator for Android. It runs classic Java mobile
 - Imports games from JAR/JAD files, a whole folder or a **ZIP archive**
 - Batch imports with a progress bar, a cancel button and a copyable list of failed files
 - Material 3 game library with light and dark themes
+- Favorites that stay at the top of the library, and multi-select to delete or favorite many games at once (long-press a game)
+- Draggable scroll bar with a letter indicator for long lists
 - Customizable virtual keyboard and touch controls
 - Separate screen, scaling and control settings for every game
 

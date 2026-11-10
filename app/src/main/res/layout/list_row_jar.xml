@@ -70,4 +70,14 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/list_favorite"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:importantForAccessibility="no"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_star"
+        tools:visibility="visible" />
+
 </ru.playsoftware.j2meloader.applist.AppItemLayout>

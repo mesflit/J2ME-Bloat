@@ -41,7 +41,19 @@ public class FastScrollBar extends View {
 	private static final long HIDE_DELAY_MS = 1500;
 	private static final long FADE_DURATION_MS = 250;
 
+	/** Tells which letter the list shows at a position. */
+	public interface SectionProvider {
+		String getSection(int position);
+	}
+
 	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private final Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private final float touchWidth;
+	private final float bubbleSize;
+	private final float bubbleGap;
+	private final int bubbleColor;
+	private SectionProvider sectionProvider;
+	private String section = "";
 	private final RectF thumbRect = new RectF();
 	private final float thumbWidth;
 	private final float thumbWidthDragging;
@@ -81,7 +93,22 @@ public class FastScrollBar extends View {
 		edgeMargin = 4 * density;
 		thumbColor = MaterialColors.getColor(context,
 				com.google.android.material.R.attr.colorOnSurfaceVariant, 0xFF808080);
+		touchWidth = 28 * density;
+		bubbleSize = 56 * density;
+		bubbleGap = 12 * density;
+		bubbleColor = MaterialColors.getColor(context,
+				com.google.android.material.R.attr.colorPrimaryContainer, 0xFFDFE0FF);
+		textPaint.setColor(MaterialColors.getColor(context,
+				com.google.android.material.R.attr.colorOnPrimaryContainer, 0xFF020865));
+		textPaint.setTextAlign(Paint.Align.CENTER);
+		textPaint.setTextSize(26 * density);
+		textPaint.setFakeBoldText(true);
 		setAlpha(0f);
+	}
+
+	/** Enables the letter bubble shown next to the thumb while it is dragged. */
+	public void setSectionProvider(@Nullable SectionProvider provider) {
+		sectionProvider = provider;
 	}
 
 	/** Connects the bar to the list it scrolls. */
@@ -152,6 +179,18 @@ public class FastScrollBar extends View {
 		paint.setColor(thumbColor);
 		paint.setAlpha(dragging ? 0xE6 : 0x99);
 		canvas.drawRoundRect(thumbRect, width / 2, width / 2, paint);
+		if (dragging && !section.isEmpty()) {
+			// The letter of the games at the current position, beside the thumb.
+			float radius = bubbleSize / 2;
+			float cx = rtl ? left + width + bubbleGap + radius : left - bubbleGap - radius;
+			float cy = thumbTop + thumbHeight / 2;
+			cy = Math.max(radius, Math.min(getHeight() - radius, cy));
+			paint.setColor(bubbleColor);
+			paint.setAlpha(0xFF);
+			canvas.drawCircle(cx, cy, radius, paint);
+			float baseline = cy - (textPaint.descent() + textPaint.ascent()) / 2;
+			canvas.drawText(section, cx, baseline, textPaint);
+		}
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -164,7 +203,10 @@ public class FastScrollBar extends View {
 		switch (event.getActionMasked()) {
 			case MotionEvent.ACTION_DOWN:
 				// Only the visible thumb takes touches; everything else goes to the list.
-				if (getAlpha() < 0.5f || y < thumbTop || y > thumbTop + thumbHeight) {
+				float x = event.getX();
+				boolean onEdge = getLayoutDirection() == LAYOUT_DIRECTION_RTL
+						? x <= touchWidth : x >= getWidth() - touchWidth;
+				if (!onEdge || getAlpha() < 0.5f || y < thumbTop || y > thumbTop + thumbHeight) {
 					return false;
 				}
 				dragging = true;
@@ -195,6 +237,7 @@ public class FastScrollBar extends View {
 					return false;
 				}
 				dragging = false;
+				section = "";
 				updateThumb();
 				show();
 				return true;
@@ -215,6 +258,10 @@ public class FastScrollBar extends View {
 			return;
 		}
 		int position = Math.round(fraction * (count - 1));
+		if (sectionProvider != null) {
+			String letter = sectionProvider.getSection(position);
+			section = letter == null ? "" : letter;
+		}
 		if (layoutManager instanceof LinearLayoutManager) {
 			((LinearLayoutManager) layoutManager).scrollToPositionWithOffset(position, 0);
 		} else {

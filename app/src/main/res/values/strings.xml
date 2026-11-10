@@ -303,5 +303,17 @@
         <item quantity="one">%d game</item>
         <item quantity="other">%d games</item>
     </plurals>
+    <string name="action_favorite_add">Add to favorites</string>
+    <string name="action_favorite_remove">Remove from favorites</string>
+    <string name="action_select">Select</string>
+    <string name="action_select_all">Select all</string>
+    <plurals name="selected_count">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d selected</item>
+    </plurals>
+    <plurals name="message_delete_selected">
+        <item quantity="one">Delete %d game? Its saves and settings are deleted too.</item>
+        <item quantity="other">Delete %d games? Their saves and settings are deleted too.</item>
+    </plurals>
     <string name="games_count_filtered">%1$d of %2$d games</string>
 </resources>

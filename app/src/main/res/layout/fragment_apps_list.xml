@@ -23,7 +23,7 @@
     <!-- Draggable scroll bar; ends above the "Add games" button. -->
     <ru.playsoftware.j2meloader.applist.FastScrollBar
         android:id="@+id/fast_scroller"
-        android:layout_width="28dp"
+        android:layout_width="112dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_marginTop="8dp"

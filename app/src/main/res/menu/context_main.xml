@@ -1,6 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/action_context_favorite"
+        android:title="@string/action_favorite_add" />
+    <item
+        android:id="@+id/action_context_select"
+        android:title="@string/action_select" />
+    <item
         android:id="@+id/action_context_shortcut"
         android:title="@string/action_context_shortcut" />
     <item

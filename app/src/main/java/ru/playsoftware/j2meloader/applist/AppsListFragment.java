@@ -63,6 +63,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
@@ -82,6 +83,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -89,6 +91,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ru.playsoftware.j2meloader.R;
 import ru.playsoftware.j2meloader.appsdb.AppRepository;
 import ru.playsoftware.j2meloader.config.Config;
@@ -144,6 +147,41 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private GridLayoutManager layoutManager;
 	private FragmentAppsListBinding binding;
 	private int importedGames;
+	/** The toolbar of multi-select mode, while it is shown. */
+	private ActionMode actionMode;
+	private final ActionMode.Callback selectionCallback = new ActionMode.Callback() {
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			mode.getMenuInflater().inflate(R.menu.selection, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			int itemId = item.getItemId();
+			if (itemId == R.id.action_select_all) {
+				AppsListFragment.this.adapter.toggleSelectAll();
+			} else if (itemId == R.id.action_select_favorite) {
+				favoriteSelected();
+			} else if (itemId == R.id.action_select_delete) {
+				alertDeleteSelected();
+			} else {
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			actionMode = null;
+			AppsListFragment.this.adapter.clearSelection();
+		}
+	};
 	private int importPhase;
 
 	public static AppsListFragment newInstance(Uri data) {
@@ -197,6 +235,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		menuHost.addMenuProvider(this, getViewLifecycleOwner());
 
 		adapter.setEmptyStateListener(this::onEmptyStateChanged);
+		adapter.setSelectionListener(this::onSelectionChanged);
 		int viewType = preferences.getInt(PREF_APPS_VIEW, AppsListAdapter.LAYOUT_TYPE_GRID);
 		adapter.setLayout(viewType);
 		layoutManager = new GridLayoutManager(requireContext(), getSpanCount(viewType));
@@ -217,6 +256,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 			}
 		});
 		binding.fastScroller.attach(binding.list);
+		binding.fastScroller.setSectionProvider(adapter::getSectionLetter);
 		binding.floatingActionButton.setOnClickListener(v -> showImportSheet());
 		binding.emptyAction.setOnClickListener(v -> showImportSheet());
 	}
@@ -385,8 +425,10 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 					if (title.equals("")) {
 						Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
 					} else {
-						item.setTitle(title);
-						appRepository.update(item);
+						// A copy, so that the list notices the change when it is reloaded.
+						AppItem renamed = item.copy();
+						renamed.setTitle(title);
+						appRepository.update(renamed);
 					}
 				})
 				.setNegativeButton(android.R.string.cancel, null);
@@ -405,9 +447,91 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		builder.show();
 	}
 
+	private void setFavorite(List<AppItem> items, boolean favorite) {
+		List<AppItem> changed = new ArrayList<>();
+		for (AppItem item : items) {
+			if (item.isFavorite() != favorite) {
+				AppItem copy = item.copy();
+				copy.setFavorite(favorite);
+				changed.add(copy);
+			}
+		}
+		if (!changed.isEmpty()) {
+			appRepository.update(changed);
+		}
+	}
+
+	/** Starts multi-select mode with this game selected. */
+	private void startSelection(AppItem item) {
+		adapter.startSelection(item);
+		if (actionMode == null) {
+			FragmentActivity activity = requireActivity();
+			if (activity instanceof AppCompatActivity) {
+				actionMode = ((AppCompatActivity) activity).startSupportActionMode(selectionCallback);
+			}
+		}
+		onSelectionChanged(1);
+	}
+
+	private void onSelectionChanged(int count) {
+		if (actionMode == null) {
+			return;
+		}
+		if (count == 0) {
+			actionMode.finish();
+		} else {
+			actionMode.setTitle(getResources().getQuantityString(R.plurals.selected_count, count, count));
+		}
+	}
+
+	/** Marks the selected games as favorites, or unmarks them if all of them already are. */
+	private void favoriteSelected() {
+		List<AppItem> items = adapter.getSelectedItems();
+		boolean allFavorite = !items.isEmpty();
+		for (AppItem item : items) {
+			if (!item.isFavorite()) {
+				allFavorite = false;
+				break;
+			}
+		}
+		setFavorite(items, !allFavorite);
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+	}
+
+	private void alertDeleteSelected() {
+		List<AppItem> items = adapter.getSelectedItems();
+		if (items.isEmpty()) {
+			return;
+		}
+		int count = items.size();
+		new AlertDialog.Builder(requireActivity())
+				.setTitle(android.R.string.dialog_alert_title)
+				.setMessage(getResources().getQuantityString(R.plurals.message_delete_selected, count, count))
+				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+					appRepository.delete(items);
+					// Many games can take a while to remove from storage.
+					Schedulers.io().scheduleDirect(() -> {
+						for (AppItem item : items) {
+							AppUtils.deleteApp(item);
+						}
+					});
+					if (actionMode != null) {
+						actionMode.finish();
+					}
+				})
+				.setNegativeButton(android.R.string.cancel, null)
+				.show();
+	}
+
 	@Override
 	public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v,
 									ContextMenu.ContextMenuInfo menuInfo) {
+		if (adapter.isSelectionMode()) {
+			// Taps select games in this mode; there is no per-game menu.
+			return;
+		}
 		MenuInflater inflater = requireActivity().getMenuInflater();
 		inflater.inflate(R.menu.context_main, menu);
 		if (!ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext())) {
@@ -415,6 +539,9 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		}
 
 		AppItem appItem = ((AppItemLayout.AppItemMenuInfo) menuInfo).appItem;
+		if (appItem.isFavorite()) {
+			menu.findItem(R.id.action_context_favorite).setTitle(R.string.action_favorite_remove);
+		}
 		if (!new File(appItem.getPathExt() + Config.MIDLET_RES_FILE).exists()) {
 			menu.findItem(R.id.action_context_reinstall).setVisible(false);
 		}
@@ -424,7 +551,13 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	public boolean onContextItemSelected(MenuItem item) {
 		AppItem appItem = ((AppItemLayout.AppItemMenuInfo) item.getMenuInfo()).appItem;
 		int itemId = item.getItemId();
-		if (itemId == R.id.action_context_shortcut) {
+		if (itemId == R.id.action_context_favorite) {
+			List<AppItem> single = new ArrayList<>();
+			single.add(appItem);
+			setFavorite(single, !appItem.isFavorite());
+		} else if (itemId == R.id.action_context_select) {
+			startSelection(appItem);
+		} else if (itemId == R.id.action_context_shortcut) {
 			requestAddShortcut(appItem);
 		} else if (itemId == R.id.action_context_rename) {
 			alertRename(appItem);
@@ -623,6 +756,10 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		// The adapter and the listeners outlive the view; detach them so it can be collected.
 		requireActivity().removeOnConfigurationChangedListener(configurationListener);
 		adapter.setEmptyStateListener(null);
+		if (actionMode != null) {
+			actionMode.finish();
+		}
+		adapter.setSelectionListener(null);
 		adapter.clearIconCache();
 		if (binding != null) {
 			binding.fastScroller.detach();

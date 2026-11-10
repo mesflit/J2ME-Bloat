@@ -330,6 +330,7 @@ public class AppInstaller {
 		if (currentApp != null) {
 			app.setId(currentApp.getId());
 			app.setTitle(currentApp.getTitle());
+			app.setFavorite(currentApp.isFavorite());
 			String path = currentApp.getPath();
 			if (!path.equals(appDirName)) {
 				File rms = new File(Config.getDataDir(), path);

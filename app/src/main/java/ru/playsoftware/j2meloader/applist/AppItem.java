@@ -19,6 +19,7 @@ package ru.playsoftware.j2meloader.applist;
 
 import android.content.Context;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -34,12 +35,31 @@ public class AppItem {
 	private final String author;
 	private final String version;
 	private final String path;
+	@ColumnInfo(defaultValue = "0")
+	private boolean favorite;
 
 	public AppItem(String path, String title, String author, String version) {
 		this.path = path;
 		this.title = title;
 		this.author = author;
 		this.version = version;
+	}
+
+	/** A separate object with the same data, so that changes can be detected by comparison. */
+	public AppItem copy() {
+		AppItem item = new AppItem(path, title, author, version);
+		item.id = id;
+		item.imagePath = imagePath;
+		item.favorite = favorite;
+		return item;
+	}
+
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
 	}
 
 	public int getId() {

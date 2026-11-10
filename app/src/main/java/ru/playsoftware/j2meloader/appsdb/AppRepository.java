@@ -124,6 +124,10 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 		execute(appItemDao.update(item));
 	}
 
+	public void update(List<AppItem> items) {
+		execute(appItemDao.update(items));
+	}
+
 	public void delete(AppItem item) {
 		execute(appItemDao.delete(item));
 	}
