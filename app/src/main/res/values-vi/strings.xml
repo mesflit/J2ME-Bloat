@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Không có dữ liệu</string>
     <string name="message_delete">Bạn thực sự muốn xoá ứng dụng này?</string>
     <string name="permission_request_failed">Ứng dụng này yêu cầu quyền ghi vào bộ nhớ</string>
-    <string name="external_storage_not_mounted">Ứng dụng này yêu cầu bộ nhớ ngoài</string>
     <string name="create">tạo</string>
     <string name="alert_msg_workdir_not_exists">Thư mục làm việc không tồn tại trên đường dẫn:\n\'%1$s\'.\nBạn muốn tạo ra nó hay chọn một cái khác?</string>
     <string name="action_context_shortcut">Thêm lối tắt</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Dữ liệu người dùng của bạn được lưu trữ trong một vị trí mà<b>sẽ bị xóa</b> khi bạn gỡ ứng dụng:\n</string>
     <string name="midlet_name"><b>Tên: </b></string>
     <string name="midlet_size"><b>K. Thước: </b></string>
-    <string name="midlet_source"><b>Nguồn: </b></string>
     <string name="midlet_vendor"><b>Nhà cung cấp: </b></string>
     <string name="midlet_version"><b>Ph. bản: </b></string>
     <string name="converting_wait">Đang chuyển đổi JAR...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Ứng dụng đã cài đặt thành công!</string>
     <string name="install_jar_non_matched_jad">Ứng dụng này khác với mô tả trong JAD.\nBỏ qua JAD và cài đặt?</string>
     <string name="install_jar_needed">Chọn tệp JAR</string>
-    <string name="invalid_resolution_not_saved">Các độ phân giải không hợp lệ: không lưu!</string>
     <string name="warn_install_from_net">Tệp tin sẽ được tải xuống từ Internet</string>
     <string name="reinstall">Ứng dụng đã cài đặt.\n\nBạn có muốn cài đặt lại không?\nTất cả dữ liệu sẽ được lưu.</string>
     <string name="reinstall_newest">Cập nhật ứng dụng này cho ph. bản %1$s?\n\nHiện đã cài đặt: %2$s\nTất cả dữ liệu sẽ được lưu.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Lưu biên dạng</string>
     <string name="PREF_SCREEN_OPTIONS">Tùy chọn màn hình</string>
     <string name="PREF_SCALE_RATIO">Đo lường(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Cân bằng</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Giữ tỷ lệ khung hình</string>
     <string name="PREF_FILTER">Bộ lọc</string>
     <string name="PREF_IMMEDIATE">Chế độ xử lý ngay lập tức</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Giá trị trong Tỷ Lệ Điểm Ảnh Nhỏ</string>
     <string name="PREF_BACKGROUND">Nền</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Bàn phím ảo</string>
-    <string name="PREF_VK_SHOW">Hiển thị bàn phím</string>
     <string name="PREF_VK_FEEDBACK">Phản hồi Haptic</string>
     <string name="PREF_VK_FORCE_OPACITY">Bắt buộc độ mờ cho các phím ngoài màn hình</string>
     <string name="PREF_TOUCH_INPUT">Cảm ứng đầu vào</string>
-    <string name="PREF_HW_ACCELERATION">Gia tốc HW (không ổn định)</string>
     <string name="pref_graphics_software">Chương trình</string>
     <string name="pref_graphics_hw_gles">Gia tốc HW(OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Gia tốc HW(window)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">mili giây</string>
     <string name="PREF_VK_SEL_FORE">Đường đánh dấu (P)</string>
     <string name="PREF_VK_SEL_BACK">Nút (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Kích thước phím</string>
-    <string name="PREF_VK_NAV_KEYS">Cần điều khiển: </string>
-    <string name="PREF_VK_SOFT_KEYS">Phím mềm: </string>
-    <string name="PREF_VK_NUM_KEYS">Số: </string>
-    <string name="PREF_VK_FIRE_KEY">Lửa: </string>
-    <string name="PREF_VK_SIZE_HINT">Kích thước</string>
     <string name="SIZE_PRESETS">Đặt trước</string>
     <string name="SWAP_SIZES">Hoán đổi K. thước</string>
     <string name="PREF_SYS_PROPS">Thuộc tính hệ thống</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Xoay ngang</string>
     <string name="error">Lỗi</string>
     <string name="message_clear_data">Bạn thực sự muốn xoá dữ liệu ứng dụng?</string>
-    <string name="PREF_VK_TYPE">Kiểu bàn phím</string>
     <string name="pref_vk_type_arrows">Mũi tên</string>
     <string name="pref_vk_type_arrows_numbers">Mũi tên &amp; số</string>
     <string name="pref_vk_type_custom">Tùy chỉnh</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Bắt buộc đóng ứng dụng có thể dẫn đến mất dữ liệu hoặc thậm chí hư hại hoàn toàn!\nTiến hành?</string>
     <string name="CONFIRMATION_REQUIRED">Yêu cầu xác nhận</string>
     <string name="select_dialog_title">Chọn MIDlet</string>
-    <string name="crash_dialog_message">Bạn có muốn gửi báo cáo lỗi đến nhà phát triển không?</string>
-    <string name="crash_dialog_title">Đã phát hiện lỗi</string>
-    <string name="report_crash">Gửi</string>
     <string name="layout_edit_finished">Đã hoàn tất chế độ chỉnh sửa</string>
     <string name="layout_edit_finish">Hoàn thành chế độ chỉnh sửa</string>
     <string name="layout_edit_mode">Chế độ chỉnh sửa cấu trúc phím</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">Tối</string>
     <string name="pref_theme_system">Cài đặt hệ thống theo dõi</string>
     <string name="pref_theme_title">Chủ đề</string>
-    <string name="pref_requires_restart_summary">Yêu cầu khởi động lại</string>
     <string name="pref_enable_actionbar_title">Bật thanh hành động</string>
     <string name="pref_enable_actionbar_summary">Trong các ứng dụng toàn màn hình</string>
     <string name="pref_enable_statusbar_title">Bật thanh trạng thái</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">Vendor</string>
     <string name="pref_map_keys">Phím ánh xạ</string>
     <string name="pref_encoding_title">Mã hóa</string>
-    <string name="pref_default_settings">Thiết lập mặc định</string>
     <string name="pref_emulator_dir">Thư mục làm việc</string>
     <string name="mapping_dialog_message">Ánh xạ dòng: %1$s</string>
     <string name="mapping_dialog_key_not_specified">không chỉ định</string>
@@ -193,7 +175,6 @@
     <string name="enter_name">Nhập tên</string>
     <string name="enter_new_name">Nhập tên mới</string>
     <string name="set_default_profile_description">Chọn biên dạng này dưới dạng cài đặt chuẩn cho tất cả ứng dụng sẽ được cài đặt sau</string>
-    <string name="error_name_exists">Đã tồn tại, nhập tên khác</string>
     <string name="default_label">"%s (mặc định)"</string>
     <string name="not_saved_exists">Đã tồn tại</string>
 </resources>

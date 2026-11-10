@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Sin datos</string>
     <string name="message_delete">¿Realmente quieres eliminar esta aplicación?</string>
     <string name="permission_request_failed">Esta aplicación requiere permisos de escritura de almacenamiento</string>
-    <string name="external_storage_not_mounted">Esta aplicación requiere almacenamiento externo</string>
     <string name="create">crear</string>
     <string name="alert_msg_workdir_not_exists">El directorio de trabajo escogido no existe en la ruta:\n‘%1$s’.\n¿Quieres crearlo o escoger otro?</string>
     <string name="action_context_shortcut">Añadir acceso directo</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Tus datos de usuario están almacenados en una ubicación que <b>se eliminará</b> si desinstalas la aplicación:\n</string>
     <string name="midlet_name"><b>Nombre: </b></string>
     <string name="midlet_size"><b>Tamaño: </b></string>
-    <string name="midlet_source"><b>Origen: </b></string>
     <string name="midlet_vendor"><b>Proveedor: </b></string>
     <string name="midlet_version"><b>Versión: </b></string>
     <string name="converting_wait">Convirtiendo JAR...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">¡Aplicación instalada correctamente!</string>
     <string name="install_jar_non_matched_jad">Esta aplicación difiere de la descrita en el JAD.\n¿Ignorar el JAD e instalar de todos modos?</string>
     <string name="install_jar_needed">Selecciona el archivo JAR</string>
-    <string name="invalid_resolution_not_saved">Resoluciones inválidas: ¡No guardado!</string>
     <string name="warn_install_from_net">El archivo se descargará desde Internet</string>
     <string name="reinstall">Esta aplicación ya está instalada.\n\n¿Quieres reinstalarla?\nLos datos se conservarán.</string>
     <string name="reinstall_newest">¿Actualizar esta aplicación a la versión %1$s?\n\nVersión actual: %2$s\nLos datos se conservarán.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Guardar perfil</string>
     <string name="PREF_SCREEN_OPTIONS">Opciones de pantalla</string>
     <string name="PREF_SCALE_RATIO">Escala(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Escalar para adaptarse</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Mantener relación de aspecto</string>
     <string name="PREF_FILTER">Filtro</string>
     <string name="PREF_IMMEDIATE">Modo de procesamiento inmediato</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Los valores son en píxeles escalados</string>
     <string name="PREF_BACKGROUND">Fondo</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Teclado virtual</string>
-    <string name="PREF_VK_SHOW">Mostrar teclado</string>
     <string name="PREF_VK_FEEDBACK">Retroalimentación háptica</string>
     <string name="PREF_VK_FORCE_OPACITY">Forzar la opacidad de las teclas afuera de la pantalla</string>
     <string name="PREF_TOUCH_INPUT">Entrada táctil</string>
-    <string name="PREF_HW_ACCELERATION">Aceleración por Hardware (Inestable)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">Aceleración por hardware (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Aceleración por hardware (ventana)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etiquetas (P)</string>
     <string name="PREF_VK_SEL_BACK">Botones (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Tamaño de teclas</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Teclas de función: </string>
-    <string name="PREF_VK_NUM_KEYS">Dígitos: </string>
-    <string name="PREF_VK_FIRE_KEY">Fuego: </string>
-    <string name="PREF_VK_SIZE_HINT">Tamaño</string>
     <string name="SIZE_PRESETS">Preajustes</string>
     <string name="SWAP_SIZES">Intercambiar tamaños</string>
     <string name="PREF_SYS_PROPS">Propiedades del sistema</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Horizontal</string>
     <string name="error">Error</string>
     <string name="message_clear_data">¿Realmente quieres borrar los datos de la aplicación?</string>
-    <string name="PREF_VK_TYPE">Tipo de teclado</string>
     <string name="pref_vk_type_arrows">Flechas</string>
     <string name="pref_vk_type_arrows_numbers">Flechas &amp; números</string>
     <string name="pref_vk_type_custom">Personalizado</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">¡Forzar el cierre de la aplicación puede resultar en pérdida de datos o incluso dañarla completamente!\n¿Quieres proceder?</string>
     <string name="CONFIRMATION_REQUIRED">Se requiere confirmación</string>
     <string name="select_dialog_title">Seleccionar MIDlet</string>
-    <string name="crash_dialog_message">¿Desea enviar un informe de errores el desarrollador?</string>
-    <string name="crash_dialog_title">Error detectado</string>
-    <string name="report_crash">Enviar</string>
     <string name="layout_edit_finished">Modo de edición finalizado</string>
     <string name="layout_edit_finish">Finalizar modo de edición</string>
     <string name="layout_edit_mode">Modo de edición de disposición del teclado</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">Oscuro</string>
     <string name="pref_theme_system">Seguir el ajuste del sistema</string>
     <string name="pref_theme_title">Tema</string>
-    <string name="pref_requires_restart_summary">Requiere reinicio</string>
     <string name="pref_enable_actionbar_title">Mostrar la barra de acción</string>
     <string name="pref_enable_actionbar_summary">En aplicaciones de pantalla completa</string>
     <string name="pref_enable_statusbar_title">Mostrar la barra de estado</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">Proveedor</string>
     <string name="pref_map_keys">Mapear teclas</string>
     <string name="pref_encoding_title">Codificación</string>
-    <string name="pref_default_settings">Configuración predeterminada</string>
     <string name="pref_emulator_dir">Directorio de trabajo</string>
     <string name="pref_screenshot_summary">Desactiva el escalado y filtrado para capturas de pantalla</string>
     <string name="pref_screenshot_title">Captura de pantalla sin procesar</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">Escribir nombre</string>
     <string name="enter_new_name">Escribir nuevo nombre</string>
     <string name="set_default_profile_description">Seleccionar este perfil como configuración predeterminada para todas las aplicaciones</string>
-    <string name="error_name_exists">Nombre existente, elegir otro</string>
     <string name="default_label">"%s (por defecto)"</string>
     <string name="not_saved_exists">Ya existe</string>
     <string name="alert_rewrite_profile">Ya existe un perfil llamado “%1$s”.\n¿Quieres sobrescribirlo?</string>

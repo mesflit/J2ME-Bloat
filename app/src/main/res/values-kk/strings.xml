@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Деректер жоқ</string>
     <string name="message_delete">Бұл қолданбаны өшіргіңіз келеме?</string>
     <string name="permission_request_failed">Бұл қолданбаға жадты жазу рұқсаты қажет</string>
-    <string name="external_storage_not_mounted">Бұл қолданба ішкі жадыны қажет етеді</string>
     <string name="create">жасау</string>
     <string name="alert_msg_workdir_not_exists">Жұмыс бумасы бұл жолда жоқ:\n\'%1$s\'\nЖаңадан жұмыс бумасын жасағыңыз келеме әлде басқасын таңдайсызба?</string>
     <string name="action_context_shortcut">Таңбаша қосу</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Пайдаланушы деректеріңіз қолданбаны өшірген кезде <b>жойылатын</b> жерде сақталады:\n</string>
     <string name="midlet_name"><b>Аты: </b></string>
     <string name="midlet_size"><b>Өлшемі: </b></string>
-    <string name="midlet_source"><b>Дереккөз: </b></string>
     <string name="midlet_vendor"><b>Сатушы: </b></string>
     <string name="midlet_version"><b>Нұсқа: </b></string>
     <string name="converting_wait">JAR файлды түрлендіруде...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Қолданба сәтті орнатылды!</string>
     <string name="install_jar_non_matched_jad">Бұл қолданба JAD ішінде сипатталған қолданбадан ерекшеленеді.\nJAD қолданбасын айналып өтіп сонда да жүктегіңіз келеме?</string>
     <string name="install_jar_needed">JAR файлды таңдау</string>
-    <string name="invalid_resolution_not_saved">Қате өлшемдер: сақталмады!</string>
     <string name="warn_install_from_net">Файл интернеттен жүктелінетін болады</string>
     <string name="reinstall">Қолданба бұрын жүктелген.\n\nОны қайтадан жүктегіңіз келеме?\nБарлық деректер сақталынатын болады.</string>
     <string name="reinstall_newest">Бұл қолданбаны %1$s нұсқасына жаңартасыз ба? \n\nҚазіргі уақытта жүктелгенден: %2$s\nБарлық деректер сақталады.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Профильді сақтау</string>
     <string name="PREF_SCREEN_OPTIONS">Экранның баптаулары</string>
     <string name="PREF_SCALE_RATIO">Масштаб(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Сәйкес масштабтау</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Пропорцияны сақтау</string>
     <string name="PREF_FILTER">Сүзгі</string>
     <string name="PREF_IMMEDIATE">Жедел өңдеу режимі</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Мәндер масштабталған пиксельдерде</string>
     <string name="PREF_BACKGROUND">Артқы фон</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Виртуалды пернетақта</string>
-    <string name="PREF_VK_SHOW">Пернетақтаны көрсету</string>
     <string name="PREF_VK_FEEDBACK">Діріл</string>
     <string name="PREF_VK_FORCE_OPACITY">Экранның сыртқы кезінде пернелерді жасыру</string>
     <string name="PREF_TOUCH_INPUT">Сенсорлық енгізу</string>
-    <string name="PREF_HW_ACCELERATION">Аппараттық жеделдету (тұрақсыз)</string>
     <string name="pref_graphics_software">Бағдарлама</string>
     <string name="pref_graphics_hw_gles">Аппараттық жеделдету (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Аппараттық жеделдету (терезе)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">мс</string>
     <string name="PREF_VK_SEL_FORE">Жапсырмалар (Н)</string>
     <string name="PREF_VK_SEL_BACK">Батырмалар (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Пернелер өлшемі</string>
-    <string name="PREF_VK_NAV_KEYS">Джойстик: </string>
-    <string name="PREF_VK_SOFT_KEYS">Софт батырмалар: </string>
-    <string name="PREF_VK_NUM_KEYS">Сандар: </string>
-    <string name="PREF_VK_FIRE_KEY">Ату: </string>
-    <string name="PREF_VK_SIZE_HINT">Өлшем</string>
     <string name="SIZE_PRESETS">Пресеттер</string>
     <string name="SWAP_SIZES">Орындарын ауыстыру</string>
     <string name="PREF_SYS_PROPS">Системалық баптаулар</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Альбом</string>
     <string name="error">Қате</string>
     <string name="message_clear_data">Бұл қолданбаның деректерін өшіргіңіз келеме?</string>
-    <string name="PREF_VK_TYPE">Пернетақта түрі</string>
     <string name="pref_vk_type_arrows">Сызықтар</string>
     <string name="pref_vk_type_arrows_numbers">Сызықтар &amp; сандар</string>
     <string name="pref_vk_type_custom">Өз қалауынша</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Қолданбаны күштеп жабу деректердің жоғалуы немесе жасамауы мүмкін!\nСонда да жалғастырасыз ба?</string>
     <string name="CONFIRMATION_REQUIRED">Расталу қажет</string>
     <string name="select_dialog_title">MIDlet таңдау</string>
-    <string name="crash_dialog_message">Орын алған қатены әзірлеушіге жібергіңіз келеме?</string>
-    <string name="crash_dialog_title">Қате орын алды</string>
-    <string name="report_crash">Жіберу</string>
     <string name="layout_edit_finished">Өзгерту режимі аяқталды</string>
     <string name="layout_edit_finish">Өзгерту режимін аяқтау</string>
     <string name="layout_edit_mode">Пернелердің орналасуын өзгерту режимі</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">Қараңғы</string>
     <string name="pref_theme_system">Баптауларды жүйеден алу</string>
     <string name="pref_theme_title">Қолданба түсі</string>
-    <string name="pref_requires_restart_summary">Шығып қайтадан кіруді қажет етеді</string>
     <string name="pref_enable_actionbar_title">ActionBar-ды қосу</string>
     <string name="pref_enable_actionbar_summary">Толық экранды қолданбалардың ішінде</string>
     <string name="pref_enable_statusbar_title">Statusbar-ды қосу</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">Өндіруші</string>
     <string name="pref_map_keys">Пернелердің орналасуы</string>
     <string name="pref_encoding_title">Кодтау</string>
-    <string name="pref_default_settings">Әдепкі баптаулар</string>
     <string name="pref_emulator_dir">Жұмыс бумасы</string>
     <string name="pref_screenshot_summary">Скриншоттардың масштабтауы мен сүзгілеуді өшіру</string>
     <string name="pref_screenshot_title">Өңделмеген скриншот</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">Атын енгізіңіз</string>
     <string name="enter_new_name">Жаңа атын еңгізіңіз</string>
     <string name="set_default_profile_description">Бұл профильді кейінірек орнатылатын барлық қолданбалар үшін стандартты параметрлер ретінде таңдаңыз</string>
-    <string name="error_name_exists">Мұндай аты бар файл бар, басқа ат еңгізіңіз</string>
     <string name="default_label">"%s (әдепкі)"</string>
     <string name="not_saved_exists">Бұрыннан бар</string>
     <string name="alert_rewrite_profile">\"%1$s\" атты профиль әлде қашан бар.\nОны бұл профильмен алмастырғыңыз келеме?</string>

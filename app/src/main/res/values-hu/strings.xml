@@ -15,7 +15,6 @@
     <string name="no_data_for_display">Nincs adat</string>
     <string name="message_delete">Biztosan törli ezt az alkalmazást?</string>
     <string name="permission_request_failed">Ez az alkalmazás tárhelyírási engedélyt igényel</string>
-    <string name="external_storage_not_mounted">Ennek az alkalmazásnak külső tárolóra van szüksége</string>
     <string name="create">létrehozás</string>
     <string name="action_context_shortcut">Parancsikon létrehozása</string>
     <string name="action_reinstall">Újratelepítés</string>
@@ -33,7 +32,6 @@
     <string name="save_profile">Profil mentése</string>
     <string name="PREF_SCREEN_OPTIONS">Képernyőbeállítások</string>
     <string name="PREF_SCALE_RATIO">Méretezés (%)</string>
-    <string name="PREF_SCALE_TO_FIT">Mérethez igazítás</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Méretarány megtartása</string>
     <string name="PREF_FILTER">Szűrő</string>
     <string name="PREF_IMMEDIATE">Azonnali feldolgozás mód</string>
@@ -49,11 +47,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Értékei méretezett pixelben</string>
     <string name="PREF_BACKGROUND">Háttér</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Virtuális billentyűzet</string>
-    <string name="PREF_VK_SHOW">Billentyűzet megjelenítése</string>
     <string name="PREF_VK_FEEDBACK">Rezgő visszajelzés</string>
     <string name="PREF_VK_FORCE_OPACITY">A képernyőn kívüli gombok áttetszőségének kényszerítése</string>
     <string name="PREF_TOUCH_INPUT">Érintéses bevitel</string>
-    <string name="PREF_HW_ACCELERATION">HW gyorsítás (nem stabil)</string>
     <string name="pref_graphics_software">Szoftveres</string>
     <string name="pref_graphics_hw_gles">Hardveres gyorsítás (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Hardveres gyorsítás (ablak)</string>
@@ -66,12 +62,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Címkék (P)</string>
     <string name="PREF_VK_SEL_BACK">Gombok (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Gombméretek</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Szoftveres gombok: </string>
-    <string name="PREF_VK_NUM_KEYS">Számok: </string>
-    <string name="PREF_VK_FIRE_KEY">Tűz: </string>
-    <string name="PREF_VK_SIZE_HINT">Méret</string>
     <string name="SIZE_PRESETS">Előbeállítások</string>
     <string name="SWAP_SIZES">Méretcsere</string>
     <string name="PREF_SYS_PROPS">Rendszertulajdonságok</string>
@@ -82,7 +72,6 @@
     <string name="pref_orientation_land">Fekvő</string>
     <string name="error">Hiba</string>
     <string name="message_clear_data">Tényleg törölni szeretné az alkalmazás adatait?</string>
-    <string name="PREF_VK_TYPE">Billentyűzettípus</string>
     <string name="pref_vk_type_phone">Telefon</string>
     <string name="pref_vk_type_phone_arrows">Telefon (nyilakkal)</string>
     <string name="PREF_LAYOUT">Elrendezés</string>
@@ -99,9 +88,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Az alkalmazás erőltetett bezárása adatvesztéshez, vagy akár teljesen működésképtelenné váláshoz vezethet!\nFolytatja?</string>
     <string name="CONFIRMATION_REQUIRED">Megerősítés szükséges</string>
     <string name="select_dialog_title">Válassza ki a MIDlet</string>
-    <string name="crash_dialog_message">Szeretné elküldeni a hibajelentést a fejlesztőknek?</string>
-    <string name="crash_dialog_title">Hiba észlelhető</string>
-    <string name="report_crash">Küldés</string>
     <string name="layout_edit_finished">Szerkesztési mód bezárva</string>
     <string name="layout_edit_finish">Szerkesztési mód bezárása</string>
     <string name="layout_edit_mode">Gombelrendezés-szerkesztő mód</string>
@@ -117,7 +103,6 @@
     <string name="pref_theme_night">Sötét</string>
     <string name="pref_theme_system">Rendszerbeállítások követése</string>
     <string name="pref_theme_title">Téma</string>
-    <string name="pref_requires_restart_summary">Újraindítást igényel</string>
     <string name="pref_enable_actionbar_title">Az ActionBar engedélyezése</string>
     <string name="pref_enable_actionbar_summary">A teljes képernyős alkalmazásokban</string>
     <string name="pref_enable_statusbar_title">Állapotsor engedélyezése</string>
@@ -131,7 +116,6 @@
     <string name="pref_app_sort_date">Dátum</string>
     <string name="pref_map_keys">Billentyűkiosztás</string>
     <string name="pref_encoding_title">Kódolás</string>
-    <string name="pref_default_settings">Alapértelmezett beállítások</string>
     <string name="pref_emulator_dir">Munkakönyvtár</string>
     <string name="mapping_dialog_message">Jelenlegi hozzárendelés: %1$s</string>
     <string name="mapping_dialog_title">Nyomjon meg egy billentyűt</string>
@@ -144,7 +128,6 @@
     <string name="enter_name">Név megadása</string>
     <string name="enter_new_name">Adja meg az új nevet</string>
     <string name="set_default_profile_description">Állítsa be ezt a profilt alapértelmezettként a jövőben telepítendő új alkalmazások számára</string>
-    <string name="error_name_exists">Már létezik, adjon meg egy másik nevet</string>
     <string name="default_label">"%s (alapértelmezett)"</string>
     <string name="not_saved_exists">Már létezik</string>
 </resources>

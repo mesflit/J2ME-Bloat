@@ -15,7 +15,6 @@
     <string name="no_data_for_display">Няма данни</string>
     <string name="message_delete">Наистина ли искате да изтриете това приложение?</string>
     <string name="permission_request_failed">Това приложение изисква разрешение за запис във хранилището</string>
-    <string name="external_storage_not_mounted">Това приложение изисква външна памет</string>
     <string name="create">създай</string>
     <string name="action_context_shortcut">Добавяне на пряк път</string>
     <string name="action_reinstall">Преинсталирай</string>
@@ -30,14 +29,12 @@
     <string name="choose">Избери</string>
     <string name="midlet_name"><b>Име: </b></string>
     <string name="midlet_size"><b>Размер: </b></string>
-    <string name="midlet_source"><b>Източник: </b></string>
     <string name="midlet_vendor"><b>Доставчик: </b></string>
     <string name="midlet_version"><b>Версия: </b></string>
     <string name="converting_wait">Конвертиране на JAR...</string>
     <string name="install">инсталиране</string>
     <string name="install_done">Приложението е инсталирано успешно!</string>
     <string name="install_jar_non_matched_jad">Приложението се различава от посоченото във JAD.\nИгнорирай и продължи?</string>
-    <string name="invalid_resolution_not_saved">Невалидна резолюция: не е запазено!</string>
     <string name="warn_install_from_net">Файлът ще бъде изтеглен от интернет</string>
     <string name="START_CMD">Старт</string>
     <string name="CANCEL_CMD">Отказ</string>
@@ -48,7 +45,6 @@
     <string name="save_profile">Запази профила</string>
     <string name="PREF_SCREEN_OPTIONS">Опции на екрана</string>
     <string name="PREF_SCALE_RATIO">Мащаб(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Мащабиране до побиране</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Запазване на пропорцията</string>
     <string name="PREF_FILTER">Филтър</string>
     <string name="PREF_IMMEDIATE">Режим на незабавна обработка</string>
@@ -64,11 +60,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Стойностите са в мащабирани пиксели</string>
     <string name="PREF_BACKGROUND">Фон</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Виртуална клавиатура</string>
-    <string name="PREF_VK_SHOW">Покажи клавиатура</string>
     <string name="PREF_VK_FEEDBACK">Вибрация при докосване</string>
     <string name="PREF_VK_FORCE_OPACITY">Принудителна прозрачност за бутони извън екрана</string>
     <string name="PREF_TOUCH_INPUT">Въвеждане с докосване</string>
-    <string name="PREF_HW_ACCELERATION">Хардуерно ускорение (нестабилно)</string>
     <string name="pref_graphics_software">Софтуерен</string>
     <string name="pref_graphics_hw_gles">Хардуерно Ускорение (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Хардуерно Ускорение (window)</string>
@@ -81,12 +75,6 @@
     <string name="PREF_UNIT_MS">мс</string>
     <string name="PREF_VK_SEL_FORE">Етикети (P)</string>
     <string name="PREF_VK_SEL_BACK">Бутони (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Размер на клавишите</string>
-    <string name="PREF_VK_NAV_KEYS">Джойстик: </string>
-    <string name="PREF_VK_SOFT_KEYS">Софтуерни клавиши: </string>
-    <string name="PREF_VK_NUM_KEYS">Цифри: </string>
-    <string name="PREF_VK_FIRE_KEY">Стрелба: </string>
-    <string name="PREF_VK_SIZE_HINT">Големина</string>
     <string name="SIZE_PRESETS">Шаблони</string>
     <string name="SWAP_SIZES">Размяна на размерите</string>
     <string name="PREF_SYS_PROPS">Свойства на системата</string>
@@ -97,7 +85,6 @@
     <string name="pref_orientation_land">Пейзажно</string>
     <string name="error">Грешка</string>
     <string name="message_clear_data">Наистина ли искате да изтриете всички данни на приложението?</string>
-    <string name="PREF_VK_TYPE">Вид клавиатура</string>
     <string name="pref_vk_type_phone">Телефон</string>
     <string name="pref_vk_type_phone_arrows">Телефон (стрелки)</string>
     <string name="PREF_LAYOUT">Изглед</string>
@@ -125,9 +112,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Принудителното затваряне може да предизвика загуба на данни или проблем в приложението!\nПродължи?</string>
     <string name="CONFIRMATION_REQUIRED">Изисква се потвърждение</string>
     <string name="select_dialog_title">Изберете MIDlet</string>
-    <string name="crash_dialog_message">Искате ли да изпратите отчет за грешки на разработчика?</string>
-    <string name="crash_dialog_title">Открита е грешка</string>
-    <string name="report_crash">Изпрати</string>
     <string name="layout_edit_finished">Режим на редактиране е приключен</string>
     <string name="layout_edit_finish">Завърши режим на редактиране</string>
     <string name="layout_edit_mode">Режим за редактиране на клавишите</string>
@@ -140,7 +124,6 @@
     <string name="pref_theme_light">Светла</string>
     <string name="pref_theme_night">Тъмна</string>
     <string name="pref_theme_title">Тема</string>
-    <string name="pref_requires_restart_summary">Изисква се рестартиране</string>
     <string name="pref_enable_actionbar_title">Включване на ActionBar</string>
     <string name="pref_enable_actionbar_summary">Приложения на цял екран</string>
     <string name="pref_enable_statusbar_title">Включи лентата на състояние</string>
@@ -155,7 +138,6 @@
     <string name="pref_app_sort_date">Дата</string>
     <string name="pref_map_keys">Клавишни настройки</string>
     <string name="pref_encoding_title">Кодиране</string>
-    <string name="pref_default_settings">Настройки по подразбиране</string>
     <string name="pref_emulator_dir">Работна директория</string>
     <string name="mapping_dialog_message">Текущи настройки: %1$s</string>
     <string name="mapping_dialog_title">Натиснете клавиш</string>
@@ -168,7 +150,6 @@
     <string name="enter_name">Въведете име</string>
     <string name="enter_new_name">Въведете ново име</string>
     <string name="set_default_profile_description">Изберете този профил като стандартни настройки за всички приложения които ще бъдат инсталирани по късно</string>
-    <string name="error_name_exists">Вече съществува, въведете друго име</string>
     <string name="default_label">"%s (по подразбиране)"</string>
     <string name="not_saved_exists">Вече съществува</string>
 </resources>

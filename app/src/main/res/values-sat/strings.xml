@@ -16,7 +16,6 @@
     <string name="no_data_for_display">ᱰᱟᱴᱟ ᱵᱚᱱᱩᱜᱼᱟ</string>
     <string name="message_delete">ᱟᱢ ᱥᱟᱹᱨᱤ ᱛᱮ ᱱᱚᱶᱟ ᱮᱯ ᱢᱮᱴᱟᱣ ᱥᱮᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ?</string>
     <string name="permission_request_failed">ᱱᱚᱶᱟ ᱮᱯ ᱫᱚ ᱫᱚᱦᱚ ᱚᱞ ᱯᱟᱹᱨᱢᱤᱥᱚᱱ ᱛᱟᱭ ᱫᱚᱨᱠᱟᱨ</string>
-    <string name="external_storage_not_mounted">ᱱᱚᱶᱟ ᱮᱯ ᱫᱚ ᱵᱟᱦᱨᱮ ᱫᱚᱦᱚ ᱡᱟᱭᱜᱟ ᱫᱚᱨᱠᱟᱨ</string>
     <string name="create">ᱛᱮᱭᱟᱨ</string>
     <string name="alert_msg_workdir_not_exists">ᱡᱟᱭᱜᱟ ᱨᱮ ᱠᱟᱹᱢᱤ ᱰᱟᱭᱨᱮᱠᱴᱚᱨᱭ ᱵᱟᱹᱱᱩᱜᱼᱟ : \n%1$s ᱾ \nᱟᱢ ᱮᱪᱫ ᱛᱮᱭᱟᱨ ᱥᱮᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ ᱟᱨᱵᱟᱝᱠᱷᱟᱱ ᱮᱴᱟᱜ ᱵᱟᱪᱷᱟᱣᱟᱢ ᱥᱮ ?</string>
     <string name="action_context_shortcut">ᱥᱚᱴᱠᱚᱴ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">ᱟᱢᱟᱜ ᱵᱮᱵᱷᱟᱨᱤᱭᱟᱹ ᱰᱟᱴᱟ ᱫᱚ ᱢᱤᱫ ᱡᱟᱭᱜᱟ ᱨᱮ ᱛᱟᱦᱮᱸᱱᱟ ᱡᱟᱦᱟᱸ <b>ᱫᱚ ᱢᱮᱴᱟᱣᱜᱼᱟ</b> ᱡᱟᱦᱟᱸ ᱛᱤᱥ ᱟᱢ ᱫᱚ ᱮᱯ ᱚᱪᱚᱜᱽ ᱟᱢ : \n</string>
     <string name="midlet_name"><b>ᱧᱩᱛᱩᱢ : </b></string>
     <string name="midlet_size"><b>ᱢᱟᱯ : </b></string>
-    <string name="midlet_source"><b>ᱥᱨᱚᱛ : </b></string>
     <string name="midlet_vendor"><b>ᱵᱮᱯᱟᱨᱤᱭᱟᱹ : </b></string>
     <string name="midlet_version"><b>ᱦᱟᱹᱞᱤᱭᱟᱹᱠ : </b></string>
     <string name="converting_wait">JAR ᱵᱚᱫᱚᱞᱚᱜ ᱠᱟᱱᱟ...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">ᱮᱯᱞᱤᱠᱮᱥᱚᱱ ᱨᱟᱹᱥ ᱞᱮᱠᱷᱟᱛᱮ ᱵᱚᱦᱟᱞ ᱮᱱᱟ!</string>
     <string name="install_jar_non_matched_jad">ᱟᱢᱟᱜ ᱮᱯ ᱫᱚ ᱵᱟᱛᱟᱣ ᱠᱟᱱ JAD ᱠᱷᱚᱱ ᱵᱷᱮᱜᱟᱨ ᱜᱮᱭᱟ ᱾ JAD ᱫᱚ ᱚᱲᱟᱜ ᱠᱟᱛᱮ ᱡᱮᱞᱠᱟ ᱛᱮ ᱵᱚᱦᱟᱞ ᱟᱢ ᱥᱮ ?</string>
     <string name="install_jar_needed">JAR ᱨᱮᱫᱽ ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
-    <string name="invalid_resolution_not_saved">ᱵᱷᱩᱞ ᱨᱤᱡᱚᱞᱭᱩᱥᱚᱱ ᱠᱚ : ᱵᱟᱝ ᱥᱟᱧᱪᱟᱣ ᱞᱮᱱᱟ !</string>
     <string name="warn_install_from_net">ᱨᱮᱫᱽ ᱫᱚ ᱤᱱᱴᱚᱨᱱᱮᱴᱨ ᱠᱷᱚᱱ ᱰᱟᱩᱱᱞᱚᱰ ᱮᱱᱟ</string>
     <string name="reinstall">ᱮᱯ ᱫᱚ ᱢᱟᱲᱟᱝ ᱠᱷᱚᱱ ᱵᱚᱦᱟᱞ ᱮᱱᱟ ᱾ \n\n ᱟᱢ ᱪᱮᱫ ᱫᱩᱦᱲᱟᱹ ᱵᱚᱦᱟᱞ ᱥᱮᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ ? \n ᱡᱷᱚᱛᱚ ᱰᱟᱴᱟ ᱥᱟᱺᱪᱟᱣᱜᱼᱟ ᱾</string>
     <string name="reinstall_newest">ᱱᱚᱶᱟ ᱮᱯ ᱫᱚ %1$s ᱛᱮ ᱦᱟᱹᱞᱤᱭᱟᱹᱠᱼᱟ ᱥᱮ ? \n\n ᱱᱤᱛᱚᱜ ᱵᱚᱦᱟᱞ ᱠᱟᱱᱟ : %2$s\n ᱡᱷᱚᱛᱚ ᱰᱟᱴᱟ ᱥᱟᱺᱪᱟᱣᱜᱼᱟ ᱾</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">ᱯᱨᱚᱯᱷᱟᱭᱤᱞ ᱥᱟᱸᱪᱟᱣ ᱢᱮ</string>
     <string name="PREF_SCREEN_OPTIONS">ᱥᱠᱨᱤᱱ ᱚᱯᱥᱚᱱᱠᱚ</string>
     <string name="PREF_SCALE_RATIO">ᱢᱟᱯ(%)</string>
-    <string name="PREF_SCALE_TO_FIT">ᱯᱷᱤᱴ ᱞᱟᱹᱜᱤᱫ ᱢᱟᱯ ᱤᱫᱤ ᱢᱮ</string>
     <string name="PREF_KEEP_ASPECT_RATIO">ᱟᱥᱯᱮᱠᱼᱴ ᱨᱮᱰᱤᱭᱚ ᱫᱚᱦᱚᱭ ᱢᱮ</string>
     <string name="PREF_FILTER">ᱪᱷᱟᱹᱱᱤ</string>
     <string name="PREF_IMMEDIATE">ᱞᱚᱜᱚᱱ ᱠᱟᱹᱢᱤ ᱢᱳᱰ</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">ᱢᱟᱯ ᱯᱤᱠᱥᱮᱞᱥ ᱨᱮᱭᱟᱜ ᱢᱩᱞ ᱚᱞ ᱢᱮ</string>
     <string name="PREF_BACKGROUND">ᱵᱮᱠᱜᱽᱨᱟᱩᱸᱰ</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">ᱣᱟᱹᱨᱪᱩᱟᱹᱞ ᱠᱤᱭᱵᱚᱰ</string>
-    <string name="PREF_VK_SHOW">ᱠᱤᱭᱵᱚᱰ ᱫᱮᱠᱷᱟᱣᱢᱮ</string>
     <string name="PREF_VK_FEEDBACK">ᱦᱟᱯᱟᱴᱤᱠ ᱯᱷᱤᱰᱵᱽᱮᱠ</string>
     <string name="PREF_VK_FORCE_OPACITY">ᱚᱯᱼᱥᱠᱨᱤᱱ ᱪᱟᱹᱵᱤᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱚᱯᱟᱥᱤᱴᱭ ᱡᱩᱨ ᱮᱢ ᱢᱮ</string>
     <string name="PREF_TOUCH_INPUT">ᱚᱛᱟ ᱟᱫᱮᱨ</string>
-    <string name="PREF_HW_ACCELERATION">HW ᱮᱠᱥᱟᱹᱞᱟᱹᱨᱮᱥᱚᱱ (ᱟᱹᱱᱥᱴᱮᱵᱟᱹᱞ)</string>
     <string name="pref_graphics_software">ᱥᱚᱯᱷᱴᱣᱮᱨ</string>
     <string name="pref_graphics_hw_gles">HW ᱮᱠᱥᱟᱹᱞᱟᱹᱨᱮᱥᱚᱱ (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">HW ᱮᱠᱥᱟᱹᱞᱟᱹᱨᱮᱥᱚᱱ (ᱡᱷᱚᱨᱠᱟ)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">ᱞᱮᱣᱮᱞᱠᱚ (P)</string>
     <string name="PREF_VK_SEL_BACK">ᱵᱩᱛᱟᱹᱢᱠᱚ (P)</string>
-    <string name="PREF_VK_KEY_SIZES">ᱠᱭ ᱢᱟᱯᱠᱚ</string>
-    <string name="PREF_VK_NAV_KEYS">ᱡᱚᱭᱥᱴᱤᱠ: </string>
-    <string name="PREF_VK_SOFT_KEYS">ᱥᱚᱯᱷᱴ ᱪᱟᱹᱵᱤ: </string>
-    <string name="PREF_VK_NUM_KEYS">ᱟᱸᱠᱠᱚ: </string>
-    <string name="PREF_VK_FIRE_KEY">ᱥᱮᱸᱜᱮᱞ: </string>
-    <string name="PREF_VK_SIZE_HINT">ᱢᱟᱯ</string>
     <string name="SIZE_PRESETS">ᱵᱮᱵᱷᱟᱨᱠᱚ</string>
     <string name="SWAP_SIZES">ᱥᱣᱟᱯ ᱢᱟᱯᱠᱚ</string>
     <string name="PREF_SYS_PROPS">ᱥᱭᱥᱴᱟᱹᱢ ᱯᱨᱚᱯᱟᱹᱨᱴᱤᱡᱽ</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">ᱞᱮᱱᱰᱥᱠᱮᱯ</string>
     <string name="error">ᱵᱷᱩᱞ</string>
     <string name="message_clear_data">ᱟᱢ ᱥᱟᱹᱨᱤ ᱛᱮ ᱮᱯ ᱰᱟᱴᱟ ᱢᱮᱴᱟᱣ ᱥᱟᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ?</string>
-    <string name="PREF_VK_TYPE">ᱠᱤᱭᱵᱚᱰ ᱯᱨᱚᱠᱟᱨ</string>
     <string name="pref_vk_type_arrows">ᱥᱟᱨ</string>
     <string name="pref_vk_type_arrows_numbers">ᱥᱟᱨ &amp; ᱮᱞ</string>
     <string name="pref_vk_type_custom">ᱠᱚᱥᱴᱚᱢ</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">ᱮᱯ ᱡᱩᱨ ᱛᱮ ᱵᱚᱸᱫ ᱞᱮᱠᱷᱟᱱ ᱰᱟᱴᱟ ᱠᱚ ᱚᱴᱟᱝ ᱚᱜᱼᱟ ᱟᱨ ᱵᱟᱝ ᱯᱩᱨᱟᱹ ᱠᱷᱟᱨᱟᱯᱚᱜᱼᱟ!\nᱢᱟᱲᱟᱝ ᱥᱮᱫ ᱞᱟᱦᱟᱜ ᱟᱢ ᱥᱮ?</string>
     <string name="CONFIRMATION_REQUIRED">ᱠᱟᱹᱱᱯᱷᱟᱹᱨᱢ ᱫᱚᱨᱠᱟᱨ</string>
     <string name="select_dialog_title">MIDlet ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
-    <string name="crash_dialog_message">ᱟᱢ ᱰᱮᱵᱽᱷᱞᱚᱯᱟᱹᱨ ᱴᱷᱮᱱ ᱵᱷᱩᱞ ᱨᱤᱯᱚᱴ ᱵᱷᱮᱡᱟ ᱥᱟᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ?</string>
-    <string name="crash_dialog_title">ᱵᱷᱩᱞ ᱯᱟᱸᱛᱮ ᱧᱟᱢᱮᱱᱟ</string>
-    <string name="report_crash">ᱵᱷᱮᱡᱟ</string>
     <string name="layout_edit_finished">ᱥᱟᱯᱲᱟᱣ ᱢᱳᱰ ᱪᱟᱵᱟᱮᱱᱟ</string>
     <string name="layout_edit_finish">ᱥᱟᱯᱲᱟᱣ ᱢᱤᱰ ᱪᱟᱵᱟᱭᱢᱮ</string>
     <string name="layout_edit_mode">ᱠᱤᱭᱞᱮᱭᱟᱩᱴ ᱥᱟᱯᱲᱟᱣ ᱢᱳᱰ</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">ᱧᱩᱛ</string>
     <string name="pref_theme_system">ᱥᱭᱥᱴᱚᱢ ᱨᱮᱭᱟᱜ ᱥᱟᱡᱟᱣ ᱠᱚ ᱯᱟᱧᱡᱟᱭ ᱢᱮ</string>
     <string name="pref_theme_title">ᱛᱷᱤᱢ</string>
-    <string name="pref_requires_restart_summary">ᱫᱩᱦᱲᱟᱹ ᱨᱤᱥᱴᱟᱴ ᱫᱚᱨᱠᱟᱨ</string>
     <string name="pref_enable_actionbar_title">ᱮᱠᱥᱚᱱᱵᱟᱨ ᱮᱢ ᱪᱷᱚᱭ ᱢᱮ</string>
     <string name="pref_enable_actionbar_summary">ᱯᱷᱩᱞᱥᱡᱨᱤᱱ ᱮᱯᱞᱤᱠᱮᱥᱚᱱ ᱠᱚ ᱨᱮ</string>
     <string name="pref_enable_statusbar_title">ᱥᱴᱮᱴᱟᱹᱥᱵᱽᱟᱨ ᱮᱢ ᱪᱷᱚ</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">ᱟᱹᱠᱷᱨᱤᱧᱤᱡ</string>
     <string name="pref_map_keys">ᱠᱭ ᱴᱮᱯᱤᱝᱠᱚ</string>
     <string name="pref_encoding_title">ᱨᱱᱠᱳᱰᱤᱝ</string>
-    <string name="pref_default_settings">ᱢᱩᱞ ᱥᱟᱡᱟᱣᱠᱚ</string>
     <string name="pref_emulator_dir">ᱠᱟᱹᱢᱤ ᱠᱟᱱ ᱰᱟᱭᱨᱮᱠᱴᱚᱨᱭ</string>
     <string name="pref_screenshot_summary">ᱥᱠᱨᱤᱱᱥᱚᱴ ᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱢᱟᱯ ᱟᱨ ᱪᱷᱟᱹᱱᱤ ᱵᱚᱱᱫᱚᱭ ᱢᱮ</string>
     <string name="pref_screenshot_title">ᱵᱮᱨᱮᱞ ᱥᱠᱨᱤᱱᱥᱚᱴ</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">ᱧᱩᱛᱩᱢ ᱟᱫᱮᱨ ᱢᱮ</string>
     <string name="enter_new_name">ᱱᱟᱶᱟ ᱠᱷᱮᱞ ᱟᱫᱮᱨ ᱢᱮ</string>
     <string name="set_default_profile_description">ᱤᱱᱟᱹ ᱛᱟᱭᱚᱢ ᱟᱨᱦᱚᱸ ᱮᱯ ᱠᱚ ᱨᱮᱭᱟᱜ ᱢᱚᱦᱲᱟ ᱥᱟᱡᱟᱣ ᱠᱚ ᱥᱟᱸᱪᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ ᱞᱟᱹᱜᱤᱫ ᱱᱚᱶᱟ ᱢᱚᱦᱲᱟ ᱥᱴᱟᱱᱰᱟᱰ ᱞᱮᱠᱷᱟ ᱵᱟᱪᱷᱟᱣ ᱡᱟᱜ ᱢᱮ</string>
-    <string name="error_name_exists">ᱢᱟᱲᱟᱝ ᱠᱷᱚᱱ ᱢᱮᱱᱟᱜᱼᱟ, ᱟᱨ ᱢᱤᱫ ᱧᱩᱛᱩᱢ ᱟᱫᱮᱨ ᱢᱮ</string>
     <string name="default_label">"%s (ᱢᱩᱞ)"</string>
     <string name="not_saved_exists">ᱢᱟᱲᱟᱝ ᱠᱷᱚᱱ ᱢᱮᱱᱟᱜᱼᱟ</string>
     <string name="alert_rewrite_profile">%1$s ᱧᱩᱛᱩᱢ ᱛᱮ ᱢᱟᱲᱟᱝ ᱠᱷᱚᱱ ᱢᱤᱫ ᱢᱚᱲᱟ ᱢᱮᱱᱟᱜᱼᱟ ᱾\n ᱟᱢ ᱪᱮᱫ ᱚᱱᱟ ᱪᱮᱛᱟᱱ ᱨᱮ ᱫᱚᱦᱚ ᱥᱟᱱᱟᱢ ᱠᱟᱱᱟ ᱥᱮ?</string>

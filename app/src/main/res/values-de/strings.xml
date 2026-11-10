@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Keine Daten</string>
     <string name="message_delete">Möchten Sie diese App wirklich löschen?</string>
     <string name="permission_request_failed">Diese App benötigt Schreibrechte</string>
-    <string name="external_storage_not_mounted">Diese App benötigt externen Speicher</string>
     <string name="create">create</string>
     <string name="alert_msg_workdir_not_exists">Arbeitsverzeichnis existiert nicht im Pfad:\n\'%1$s\'.\nMöchten Sie es erstellen oder ein anderes auswählen?</string>
     <string name="action_context_shortcut">Verknüpfung hinzufügen</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Deine Nutzerdaten werden auf deinem Gerät lokal gespeichert und beim Deinstallieren der App &lt;b&gt;automatisch gelöscht&lt;\b&gt;\n</string>
     <string name="midlet_name"><b>Name: </b></string>
     <string name="midlet_size"><b>Größe: </b></string>
-    <string name="midlet_source"><b>Quelle: </b></string>
     <string name="midlet_vendor"><b>Hersteller: </b></string>
     <string name="midlet_version"><b>Version: </b></string>
     <string name="converting_wait">Konvertiere Jar...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Die Anwendung wurde erfolgreich eingerichtet!</string>
     <string name="install_jar_non_matched_jad">Diese App unterscheidet sich von dem, was in JAD beschrieben wird.\nMöchtest du JAD ignorieren und sie trotzdem installieren?</string>
     <string name="install_jar_needed">Wähle eine JAR-Datei</string>
-    <string name="invalid_resolution_not_saved">Ungültige Auflösungen: nicht gespeichert!</string>
     <string name="warn_install_from_net">Die Datei wird aus dem Internet heruntergeladen.</string>
     <string name="reinstall">Die App ist bereits installiert.\n\nMöchtest du sie neu installieren?\nAlle Daten werden gespeichert.</string>
     <string name="reinstall_newest">Diese App auf Version %1$saktualisieren?\n\nDerzeit installiert: %2$s\nAlle Daten werden gespeichert.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Profil speichern</string>
     <string name="PREF_SCREEN_OPTIONS">Bildschirmoptionen</string>
     <string name="PREF_SCALE_RATIO">Skalierung (%)</string>
-    <string name="PREF_SCALE_TO_FIT">Passend skalieren</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Seitenverhältnis beibehalten</string>
     <string name="PREF_FILTER">Filter</string>
     <string name="PREF_IMMEDIATE">Sofortiger Verarbeitungsmodus</string>
@@ -73,10 +69,8 @@
     <string name="PREF_FONT_SIZE_IN_SP">Werte sind in Scaled Pixels</string>
     <string name="PREF_BACKGROUND">Hintergrund</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Bildschirmtastatur</string>
-    <string name="PREF_VK_SHOW">Tastatur anzeigen</string>
     <string name="PREF_VK_FEEDBACK">Haptisches Feedback</string>
     <string name="PREF_TOUCH_INPUT">Toucheingabe</string>
-    <string name="PREF_HW_ACCELERATION">HW Beschleunigung (instabil)</string>
     <string name="pref_graphics_software">Programm</string>
     <string name="PREF_VK_BACK">Schaltflächen</string>
     <string name="PREF_VK_FORE">Beschriftungen</string>
@@ -86,12 +80,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Beschriftungen (P)</string>
     <string name="PREF_VK_SEL_BACK">Schaltfächen (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Tastengrössen</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Virtuelle Tasten: </string>
-    <string name="PREF_VK_NUM_KEYS">Ziffern: </string>
-    <string name="PREF_VK_FIRE_KEY">Feuer: </string>
-    <string name="PREF_VK_SIZE_HINT">Grösse</string>
     <string name="SIZE_PRESETS">Voreinstellungen</string>
     <string name="SWAP_SIZES">Grössen tauschen</string>
     <string name="PREF_SYS_PROPS">Systemeigenschaften</string>
@@ -101,7 +89,6 @@
     <string name="pref_orientation_land">Landschaft</string>
     <string name="error">Fehler</string>
     <string name="message_clear_data">Möchten Sie wirklich die App-Daten löschen?</string>
-    <string name="PREF_VK_TYPE">Tastaturtyp</string>
     <string name="pref_vk_type_arrows">Pfeile</string>
     <string name="pref_vk_type_arrows_numbers">Pfeile &amp; Nummern</string>
     <string name="pref_vk_type_custom">Personalisiert</string>
@@ -131,9 +118,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Erzwungenes Schliessen der Anwendung kann zu Datenverlust führen oder die Anwendung beschädigen!\nFortfahren?</string>
     <string name="CONFIRMATION_REQUIRED">Bestätigung erforderlich</string>
     <string name="select_dialog_title">MIDlet auswählen</string>
-    <string name="crash_dialog_message">Möchten Sie ein Fehlerbericht an den Entwickler senden?</string>
-    <string name="crash_dialog_title">Fehler festgestellt</string>
-    <string name="report_crash">Senden</string>
     <string name="layout_edit_finished">Bearbeitungsmodus beendet</string>
     <string name="layout_edit_finish">Bearbeitungsmodus beenden</string>
     <string name="layout_edit_mode">Tastaturlayout Bearbeitungsmodus</string>
@@ -153,7 +137,6 @@
     <string name="pref_theme_night">Dunkel</string>
     <string name="pref_theme_system">Systemeinstellungen übernehmen</string>
     <string name="pref_theme_title">Design</string>
-    <string name="pref_requires_restart_summary">Erfordert Neustart</string>
     <string name="pref_enable_actionbar_title">ActionBar aktivieren</string>
     <string name="pref_enable_actionbar_summary">In Vollbild-Anwendungen</string>
     <string name="pref_enable_statusbar_title">Statusleiste aktivieren</string>
@@ -168,7 +151,6 @@
     <string name="pref_app_sort_date">Datum</string>
     <string name="pref_map_keys">Tastenzuordnung</string>
     <string name="pref_encoding_title">Zeichenkodierung</string>
-    <string name="pref_default_settings">Standardeinstellungen</string>
     <string name="pref_emulator_dir">Arbeitsverzeichnis</string>
     <string name="pref_screenshot_summary">Skalierung und Filterung für Screenshots deaktivieren</string>
     <string name="pref_screenshot_title">Bildschirmfoto aufnehmen</string>
@@ -184,7 +166,6 @@
     <string name="enter_name">Namen eingeben</string>
     <string name="enter_new_name">Neuen Namen eingeben</string>
     <string name="set_default_profile_description">Wähle dieses Profil als Standardprofil für alle weiteren Apps, die du installieren wirst.</string>
-    <string name="error_name_exists">Dieser Name ist leider bereits vergeben. Gib einen anderen Namen ein</string>
     <string name="default_label">"%s (Standard)"</string>
     <string name="not_saved_exists">Bereits vorhanden</string>
     <string name="alert_rewrite_profile">Ein Profil mit dem Namen: \"%1$s\" existiert bereits.\nMöchtest du es überschreiben?</string>

@@ -11,7 +11,6 @@
     <string name="no_data_for_display">Ingen data</string>
     <string name="message_delete">Vil du slette denne app?</string>
     <string name="permission_request_failed">Denne app kræver skrivetilladelse til lager</string>
-    <string name="external_storage_not_mounted">Denne app kræver eksternt lager</string>
     <string name="action_context_shortcut">Tilføj genvej</string>
     <string name="action_settings">Indstillinger</string>
     <string name="action_context_delete">Slet</string>
@@ -23,7 +22,6 @@
     <string name="RESET_LAYOUT_CMD">Nulstil tastelayout</string>
     <string name="PREF_SCREEN_OPTIONS">Skærmindstillinger</string>
     <string name="PREF_SCALE_RATIO">Skalér(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Skalér tilpasset</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Behold billedformat</string>
     <string name="PREF_FILTER">Filtrér</string>
     <string name="PREF_IMMEDIATE">Omgående behandlingstilstand</string>
@@ -36,7 +34,6 @@
     <string name="PREF_FONT_SIZE_IN_SP">Værdier er i skaleret pixels</string>
     <string name="PREF_BACKGROUND">Baggrund</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Virtuelt tastatur</string>
-    <string name="PREF_VK_SHOW">Vis tastatur</string>
     <string name="PREF_VK_FEEDBACK">Berøringsvibration</string>
     <string name="PREF_TOUCH_INPUT">Berøringsinput</string>
     <string name="PREF_VK_BACK">Knapper</string>
@@ -47,12 +44,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etiketter (P)</string>
     <string name="PREF_VK_SEL_BACK">Knapper (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Tastestørrelser</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Softkeys: </string>
-    <string name="PREF_VK_NUM_KEYS">Cifre: </string>
-    <string name="PREF_VK_FIRE_KEY">Skyd: </string>
-    <string name="PREF_VK_SIZE_HINT">Størrelse</string>
     <string name="SIZE_PRESETS">Forudindstillinger</string>
     <string name="SWAP_SIZES">Bytte størrelser</string>
     <string name="PREF_SYS_PROPS">Systemindstillinger</string>
@@ -60,9 +51,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Tvangslukning af programmet kan medføre tab af data eller endda ødelægge det helt!\nFortsæt?</string>
     <string name="CONFIRMATION_REQUIRED">Bekræftelse kræves</string>
     <string name="select_dialog_title">Vælg MIDlet</string>
-    <string name="crash_dialog_message">Vil du sende en fejlrapport til udvikleren?</string>
-    <string name="crash_dialog_title">Fejl registreret</string>
-    <string name="report_crash">Send</string>
     <string name="layout_edit_finished">Redigeringstilstand afsluttet</string>
     <string name="layout_edit_finish">Afslut redigeringstilstand</string>
     <string name="layout_edit_mode">Tastelayout redigeringstilstand</string>

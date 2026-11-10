@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Немає даних</string>
     <string name="message_delete">Ви дійсно хочете видалити данний додаток?</string>
     <string name="permission_request_failed">Данний додаток вимагає дозволу записування данних</string>
-    <string name="external_storage_not_mounted">Данний додаток вимагає збереження даних у зовнішню пам\'ять</string>
     <string name="create">створити</string>
     <string name="alert_msg_workdir_not_exists">Робочий каталог не існує за шляхом:\n\'%1$s\'.\nВи хочете створити його чи вибрати інший?</string>
     <string name="action_context_shortcut">Додати ярлик</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Ваші дані користувача зберігаються у місці, яке <b>буде видалено</b>, коли ви видалите додаток:\n</string>
     <string name="midlet_name"><b>Назва: </b></string>
     <string name="midlet_size"><b>Розмір: </b></string>
-    <string name="midlet_source"><b>Джерело: </b></string>
     <string name="midlet_vendor"><b>Постачальник: </b></string>
     <string name="midlet_version"><b>Версія: </b></string>
     <string name="converting_wait">Перетворення JAR...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Додаток успішно встановлено!</string>
     <string name="install_jar_non_matched_jad">Цей додаток відрізняється від описаної в JAD.\nІгнорувати JAD і все одно встановити?</string>
     <string name="install_jar_needed">Виберіть файл JAR</string>
-    <string name="invalid_resolution_not_saved">Недійсні розміри: не збережено!</string>
     <string name="warn_install_from_net">Файл буде завантажено з Інтернету</string>
     <string name="reinstall">Додаток вже встановлено.\n\nВстановити його повторно?\nУсі дані буде збережено.</string>
     <string name="reinstall_newest">Оновити цей додаток до версії %1$s?\n\nНаразі встановлено: %2$s\nУсі дані буде збережено.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Зберегти профіль</string>
     <string name="PREF_SCREEN_OPTIONS">Налаштування екрану</string>
     <string name="PREF_SCALE_RATIO">Масштаб(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Підганяти розмір</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Зберігати пропорції</string>
     <string name="PREF_FILTER">Фільтр</string>
     <string name="PREF_IMMEDIATE">Режим невідкладної обробки</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Значення в масштабованих пікселях</string>
     <string name="PREF_BACKGROUND">Фон</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Віртуальна клавіатура</string>
-    <string name="PREF_VK_SHOW">Показати клавіатуру</string>
     <string name="PREF_VK_FEEDBACK">Вібрація при натисканні</string>
     <string name="PREF_VK_FORCE_OPACITY">Примусова прозорість для вимк. екрану</string>
     <string name="PREF_TOUCH_INPUT">Сенсорний ввід</string>
-    <string name="PREF_HW_ACCELERATION">Апаратне прискорення (нестабільне)</string>
     <string name="pref_graphics_software">Програмне</string>
     <string name="pref_graphics_hw_gles">Апаратне прискорення (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Апаратне прискорення (window)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">мс</string>
     <string name="PREF_VK_SEL_FORE">Позначки (П)</string>
     <string name="PREF_VK_SEL_BACK">Клавіші (П)</string>
-    <string name="PREF_VK_KEY_SIZES">Розмір клавіш</string>
-    <string name="PREF_VK_NAV_KEYS">Джойстик: </string>
-    <string name="PREF_VK_SOFT_KEYS">Софт-клавіші: </string>
-    <string name="PREF_VK_NUM_KEYS">Цифри: </string>
-    <string name="PREF_VK_FIRE_KEY">Вогонь: </string>
-    <string name="PREF_VK_SIZE_HINT">Розмір</string>
     <string name="SIZE_PRESETS">Шаблони</string>
     <string name="SWAP_SIZES">Поміняти розміри</string>
     <string name="PREF_SYS_PROPS">Властивості системи</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Альбомна</string>
     <string name="error">Помилка</string>
     <string name="message_clear_data">Ви дійсно хочете очистити програмні дані?</string>
-    <string name="PREF_VK_TYPE">Тип клавіатури</string>
     <string name="pref_vk_type_arrows">Стрілки</string>
     <string name="pref_vk_type_arrows_numbers">Стрілки &amp; числа</string>
     <string name="pref_vk_type_custom">Користувацький</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Примусове закривання додатку може призвести до втрати даних або навіть до повного виведення його з ладу! \nПродовжити?</string>
     <string name="CONFIRMATION_REQUIRED">Необхідне підтвердження</string>
     <string name="select_dialog_title">Обрати MIDlet</string>
-    <string name="crash_dialog_message">Чи ви хочете, надіслати розробнику звіт про помилку?</string>
-    <string name="crash_dialog_title">Виявлена помилка</string>
-    <string name="report_crash">Надіслати</string>
     <string name="layout_edit_finished">Режим редагування завершено</string>
     <string name="layout_edit_finish">Завершити режим редагування</string>
     <string name="layout_edit_mode">Режим редагування клавіатури</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">Темна</string>
     <string name="pref_theme_system">Слідкувати налаштуваннями системи</string>
     <string name="pref_theme_title">Тема</string>
-    <string name="pref_requires_restart_summary">Необхідне перезавантаження</string>
     <string name="pref_enable_actionbar_title">Увімкнути ActionBar</string>
     <string name="pref_enable_actionbar_summary">У повноекранних додатках</string>
     <string name="pref_enable_statusbar_title">Увімкнути рядок стану</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">Постачальник</string>
     <string name="pref_map_keys">Зіставлення клавіш</string>
     <string name="pref_encoding_title">Кодування</string>
-    <string name="pref_default_settings">Налаштування за замовчуванням</string>
     <string name="pref_emulator_dir">Робоча директорія</string>
     <string name="pref_screenshot_summary">Вимкнути масштабування та фільтрацію для знімків екрана</string>
     <string name="pref_screenshot_title">Необроблений знімок екрана</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">Введіть ім\'я</string>
     <string name="enter_new_name">Введіть нове ім\'я</string>
     <string name="set_default_profile_description">Виберіть цей профіль як стандартні налаштування для всіх програм, які будуть встановлені пізніше</string>
-    <string name="error_name_exists">Уже існує, введіть інше ім\'я</string>
     <string name="default_label">"%s (за замовчуванням)"</string>
     <string name="not_saved_exists">Вже існує</string>
     <string name="alert_rewrite_profile">Профіль під назвою \"%1$s\" уже існує.\nВи хочете перезаписати його?</string>

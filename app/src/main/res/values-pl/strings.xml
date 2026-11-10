@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Brak danych</string>
     <string name="message_delete">Czy na pewno chcesz usunąć tę aplikację?</string>
     <string name="permission_request_failed">Ta aplikacja wymaga pozwolenia na zapisywanie danych do pamięci zewnętrznej</string>
-    <string name="external_storage_not_mounted">Ta aplikacja wymaga dostępu do pamięci zewnętrznej</string>
     <string name="create">utwórz</string>
     <string name="alert_msg_workdir_not_exists">Katalog roboczy nie istnieje pod ścieżką:\n\'%1$s\'.\nCzy chcesz utworzyć ją lub wybrać inną?</string>
     <string name="action_context_shortcut">Dodaj skrót</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Twoje dane użytkownika są przechowywane w lokalizacji która <b>zostanie usunięta</b> kiedy odinstalujesz aplikację:\n</string>
     <string name="midlet_name"><b>Nazwa: </b></string>
     <string name="midlet_size"><b>Rozmiar: </b></string>
-    <string name="midlet_source"><b>Źródło: </b></string>
     <string name="midlet_vendor"><b>Dostawca: </b></string>
     <string name="midlet_version"><b>Wersja: </b></string>
     <string name="converting_wait">Konwertuję plik JAR...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Aplikacja zainstalowana pomyślnie!</string>
     <string name="install_jar_non_matched_jad">Ta aplikacja różni się od opisanej w JAD.\nIgnorować JAD i mimo to zainstalować?</string>
     <string name="install_jar_needed">Wybierz plik JAR</string>
-    <string name="invalid_resolution_not_saved">Nieprawidłowa rozdzielczość: nie zapisano!</string>
     <string name="warn_install_from_net">Plik zostanie pobrany z Internetu</string>
     <string name="reinstall">Aplikacja jest już zainstalowana.\n\nCzy chcesz ją zainstalować ponownie?\nWszystkie dane zostaną zapisane.</string>
     <string name="reinstall_newest">Zaktualizuj tę aplikację do wersji %1$s?\n\nObecnie zainstalowana: %2$s\nWszystkie dane zostaną zapisane.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Zapisz profil</string>
     <string name="PREF_SCREEN_OPTIONS">Opcje ekranu</string>
     <string name="PREF_SCALE_RATIO">Skala(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Skaluj, aby dopasować</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Zachowaj proporcje</string>
     <string name="PREF_FILTER">Filtrowanie</string>
     <string name="PREF_IMMEDIATE">Tryb natychmiastowego przetwarzania</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Wartości są w skalowanych pikselach</string>
     <string name="PREF_BACKGROUND">Tło</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Wirtualna klawiatura</string>
-    <string name="PREF_VK_SHOW">Pokaż klawiaturę</string>
     <string name="PREF_VK_FEEDBACK">Wibracja przy naciśnięciu</string>
     <string name="PREF_VK_FORCE_OPACITY">Wymuś przeźroczystość przycisków poza ekranem</string>
     <string name="PREF_TOUCH_INPUT">Wprowadzanie dotykowe</string>
-    <string name="PREF_HW_ACCELERATION">Przyspieszenie sprzętowe (niestabilne)</string>
     <string name="pref_graphics_software">Oprogramowanie</string>
     <string name="pref_graphics_hw_gles">Przyspieszenie sprzętowe (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Przyspieszenie sprzętowe (okno)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etykiety (P)</string>
     <string name="PREF_VK_SEL_BACK">Przyciski (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Kluczowe rozmiary</string>
-    <string name="PREF_VK_NAV_KEYS">Drążek sterowy: </string>
-    <string name="PREF_VK_SOFT_KEYS">Softkeys: </string>
-    <string name="PREF_VK_NUM_KEYS">Cyfry: </string>
-    <string name="PREF_VK_FIRE_KEY">Ogień: </string>
-    <string name="PREF_VK_SIZE_HINT">Rozmiar</string>
     <string name="SIZE_PRESETS">Presets</string>
     <string name="SWAP_SIZES">Zamień rozmiary</string>
     <string name="PREF_SYS_PROPS">Właściwości systemu</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Pozioma</string>
     <string name="error">Błąd</string>
     <string name="message_clear_data">Czy na pewno chcesz wyczyścić dane aplikacji?</string>
-    <string name="PREF_VK_TYPE">Typ klawiatury</string>
     <string name="pref_vk_type_arrows">Strzałki</string>
     <string name="pref_vk_type_arrows_numbers">Strzałki &amp; numery</string>
     <string name="pref_vk_type_custom">Własne</string>
@@ -124,9 +111,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Wymuszenie zamknięcia aplikacji może spowodować utratę danych lub nawet całkowicie ją zepsuć! \nKontynuować?</string>
     <string name="CONFIRMATION_REQUIRED">Wymagane potwierdzenie</string>
     <string name="select_dialog_title">Wybierz MIDlet</string>
-    <string name="crash_dialog_message">Czy chcesz wysłać raport o błędzie do programisty?</string>
-    <string name="crash_dialog_title">Wykryto błąd</string>
-    <string name="report_crash">Wyślij</string>
     <string name="layout_edit_finished">Tryb edycji został zakończony</string>
     <string name="layout_edit_finish">Zakończ tryb edycji</string>
     <string name="layout_edit_mode">Tryb edycji układu przycisków</string>
@@ -139,7 +123,6 @@
     <string name="pref_theme_light">Jasny</string>
     <string name="pref_theme_night">Ciemny</string>
     <string name="pref_theme_title">Motyw</string>
-    <string name="pref_requires_restart_summary">Wymaga restartu</string>
     <string name="pref_enable_actionbar_title">Włącz ActionBar</string>
     <string name="pref_enable_actionbar_summary">W aplikacjach pełnoekranowych</string>
     <string name="pref_enable_statusbar_title">Włącz pasek stanu</string>
@@ -150,7 +133,6 @@
     <string name="pref_app_sort_date">Data</string>
     <string name="pref_map_keys">Mapowanie klawiszy</string>
     <string name="pref_encoding_title">Kodowanie</string>
-    <string name="pref_default_settings">Ustawienia domyślne</string>
     <string name="mapping_dialog_message">Bieżące mapowanie: %1$s</string>
     <string name="mapping_dialog_title">Naciśnij przycisk</string>
     <string name="reset_mapping">Zresetuj</string>

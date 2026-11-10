@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Žádná data</string>
     <string name="message_delete">Opravdu chcete odstranit tuto aplikaci?</string>
     <string name="permission_request_failed">Tato aplikace vyžaduje oprávnění k zápisu do úložiště</string>
-    <string name="external_storage_not_mounted">Tato aplikace vyžaduje externí úložiště</string>
     <string name="create">vytvořit</string>
     <string name="alert_msg_workdir_not_exists">Pracovní adresář neexistuje na cestě:\n\'%1$s\'\nChcete jej vytvořit nebo vybrat jiný?</string>
     <string name="action_context_shortcut">Přidat zkratku</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">Vaše uživatelská data jsou uložena v místě, které <b>bude smazáno</b> při odinstalaci aplikace:\n</string>
     <string name="midlet_name"><b>Název: </b></string>
     <string name="midlet_size"><b>Velikost: </b></string>
-    <string name="midlet_source"><b>Zdroj: </b></string>
     <string name="midlet_vendor"><b>Dodavatel: </b></string>
     <string name="midlet_version"><b>Verze: </b></string>
     <string name="converting_wait">Probíhá převod JAR...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">Aplikace byla úspěšně nainstalována!</string>
     <string name="install_jar_non_matched_jad">Tato aplikace se liší od té popsané v JAD.\nNebrat v úvahu JAD a přesto nainstalovat?</string>
     <string name="install_jar_needed">Vyberte JAR soubor</string>
-    <string name="invalid_resolution_not_saved">Neplatné rozlišení: neuloženo!</string>
     <string name="warn_install_from_net">Soubor bude stažen z internetu</string>
     <string name="reinstall">Aplikace je již nainstalována.\n\nChcete ji přeinstalovat?\nVšechna data budou uložena.</string>
     <string name="reinstall_newest">Aktualizovat tuto aplikaci na verzi %1$s?\n\nNyní nainstalována: %2$s\nVšechna data budou uložena.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">Uložit profil</string>
     <string name="PREF_SCREEN_OPTIONS">Možnosti zobrazení</string>
     <string name="PREF_SCALE_RATIO">Měřítko (%)</string>
-    <string name="PREF_SCALE_TO_FIT">Přizpůsobit velikosti</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Zachovat poměr stran</string>
     <string name="PREF_FILTER">Filtr</string>
     <string name="PREF_IMMEDIATE">Režim okamžitého zpracování</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Hodnoty jsou ve škálovaných obrazových bodech</string>
     <string name="PREF_BACKGROUND">Pozadí</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Virtuální klávesnice</string>
-    <string name="PREF_VK_SHOW">Zobrazit klávesnici</string>
     <string name="PREF_VK_FEEDBACK">Hmatová odezva</string>
     <string name="PREF_VK_FORCE_OPACITY">Vynutit neprůhlednost pro tlačítka mimo obrazovku</string>
     <string name="PREF_TOUCH_INPUT">Dotykové ovládání</string>
-    <string name="PREF_HW_ACCELERATION">HW akcelerace (nestabilní)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">HW akcelerace (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">HW akcelerace (window)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Popisky (P)</string>
     <string name="PREF_VK_SEL_BACK">Tlačítka (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Velikosti kláves</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Softwarové klávesy: </string>
-    <string name="PREF_VK_NUM_KEYS">Číslice: </string>
-    <string name="PREF_VK_FIRE_KEY">Akce: </string>
-    <string name="PREF_VK_SIZE_HINT">Velikost</string>
     <string name="SIZE_PRESETS">Předvolby</string>
     <string name="SWAP_SIZES">Prohodit velikosti</string>
     <string name="PREF_SYS_PROPS">Systémové vlastnosti</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">Na šířku</string>
     <string name="error">Chyba</string>
     <string name="message_clear_data">Opravdu chcete odstranit data aplikace?</string>
-    <string name="PREF_VK_TYPE">Typ klávesnice</string>
     <string name="pref_vk_type_arrows">Šipky</string>
     <string name="pref_vk_type_arrows_numbers">Šipky a čísla</string>
     <string name="pref_vk_type_custom">Vlastní</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Vynucené ukončení aplikace může vést ke ztrátě dat nebo ji dokonce úplně rozbít!\nPokračovat?</string>
     <string name="CONFIRMATION_REQUIRED">Vyžadováno potvrzení</string>
     <string name="select_dialog_title">Vyberte MIDlet</string>
-    <string name="crash_dialog_message">Chcete odeslat hlášení o chybě vývojáři?</string>
-    <string name="crash_dialog_title">Byla zjištěna chyba</string>
-    <string name="report_crash">Odeslat</string>
     <string name="layout_edit_finished">Režim úprav ukončen</string>
     <string name="layout_edit_finish">Ukončit režim úprav</string>
     <string name="layout_edit_mode">Režim úpravy rozložení kláves</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">Tmavý</string>
     <string name="pref_theme_system">Výchozí nastavení systému</string>
     <string name="pref_theme_title">Vzhled</string>
-    <string name="pref_requires_restart_summary">Vyžaduje znovuspuštění</string>
     <string name="pref_enable_actionbar_title">Povolit panel akcí</string>
     <string name="pref_enable_actionbar_summary">V celoobrazovkových aplikacích</string>
     <string name="pref_enable_statusbar_title">Povolit stavovou lištu</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">Dodavatel</string>
     <string name="pref_map_keys">Mapování kláves</string>
     <string name="pref_encoding_title">Kódování</string>
-    <string name="pref_default_settings">Výchozí nastavení</string>
     <string name="pref_emulator_dir">Pracovní adresář</string>
     <string name="pref_screenshot_summary">Zakázat škálování a filtrování snímků obrazovky</string>
     <string name="pref_screenshot_title">Nezpracované snímky obrazovky</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">Zadejte název</string>
     <string name="enter_new_name">Zadejte nový název</string>
     <string name="set_default_profile_description">Vyberte tento profil jako výchozí nastavení pro všechny aplikace, které budou nainstalovány později</string>
-    <string name="error_name_exists">Již existuje, zadejte jiný název</string>
     <string name="default_label">"%s (výchozí)"</string>
     <string name="not_saved_exists">Již existuje</string>
     <string name="alert_rewrite_profile">Profil s názvem \"%1$s\" již existuje.\nChcete jej přepsat?</string>

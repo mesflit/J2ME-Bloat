@@ -16,7 +16,6 @@
     <string name="no_data_for_display">لا يوجد بيانات</string>
     <string name="message_delete">هل تريد حذف هذا التطبيق حقاً؟</string>
     <string name="permission_request_failed">هذا التطبيق يتطلب إذونات الكتابة و التخزين</string>
-    <string name="external_storage_not_mounted">هذا التطبيق يتطلب تخزين خارجي</string>
     <string name="create">إنشاء</string>
     <string name="alert_msg_workdir_not_exists">دليل العمل غير موجود في المسار:\n\'%1$s\'.\nهل تريد إنشاؤه أو اختيار دليل آخر؟</string>
     <string name="action_context_shortcut">إضافة اختصار</string>
@@ -34,7 +33,6 @@
     <string name="scoped_storage_warning">يتم تخزين بيانات المستخدم في مسار <b>سيتم حذفه</b> عند إلغاء تثبيت التطبيق:\n</string>
     <string name="midlet_name"><b>الاسم: </b></string>
     <string name="midlet_size"><b>الحجم: </b></string>
-    <string name="midlet_source"><b>المصدر: </b></string>
     <string name="midlet_vendor"><b>المصدر: </b></string>
     <string name="midlet_version"><b>الإصدار: </b></string>
     <string name="converting_wait">جار تحويل ملف تطبيق جافا...</string>
@@ -42,7 +40,6 @@
     <string name="install_done">تم تثبيت التطبيق بنجاح!</string>
     <string name="install_jar_non_matched_jad">هذا التطبيق يختلف عن ذلك الموصوف في JAD.\nتجاهل JAD والتثبيت على أي حال؟</string>
     <string name="install_jar_needed">حدد ملف JAR</string>
-    <string name="invalid_resolution_not_saved">القرارات غير صالحة: لم يتم حفظها!</string>
     <string name="warn_install_from_net">سيتم تنزيل الملف من الإنترنت</string>
     <string name="reinstall">التطبيق مثبت بالفعل.\n\nهل تريد إعادة تثبيته؟\nسيتم حفظ جميع البيانات.</string>
     <string name="reinstall_newest">قم بتحديث هذا التطبيق إلى الإصدار %1$s؟\n\nالمثبت حاليا: %2$s\nسيتم حفظ جميع البيانات.</string>
@@ -57,7 +54,6 @@
     <string name="save_profile">حفظ الوضع</string>
     <string name="PREF_SCREEN_OPTIONS">إعدادات الشاشة</string>
     <string name="PREF_SCALE_RATIO">المقاس(٪)</string>
-    <string name="PREF_SCALE_TO_FIT">مقاس ملء الشاشه</string>
     <string name="PREF_KEEP_ASPECT_RATIO">الاحتفاظ بنسبة العرض إلى الارتفاع</string>
     <string name="PREF_FILTER">فلترة</string>
     <string name="PREF_IMMEDIATE">وضع المعالجة الفورية</string>
@@ -73,11 +69,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">القيم مقاسةً بكل بكسل</string>
     <string name="PREF_BACKGROUND">الخلفية</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">لوحة المفاتيح الإفتراضية</string>
-    <string name="PREF_VK_SHOW">أظهر لوحة المفاتيح</string>
     <string name="PREF_VK_FEEDBACK">اهتزاز عند النقر</string>
     <string name="PREF_VK_FORCE_OPACITY">فرض التعتيم للمفاتيح المقفلة</string>
     <string name="PREF_TOUCH_INPUT">الإدخال باللمس</string>
-    <string name="PREF_HW_ACCELERATION">تسريع المعدات(غير مستقر)</string>
     <string name="pref_graphics_software">البرمجيات</string>
     <string name="pref_graphics_hw_gles">تسارع HW (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">تسارع HW (نافذة)</string>
@@ -90,12 +84,6 @@
     <string name="PREF_UNIT_MS">ميلي ثانية</string>
     <string name="PREF_VK_SEL_FORE">العناوين(P)</string>
     <string name="PREF_VK_SEL_BACK">الأزرار(P)</string>
-    <string name="PREF_VK_KEY_SIZES">أحجام المفاتيح</string>
-    <string name="PREF_VK_NAV_KEYS">عصا التحكم: </string>
-    <string name="PREF_VK_SOFT_KEYS">مفاتيح التنقل: </string>
-    <string name="PREF_VK_NUM_KEYS">الأرقام: </string>
-    <string name="PREF_VK_FIRE_KEY">مفتاح (الاطلاق/البدء/الضرب): </string>
-    <string name="PREF_VK_SIZE_HINT">الحجم</string>
     <string name="SIZE_PRESETS">إعدادات مسبقة</string>
     <string name="SWAP_SIZES">مبادلة الأحجام</string>
     <string name="PREF_SYS_PROPS">خصائص النظام</string>
@@ -106,7 +94,6 @@
     <string name="pref_orientation_land">أفقي</string>
     <string name="error">خطأ</string>
     <string name="message_clear_data">هل تريد حقاً أن تحذف بيانات التطبيق؟</string>
-    <string name="PREF_VK_TYPE">نوع لوحة المفاتيح</string>
     <string name="pref_vk_type_arrows">الأسهم</string>
     <string name="pref_vk_type_arrows_numbers">الأسهم &amp; الأرقام</string>
     <string name="pref_vk_type_custom">مخصص</string>
@@ -139,9 +126,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">فرض اغلاق التطبيق قد يؤدي لفقد بعض البيانات او تدميرها بالكامل!\nمتابعه؟</string>
     <string name="CONFIRMATION_REQUIRED">التأكيد مطلوب</string>
     <string name="select_dialog_title">حدد MIDlet</string>
-    <string name="crash_dialog_message">هل تريد إرسال تقرير عن الخطأ إلى المطور؟</string>
-    <string name="crash_dialog_title">تم الكشف عن خطأ</string>
-    <string name="report_crash">إرسال</string>
     <string name="layout_edit_finished">تم الانتهاء من وضع التعديل</string>
     <string name="layout_edit_finish">انهاء وضع التعديل</string>
     <string name="layout_edit_mode">وضع تحرير توضع تخطيط الازرار</string>
@@ -163,7 +147,6 @@
     <string name="pref_theme_night">مظلم(اسود)</string>
     <string name="pref_theme_system">اتبع إعدادات النظام</string>
     <string name="pref_theme_title">المظهر</string>
-    <string name="pref_requires_restart_summary">يتطلب إعادة التشغيل</string>
     <string name="pref_enable_actionbar_title">تفعيل اكشن بار</string>
     <string name="pref_enable_actionbar_summary">في تطبيقات ملء الشاشة</string>
     <string name="pref_enable_statusbar_title">تمكين شريط الحالة</string>
@@ -179,7 +162,6 @@
     <string name="pref_app_sort_vendor">المورد</string>
     <string name="pref_map_keys">توجيهات المفتاح</string>
     <string name="pref_encoding_title">الترميز</string>
-    <string name="pref_default_settings">الإعدادات الإفتراضية</string>
     <string name="pref_emulator_dir">مجلد المفتوح</string>
     <string name="pref_screenshot_summary">تعطيل القياس والتصفية لقطات الشاشة</string>
     <string name="pref_screenshot_title">لقطة شاشة خامة</string>
@@ -200,7 +182,6 @@
     <string name="enter_name">أدخل الاسم</string>
     <string name="enter_new_name">أدخل الاسم الجديد</string>
     <string name="set_default_profile_description">تحديد هذا الملف الشخصي كإعدادات إفتراضية لجميع التطبيقات التي سيتم تثبيتها لاحقاً</string>
-    <string name="error_name_exists">هذا الاسم مستخدم، أدخل اسم آخر</string>
     <string name="default_label">"%s (افتراضي)"</string>
     <string name="not_saved_exists">موجود بالفعل</string>
     <string name="alert_rewrite_profile">ملف تعريف اسمه \"%1$s\" موجود بالفعل.\nهل تريد الكتابة فوقه؟</string>

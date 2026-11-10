@@ -30,9 +30,6 @@ import android.view.KeyEvent;
 
 import androidx.core.content.ContextCompat;
 
-import org.acra.ACRA;
-import org.acra.ErrorReporter;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,9 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigInteger;
 import java.nio.charset.Charset;
-import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +66,6 @@ import ru.playsoftware.j2meloader.config.Config;
 import ru.playsoftware.j2meloader.config.ProfileModel;
 import ru.playsoftware.j2meloader.config.ProfilesManager;
 import ru.playsoftware.j2meloader.config.ShaderInfo;
-import ru.playsoftware.j2meloader.util.Constants;
 import ru.playsoftware.j2meloader.util.FileUtils;
 import ru.playsoftware.j2meloader.util.IOUtils;
 import ru.woesss.j2me.jar.Descriptor;
@@ -127,16 +121,9 @@ public class MicroLoader {
 
 	LinkedHashMap<String, String> loadMIDletList() throws IOException {
 		LinkedHashMap<String, String> midlets = new LinkedHashMap<>();
-		String jarHash = null;
 		Descriptor descriptor;
 		if (BuildConfig.FULL_EMULATOR) {
 			descriptor = new Descriptor(new File(appDir, Config.MIDLET_MANIFEST_FILE), false);
-			try {
-				byte[] bytes = FileUtils.getBytes(new File(appDir, Config.MIDLET_RES_FILE));
-				byte[] sum = MessageDigest.getInstance("md5").digest(bytes);
-				jarHash = String.format("%032x", new BigInteger(1, sum));
-			} catch (Throwable ignored) {
-			}
 		} else {
 			try (InputStream stream = getClass().getResourceAsStream("/MIDLET-META-INF/MANIFEST.MF")) {
 				if (stream == null) {
@@ -148,19 +135,6 @@ public class MicroLoader {
 			}
 		}
 		Map<String, String> attr = descriptor.getAttrs();
-		ErrorReporter errorReporter = ACRA.getErrorReporter();
-		String report = errorReporter.getCustomData(Constants.KEY_APPCENTER_ATTACHMENT);
-		StringBuilder sb = new StringBuilder();
-		if (report != null) {
-			sb.append(report).append("\n");
-		}
-		sb.append(Descriptor.MIDLET_NAME).append(": ").append(descriptor.getName()).append("\n");
-		sb.append(Descriptor.MIDLET_VENDOR).append(": ").append(descriptor.getVendor()).append("\n");
-		sb.append(Descriptor.MIDLET_VERSION).append(": ").append(descriptor.getVersion()).append("\n");
-		if (jarHash != null) {
-			sb.append("JAR_HASH_MD5").append(": ").append(jarHash);
-		}
-		errorReporter.putCustomData(Constants.KEY_APPCENTER_ATTACHMENT, sb.toString());
 		MIDlet.initProps(attr);
 		for (int i = 1; ; i++) {
 			String v = attr.get("MIDlet-" + i);

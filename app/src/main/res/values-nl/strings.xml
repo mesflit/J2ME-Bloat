@@ -15,7 +15,6 @@
     <string name="no_data_for_display">Geen gegevens</string>
     <string name="message_delete">Weet u zeker dat u deze app wilt verwijderen?</string>
     <string name="permission_request_failed">Deze app vereist schrijfrechten voor opslag</string>
-    <string name="external_storage_not_mounted">Deze app vereist externe opslag</string>
     <string name="action_context_shortcut">Snelkoppeling toevoegen</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_context_delete">Verwijder</string>
@@ -33,7 +32,6 @@
     <string name="save_profile">Profiel opslaan</string>
     <string name="PREF_SCREEN_OPTIONS">Schermopties</string>
     <string name="PREF_SCALE_RATIO">Schaal(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Schaal om passend te maken</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Beeldverhouding behouden</string>
     <string name="PREF_FILTER">Filter</string>
     <string name="PREF_IMMEDIATE">Onmiddellijke verwerkingsmodus</string>
@@ -49,11 +47,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Waarden staan in geschaalde pixels</string>
     <string name="PREF_BACKGROUND">Achtergrond</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Virtueel toetsenbord</string>
-    <string name="PREF_VK_SHOW">Toon toetsenbord</string>
     <string name="PREF_VK_FEEDBACK">Haptische feedback</string>
     <string name="PREF_VK_FORCE_OPACITY">Doorzichtigheid forceren voor toetsen buiten het scherm</string>
     <string name="PREF_TOUCH_INPUT">Touch input</string>
-    <string name="PREF_HW_ACCELERATION">HW acceleratie (onstabiel)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">HW acceleratie (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">HW acceleratie (venster)</string>
@@ -66,12 +62,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etiketten (P)</string>
     <string name="PREF_VK_SEL_BACK">Knoppen (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Sleutel grootte</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Soft toetsen: </string>
-    <string name="PREF_VK_NUM_KEYS">Cijfers: </string>
-    <string name="PREF_VK_FIRE_KEY">Brand: </string>
-    <string name="PREF_VK_SIZE_HINT">Maat</string>
     <string name="SIZE_PRESETS">Voorinstellingen</string>
     <string name="SWAP_SIZES">Swap grootte</string>
     <string name="PREF_SYS_PROPS">Systeemeigenschappen</string>
@@ -82,7 +72,6 @@
     <string name="pref_orientation_land">Landschap modus</string>
     <string name="error">Fout</string>
     <string name="message_clear_data">Weet u zeker dat u de app data wilt wissen?</string>
-    <string name="PREF_VK_TYPE">Toetsenbord type</string>
     <string name="pref_vk_type_phone">Telefoon</string>
     <string name="pref_vk_type_phone_arrows">Telefoon (pijlen)</string>
     <string name="PREF_LAYOUT">Indeling</string>
@@ -110,9 +99,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Als u de toepassing forceert om de toepassing te sluiten, kan dit leiden tot gegevensverlies of zelfs helemaal breken! \nVerder?</string>
     <string name="CONFIRMATION_REQUIRED">Bevestiging vereist</string>
     <string name="select_dialog_title">Selecteer MIDled</string>
-    <string name="crash_dialog_message">Wilt u een foutrapport verzenden naar de ontwikkelaar?</string>
-    <string name="crash_dialog_title">Fout gedetecteerd</string>
-    <string name="report_crash">Verzenden</string>
     <string name="layout_edit_finished">Bewerkingsmodus voltooid</string>
     <string name="layout_edit_finish">Voltooi de bewerkingsmodus</string>
     <string name="layout_edit_mode">Keylayout bewerkingsmodus</string>
@@ -125,7 +111,6 @@
     <string name="pref_theme_light">Licht</string>
     <string name="pref_theme_night">Donker</string>
     <string name="pref_theme_title">Thema</string>
-    <string name="pref_requires_restart_summary">Herstart vereist</string>
     <string name="pref_enable_actionbar_title">ActionBar inschakelen</string>
     <string name="pref_enable_actionbar_summary">In fullscreen toepassingen</string>
     <string name="pref_enable_statusbar_title">Statusbalk inschakelen</string>
@@ -140,7 +125,6 @@
     <string name="pref_app_sort_date">Datum</string>
     <string name="pref_map_keys">Sneltoetsen</string>
     <string name="pref_encoding_title">Versleutelen</string>
-    <string name="pref_default_settings">Standaard instellingen</string>
     <string name="pref_emulator_dir">Werkfolder</string>
     <string name="mapping_dialog_message">Huidige toewijzing: %1$s</string>
     <string name="mapping_dialog_title">Druk op een toets</string>
@@ -153,7 +137,6 @@
     <string name="enter_name">Naam invoeren</string>
     <string name="enter_new_name">Voer nieuwe naam in</string>
     <string name="set_default_profile_description">Selecteer dit profiel als standaard instelling voor alle apps die later zullen worden geïnstalleerd</string>
-    <string name="error_name_exists">Bestaat al, voer een andere naam in</string>
     <string name="default_label">"%s (standaard)"</string>
     <string name="not_saved_exists">Bestaat al</string>
 </resources>

@@ -15,7 +15,6 @@
     <string name="no_data_for_display">Nessun dato</string>
     <string name="message_delete">Vuoi davvero eliminare questa applicazione?</string>
     <string name="permission_request_failed">Questa applicazione richiede l\'autorizzazione di scrittura nell\'archivio</string>
-    <string name="external_storage_not_mounted">Questa applicazione richiede l\'archiviazione esterna</string>
     <string name="action_context_shortcut">Aggiungi collegamento</string>
     <string name="action_settings">Impostazioni</string>
     <string name="action_context_delete">Elimina</string>
@@ -31,7 +30,6 @@
     <string name="save_profile">Salva Profilo</string>
     <string name="PREF_SCREEN_OPTIONS">Opzioni schermo</string>
     <string name="PREF_SCALE_RATIO">Scala(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Allarga fino a riempire</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Mantieni le proporzioni</string>
     <string name="PREF_FILTER">Filtro</string>
     <string name="PREF_IMMEDIATE">Modalità di elaborazione immediata</string>
@@ -47,11 +45,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">I valori sono in pixel scalati</string>
     <string name="PREF_BACKGROUND">Sfondo</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Tastiera virtuale</string>
-    <string name="PREF_VK_SHOW">Mostra la tastiera</string>
     <string name="PREF_VK_FEEDBACK">Feedback tattile</string>
     <string name="PREF_VK_FORCE_OPACITY">Forza l\'opacità per i tasti fuori schermo</string>
     <string name="PREF_TOUCH_INPUT">Input tocco</string>
-    <string name="PREF_HW_ACCELERATION">Accelerazione hardware (instabile)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">Accelerazione HW (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Accelerazione HW (Finestra)</string>
@@ -64,12 +60,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etichette (P)</string>
     <string name="PREF_VK_SEL_BACK">Tasti (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Dimensioni tasto</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Tasti virtuali: </string>
-    <string name="PREF_VK_NUM_KEYS">Cifre: </string>
-    <string name="PREF_VK_FIRE_KEY">Fuoco: </string>
-    <string name="PREF_VK_SIZE_HINT">Dimensione</string>
     <string name="SIZE_PRESETS">Predefiniti</string>
     <string name="SWAP_SIZES">Scambia dimensioni</string>
     <string name="PREF_SYS_PROPS">Proprietà di sistema</string>
@@ -80,7 +70,6 @@
     <string name="pref_orientation_land">Panoramico</string>
     <string name="error">Errore</string>
     <string name="message_clear_data">Vuoi davvero cancellare i dati dell\'applicazione?</string>
-    <string name="PREF_VK_TYPE">Tipo di tastiera</string>
     <string name="pref_vk_type_phone">Telefono</string>
     <string name="pref_vk_type_phone_arrows">Telefono (frecce)</string>
     <string name="PREF_LAYOUT">Posizionamento</string>
@@ -97,9 +86,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">La chiusura forzata dell\'applicazione potrebbe causare una perdita di dati o la loro perdita completa!\nProcedere?</string>
     <string name="CONFIRMATION_REQUIRED">Conferma richiesta</string>
     <string name="select_dialog_title">Scegli MIDlet</string>
-    <string name="crash_dialog_message">Vuoi inviare il report dell\'errore allo sviluppatore?</string>
-    <string name="crash_dialog_title">Errore rilevato</string>
-    <string name="report_crash">Invia</string>
     <string name="layout_edit_finished">Modalità modifica conclusa</string>
     <string name="layout_edit_finish">Termina modalità modifica</string>
     <string name="layout_edit_mode">Modalità modifica disposizione tasti</string>
@@ -112,7 +98,6 @@
     <string name="pref_theme_light">Chiaro</string>
     <string name="pref_theme_night">Scuro</string>
     <string name="pref_theme_title">Tema</string>
-    <string name="pref_requires_restart_summary">Richiede il riavvio</string>
     <string name="pref_enable_actionbar_title">Abilita barra delle azioni</string>
     <string name="pref_enable_actionbar_summary">Nelle applicazioni a schermo intero</string>
     <string name="pref_enable_statusbar_title">Abilita barra di stato</string>
@@ -127,7 +112,6 @@
     <string name="pref_app_sort_date">Data</string>
     <string name="pref_map_keys">Mappature dei tasti</string>
     <string name="pref_encoding_title">Codifica testo</string>
-    <string name="pref_default_settings">Impostazioni predefinite</string>
     <string name="pref_emulator_dir">Cartella di lavoro</string>
     <string name="mapping_dialog_message">Mappatura corrente: %1$s</string>
     <string name="mapping_dialog_title">Premi un tasto</string>
@@ -140,7 +124,6 @@
     <string name="enter_name">Inserisci il nome</string>
     <string name="enter_new_name">Inserisci un nuovo nome</string>
     <string name="set_default_profile_description">Seleziona questo profilo come impostazioni standard per tutte le applicazioni che saranno installate in seguito</string>
-    <string name="error_name_exists">Esiste già, inserisci un altro nome</string>
     <string name="default_label">"%s (Predefinito)"</string>
     <string name="not_saved_exists">Esiste già</string>
 </resources>

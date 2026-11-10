@@ -16,7 +16,6 @@
     <string name="no_data_for_display">Нет данных</string>
     <string name="message_delete">Вы действительно хотите удалить это приложение?</string>
     <string name="permission_request_failed">Для работы приложения требуется разрешение на запись файлов</string>
-    <string name="external_storage_not_mounted">Для работы приложения требуется внешнее хранилище</string>
     <string name="create">создать</string>
     <string name="alert_msg_workdir_not_exists">Рабочая папка эмулятора будет создана по пути:\n\"%1$s\".\nВы можете выбрать другую сейчас, нажав кнопку %2$s, и в любое время через настройки</string>
     <string name="action_context_shortcut">Добавить ярлык</string>
@@ -35,7 +34,6 @@
     <string name="error_no_picker">Пожалуйста, установите файловый менеджер</string>
     <string name="midlet_name"><b>Название: </b></string>
     <string name="midlet_size"><b>Размер: </b></string>
-    <string name="midlet_source"><b>Источник: </b></string>
     <string name="midlet_vendor"><b>Поставщик: </b></string>
     <string name="midlet_version"><b>Версия: </b></string>
     <string name="converting_wait">Конвертация JAR...</string>
@@ -43,7 +41,6 @@
     <string name="install_done">Приложение установлено!</string>
     <string name="install_jar_non_matched_jad">Это приложение не соответствует описанному в JAD. Параметры из JAD не будут использованы\n\nВсё равно установить?</string>
     <string name="install_jar_needed">Выберите JAR файл</string>
-    <string name="invalid_resolution_not_saved">Некорректные размеры: не сохранено!</string>
     <string name="warn_install_from_net">Файл будет загружен из сети Интернет</string>
     <string name="reinstall">Приложение уже установлено.\n\nВы хотите его переустановить?\nВсе данные будут сохранены.</string>
     <string name="reinstall_newest">Обновить это приложение?\n\nНовая версия: %1$s?\nУстановлено: %2$s\nВсе данные будут сохранены.</string>
@@ -58,7 +55,6 @@
     <string name="save_profile">Сохранить профиль</string>
     <string name="PREF_SCREEN_OPTIONS">Параметры экрана</string>
     <string name="PREF_SCALE_RATIO">Масштаб(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Масштабировать</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Сохранять пропорции</string>
     <string name="PREF_FILTER">Фильтрация</string>
     <string name="PREF_IMMEDIATE">Режим неотложной обработки</string>
@@ -74,11 +70,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Значения в масш. пикселях</string>
     <string name="PREF_BACKGROUND">Фон</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Виртуальная клавиатура</string>
-    <string name="PREF_VK_SHOW">Показывать клавиатуру</string>
     <string name="PREF_VK_FEEDBACK">Тактильный отклик</string>
     <string name="PREF_VK_FORCE_OPACITY">Принудительная непрозрачность кнопок вне экрана</string>
     <string name="PREF_TOUCH_INPUT">Сенсорный ввод</string>
-    <string name="PREF_HW_ACCELERATION">Аппаратное ускорение (нестабильно)</string>
     <string name="pref_graphics_software">Программный</string>
     <string name="pref_graphics_hw_gles">Аппаратный (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Аппаратный (window)</string>
@@ -91,12 +85,6 @@
     <string name="PREF_UNIT_MS">мс</string>
     <string name="PREF_VK_SEL_FORE">Надписи (Н)</string>
     <string name="PREF_VK_SEL_BACK">Кнопки (Н)</string>
-    <string name="PREF_VK_KEY_SIZES">Размеры клавиш</string>
-    <string name="PREF_VK_NAV_KEYS">Джойстик: </string>
-    <string name="PREF_VK_SOFT_KEYS">Софт-кл.: </string>
-    <string name="PREF_VK_NUM_KEYS">Цифры: </string>
-    <string name="PREF_VK_FIRE_KEY">Огонь: </string>
-    <string name="PREF_VK_SIZE_HINT">Разм.</string>
     <string name="SIZE_PRESETS">Предустановки</string>
     <string name="SWAP_SIZES">Поменять местами</string>
     <string name="PREF_SYS_PROPS">Системные параметры</string>
@@ -107,7 +95,6 @@
     <string name="pref_orientation_land">Альбом</string>
     <string name="error">Ошибка</string>
     <string name="message_clear_data">Вы действительно хотите очистить данные приложения?</string>
-    <string name="PREF_VK_TYPE">Тип клавиатуры</string>
     <string name="pref_vk_type_arrows">Стрелки</string>
     <string name="pref_vk_type_arrows_numbers">Стрелки и цифры</string>
     <string name="pref_vk_type_custom">Пользовательская</string>
@@ -140,9 +127,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Принудительное закрытие приложения может привести к потере данных или даже полной его неработоспособности!\nПродолжить?</string>
     <string name="CONFIRMATION_REQUIRED">Требуется подтверждение</string>
     <string name="select_dialog_title">Выберите MIDlet</string>
-    <string name="crash_dialog_message">Вы хотите отправить отчет об ошибке разработчику?</string>
-    <string name="crash_dialog_title">Произошла ошибка</string>
-    <string name="report_crash">Отправить</string>
     <string name="layout_edit_finished">Редактирование раскладки завершено</string>
     <string name="layout_edit_finish">Завершить редактирование раскладки</string>
     <string name="layout_edit_mode">Режим редактирования раскладки</string>
@@ -165,7 +149,6 @@
     <string name="pref_theme_night">Тёмная</string>
     <string name="pref_theme_system">Следовать настройкам системы</string>
     <string name="pref_theme_title">Тема</string>
-    <string name="pref_requires_restart_summary">Требуется перезапуск</string>
     <string name="pref_enable_actionbar_title">Включить ActionBar</string>
     <string name="pref_enable_actionbar_summary">В полноэкранных приложениях</string>
     <string name="pref_black_background_title">Черный фон</string>
@@ -184,7 +167,6 @@
     <string name="pref_app_sort_vendor">Поставщик</string>
     <string name="pref_map_keys">Назначение кнопок</string>
     <string name="pref_encoding_title">Кодировка</string>
-    <string name="pref_default_settings">Стандартные настройки</string>
     <string name="pref_emulator_dir">Рабочая папка</string>
     <string name="pref_screenshot_summary">Отключить масштабирование и фильтрацию скриншотов</string>
     <string name="pref_screenshot_title">Необработанный скриншот</string>
@@ -205,7 +187,6 @@
     <string name="enter_name">Введите название</string>
     <string name="enter_new_name">Введите новое название</string>
     <string name="set_default_profile_description">Выбрать этот шаблон как стандартную настройку для всех приложений, которые будут устанавливаться позже</string>
-    <string name="error_name_exists">Уже есть, введите другое название</string>
     <string name="default_label">"%s (стандартный)"</string>
     <string name="not_saved_exists">Уже существует</string>
     <string name="alert_rewrite_profile">Профиль \"%1$s\" уже есть.\nХотите его перезаписать?</string>

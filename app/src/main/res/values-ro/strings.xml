@@ -14,7 +14,6 @@
     <string name="no_data_for_display">Nu există informații disponibile</string>
     <string name="message_delete">Chiar vrei sa ștergi această aplicație?</string>
     <string name="permission_request_failed">Această aplicație are nevoie de permisiuni de stocare</string>
-    <string name="external_storage_not_mounted">Aceasta aplicație are nevoie de stocare externă</string>
     <string name="action_context_shortcut">Adaugă scurtătură</string>
     <string name="action_settings">Setări</string>
     <string name="action_context_delete">Șterge</string>
@@ -27,7 +26,6 @@
     <string name="RESET_LAYOUT_CMD">Resetează formatul tastaturii</string>
     <string name="PREF_SCREEN_OPTIONS">Opțiunile ecranului</string>
     <string name="PREF_SCALE_RATIO">Redimensionare(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Redimensionare pentru potrivire</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Păstrează raportul aspectului</string>
     <string name="PREF_FILTER">Filtru</string>
     <string name="PREF_IMMEDIATE">Modul de prelucrare imediată</string>
@@ -43,10 +41,8 @@
     <string name="PREF_FONT_SIZE_IN_SP">Valorile sunt redimensionate în pixeli</string>
     <string name="PREF_BACKGROUND">Fundal</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Tastatură virtuală</string>
-    <string name="PREF_VK_SHOW">Arată tastatura</string>
     <string name="PREF_VK_FEEDBACK">Vibratii</string>
     <string name="PREF_TOUCH_INPUT">Intrare atingere</string>
-    <string name="PREF_HW_ACCELERATION">Acceleratie HW (instabila)</string>
     <string name="PREF_VK_BACK">Butoane</string>
     <string name="PREF_VK_FORE">Etichete</string>
     <string name="PREF_VK_OUTLINE">Contur</string>
@@ -55,12 +51,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Etichete (P)</string>
     <string name="PREF_VK_SEL_BACK">Butoane (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Dimensiune tastă</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Taste moi: </string>
-    <string name="PREF_VK_NUM_KEYS">Cifre: </string>
-    <string name="PREF_VK_FIRE_KEY">Foc: </string>
-    <string name="PREF_VK_SIZE_HINT">Dimensiune</string>
     <string name="SIZE_PRESETS">Presetări</string>
     <string name="SWAP_SIZES">Schimbă dimensiunea</string>
     <string name="PREF_SYS_PROPS">Proprietati sistem</string>
@@ -71,7 +61,6 @@
     <string name="pref_orientation_land">Peisaj</string>
     <string name="error">Eroare</string>
     <string name="message_clear_data">Ești sigur că vrei să ștergi datele aplicației?</string>
-    <string name="PREF_VK_TYPE">Tip tastatură</string>
     <string name="pref_vk_type_phone">Telefon (numeric)</string>
     <string name="pref_vk_type_phone_arrows">Telefon (D-pad)</string>
     <string name="PREF_LAYOUT">Dispunere</string>
@@ -79,9 +68,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Închiderea forțată a aplicației ar putea duce la pierderea datelor!\nVrei să continui?</string>
     <string name="CONFIRMATION_REQUIRED">Confirmare necesară</string>
     <string name="select_dialog_title">Selecteaza MIDlet</string>
-    <string name="crash_dialog_message">Dorești să trimiți raportul erorii către programator?</string>
-    <string name="crash_dialog_title">Eroare detectată</string>
-    <string name="report_crash">Trimite</string>
     <string name="layout_edit_finished">Modul de editare a fost terminat</string>
     <string name="layout_edit_finish">Termină modul de editare</string>
     <string name="layout_edit_mode">Modul de editare al formatului tastaturii</string>
@@ -94,7 +80,6 @@
     <string name="pref_theme_light">Luminata</string>
     <string name="pref_theme_night">Intunecata</string>
     <string name="pref_theme_title">Tema</string>
-    <string name="pref_requires_restart_summary">Este nevoie de restart</string>
     <string name="pref_enable_actionbar_title">Activează ActionBar</string>
     <string name="pref_enable_actionbar_summary">În aplicațiile pe tot ecranul</string>
     <string name="pref_wakelock_title">Tine ecranul aprins</string>
@@ -104,7 +89,6 @@
     <string name="pref_app_sort_date">Data</string>
     <string name="pref_map_keys">Mapari taste</string>
     <string name="pref_encoding_title">Codificare</string>
-    <string name="pref_default_settings">Setări implicite</string>
     <string name="mapping_dialog_message">Mapari curente: %1$s</string>
     <string name="mapping_dialog_title">Apasă o tastă</string>
     <string name="reset_mapping">Resetare</string>

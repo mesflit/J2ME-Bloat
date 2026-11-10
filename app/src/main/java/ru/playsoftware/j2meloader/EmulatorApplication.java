@@ -16,38 +16,19 @@
 
 package ru.playsoftware.j2meloader;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
-import org.acra.ACRA;
-import org.acra.config.CoreConfigurationBuilder;
-import org.acra.config.DialogConfigurationBuilder;
-
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-
 import ru.playsoftware.j2meloader.util.Constants;
 import ru.playsoftware.j2meloader.util.FileUtils;
 
 public class EmulatorApplication extends Application {
-	private static final String[] VALID_SIGNATURES = {
-			"78EF7758720A9902F731ED706F72C669C39B765C", // GPlay
-			"289F84A32207DF89BE749481ED4BD07E15FC268F", // F-Droid
-			"FA8AA497194847D5715BAA62C6344D75A936EBA6" // Private
-	};
-
 	private static EmulatorApplication instance;
 
 	private final SharedPreferences.OnSharedPreferenceChangeListener themeListener = (sharedPreferences, key) -> {
@@ -59,26 +40,11 @@ public class EmulatorApplication extends Application {
 		return instance;
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	protected void attachBaseContext(Context base) {
 		super.attachBaseContext(base);
 		instance = this;
 
-		ACRA.init(this, new CoreConfigurationBuilder()
-				.withBuildConfigClass(BuildConfig.class)
-				.withParallel(false)
-				.withSendReportsInDevMode(false)
-				.withPluginConfigurations(new DialogConfigurationBuilder()
-						.withTitle(getString(R.string.crash_dialog_title))
-						.withText(getString(R.string.crash_dialog_message))
-						.withPositiveButtonText(getString(R.string.report_crash))
-						.withResTheme(androidx.appcompat.R.style.Theme_AppCompat_DayNight_Dialog)
-						.withEnabled(true)
-						.build()
-				));
-		boolean enabled = isSignatureValid() && !BuildConfig.FLAVOR.equals("dev");
-		ACRA.getErrorReporter().setEnabled(enabled);
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		sp.registerOnSharedPreferenceChangeListener(themeListener);
 		setNightMode(sp.getString(Constants.PREF_THEME, null));
@@ -92,35 +58,6 @@ public class EmulatorApplication extends Application {
 		} else {
 			return FileUtils.getText("/proc/self/cmdline").trim();
 		}
-	}
-
-	@SuppressLint("PackageManagerGetSignatures")
-	private boolean isSignatureValid() {
-		try {
-			Signature[] signatures;
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-				PackageInfo info = getPackageManager()
-						.getPackageInfo(getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES);
-				signatures = info.signingInfo.getApkContentsSigners();
-			} else {
-				PackageInfo info = getPackageManager()
-						.getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-				signatures = info.signatures;
-			}
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			for (Signature signature : signatures) {
-				md.update(signature.toByteArray());
-				String sha1 = String.format("%032X", new BigInteger(1, md.digest()));
-				if (Arrays.asList(VALID_SIGNATURES).contains(sha1)) {
-					return true;
-				}
-			}
-		} catch (PackageManager.NameNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 	void setNightMode(String theme) {

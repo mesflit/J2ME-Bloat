@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="close">Close</string>
     <string name="exit">Exit</string>
@@ -27,7 +25,6 @@
     <string name="no_data_for_display">No data</string>
     <string name="message_delete">Do you really want to delete this app?</string>
     <string name="permission_request_failed">This app requires storage write permission</string>
-    <string name="external_storage_not_mounted">This app requires external storage</string>
     <string name="create">create</string>
     <string name="alert_msg_workdir_not_exists">Working directory does not exist at path:\n\'%1$s\'.\nDo you want to create it or choose another one?</string>
     <string name="action_context_shortcut">Add shortcut</string>
@@ -47,7 +44,6 @@
 
     <string name="midlet_name"><b>Name: </b></string>
     <string name="midlet_size"><b>Size: </b></string>
-    <string name="midlet_source"><b>Source: </b></string>
     <string name="midlet_vendor"><b>Vendor: </b></string>
     <string name="midlet_version"><b>Version: </b></string>
     <string name="converting_wait">Converting JAR...</string>
@@ -61,7 +57,6 @@
     <string name="install_multiple_skipped">Already in library (skipped): %1$d</string>
     <string name="install_multiple_failed">Failed: %1$d</string>
     <string name="install_multiple_more">…and %1$d more</string>
-    <string name="invalid_resolution_not_saved">Invalid resolutions: not saved!</string>
     <string name="warn_install_from_net">File will be downloaded from Internet</string>
     <string name="reinstall">App already installed.\n\nDo you want to reinstall it?\nAll data will be saved.</string>
     <string name="reinstall_newest">Update this app to version %1$s?\n\nCurrently installed: %2$s\nAll data will be saved.</string>
@@ -77,7 +72,6 @@
     <string name="save_profile">Save profile</string>
     <string name="PREF_SCREEN_OPTIONS">Screen options</string>
     <string name="PREF_SCALE_RATIO">Scale(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Scale to fit</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Keep aspect ratio</string>
     <string name="PREF_FILTER">Filter</string>
     <string name="PREF_IMMEDIATE">Immediate processing mode</string>
@@ -94,11 +88,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Values are in Scaled Pixels</string>
     <string name="PREF_BACKGROUND">Background</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Virtual keyboard</string>
-    <string name="PREF_VK_SHOW">Show keyboard</string>
     <string name="PREF_VK_FEEDBACK">Haptic feedback</string>
     <string name="PREF_VK_FORCE_OPACITY">Force opacity for off-screen keys</string>
     <string name="PREF_TOUCH_INPUT">Touch input</string>
-    <string name="PREF_HW_ACCELERATION">HW acceleration (unstable)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">HW acceleration (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">HW acceleration (window)</string>
@@ -112,12 +104,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Labels (P)</string>
     <string name="PREF_VK_SEL_BACK">Buttons (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Key sizes</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Soft keys: </string>
-    <string name="PREF_VK_NUM_KEYS">Digits: </string>
-    <string name="PREF_VK_FIRE_KEY">Fire: </string>
-    <string name="PREF_VK_SIZE_HINT">Size</string>
     <string name="SIZE_PRESETS">Presets</string>
     <string name="SWAP_SIZES">Swap sizes</string>
     <string name="PREF_SYS_PROPS">System properties</string>
@@ -129,7 +115,6 @@
     <string name="pref_orientation_land">Landscape</string>
     <string name="error">Error</string>
     <string name="message_clear_data">Do you really want to clear app data?</string>
-    <string name="PREF_VK_TYPE">Keyboard type</string>
     <string name="pref_vk_type_arrows">Arrows</string>
     <string name="pref_vk_type_arrows_numbers">Arrows &amp; numbers</string>
     <string name="pref_vk_type_custom">Custom</string>
@@ -145,7 +130,6 @@
     <string name="delete_file_title">Delete file?</string>
     <string name="delete_file_message">Do you really want to delete \"%1$s\"?</string>
     <string name="error_delete_file">Failed to delete \"%1$s\"</string>
-    <string name="error_add_file">Failed to add \"%1$s\"</string>
     <string name="identity_filter">Fast (no filter)</string>
     <string name="shader_tuning">Shader Tuning</string>
     <string name="shader_setting" translatable="false">%s: %s</string>
@@ -177,9 +161,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Force-closing the application may result in data loss or even break it completely!\nProceed?</string>
     <string name="CONFIRMATION_REQUIRED">Confirmation required</string>
     <string name="select_dialog_title">Select MIDlet</string>
-    <string name="crash_dialog_message">Do you want to send error report to the developer?</string>
-    <string name="crash_dialog_title">Error detected</string>
-    <string name="report_crash">Send</string>
     <string name="layout_edit_finished">Edit mode finished</string>
     <string name="layout_edit_finish">Finish edit mode</string>
     <string name="layout_edit_mode">Keylayout edit mode</string>
@@ -207,7 +188,6 @@
     <string name="pref_theme_night">Dark</string>
     <string name="pref_theme_system">Follow system settings</string>
     <string name="pref_theme_title">Theme</string>
-    <string name="pref_requires_restart_summary">Requires restart</string>
     <string name="pref_enable_actionbar_title">Enable ActionBar</string>
     <string name="pref_enable_actionbar_summary">In fullscreen applications</string>
     <string name="pref_black_background_title">Black background</string>
@@ -227,7 +207,6 @@
     <string name="pref_apps_view">view</string>
     <string name="pref_map_keys">Key mappings</string>
     <string name="pref_encoding_title">Encoding</string>
-    <string name="pref_default_settings">Default settings</string>
     <string name="pref_emulator_dir">Working directory</string>
     <string name="pref_screenshot_summary">Disable scaling and filtering for screenshots</string>
     <string name="pref_screenshot_title">Raw screenshot</string>
@@ -246,9 +225,7 @@
     <string name="pref_mascot_summary">Show message when using</string>
     <string name="pref_mascot_title">Detect Mascot Capsule 3D</string>
 
-    <string name="_RESOLUTION_SEPARATOR" translatable="false">x</string>
     <string name="_FONT_SEPARATOR" translatable="false">-</string>
-    <string name="_MINUS_ONE" translatable="false">-1</string>
 
     <string name="virtual_key_left_soft" translatable="false">L</string>
     <string name="virtual_key_right_soft" translatable="false">R</string>
@@ -289,7 +266,6 @@
     <string name="enter_name">Enter name</string>
     <string name="enter_new_name">Enter new name</string>
     <string name="set_default_profile_description">Select this profile as a standard settings for all apps that will be installed later</string>
-    <string name="error_name_exists">Already exists, enter other name</string>
     <string name="default_label">"%s (default)"</string>
     <string name="not_saved_exists">Already exists</string>
     <string name="preset_cannot_delete">Cannot edit built-in presets</string>

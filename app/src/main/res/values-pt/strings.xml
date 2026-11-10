@@ -15,7 +15,6 @@
     <string name="no_data_for_display">Sem informação</string>
     <string name="message_delete">Você quer mesmo excluir este app?</string>
     <string name="permission_request_failed">Este aplicativo requer permissão de gravação de armazenamento</string>
-    <string name="external_storage_not_mounted">Este aplicativo requer acesso à memória</string>
     <string name="action_context_shortcut">Adicionar atalho</string>
     <string name="action_settings">Configurações</string>
     <string name="action_context_delete">Eliminar</string>
@@ -33,7 +32,6 @@
     <string name="save_profile">Guardar perfil</string>
     <string name="PREF_SCREEN_OPTIONS">Ajustes de Tela</string>
     <string name="PREF_SCALE_RATIO">Escala(%)</string>
-    <string name="PREF_SCALE_TO_FIT">Ajuste para encaixar</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Manter a Proporção da Imagem</string>
     <string name="PREF_FILTER">Filtro</string>
     <string name="PREF_IMMEDIATE">Modo de processamento imediato</string>
@@ -49,11 +47,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Valores em pixel dimensionado</string>
     <string name="PREF_BACKGROUND">Plano de Fundo</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Teclado virtual</string>
-    <string name="PREF_VK_SHOW">Mostrar teclado</string>
     <string name="PREF_VK_FEEDBACK">Feedback háptico</string>
     <string name="PREF_VK_FORCE_OPACITY">Forçar opacidade para teclas fora da tela</string>
     <string name="PREF_TOUCH_INPUT">Entrada por toque</string>
-    <string name="PREF_HW_ACCELERATION">Aceleração de HW (instável)</string>
     <string name="pref_graphics_software">Software</string>
     <string name="pref_graphics_hw_gles">Aceleração HW (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Aceleração HW (janela)</string>
@@ -66,12 +62,6 @@
     <string name="PREF_UNIT_MS">ms</string>
     <string name="PREF_VK_SEL_FORE">Rótulos (P)</string>
     <string name="PREF_VK_SEL_BACK">Botões (P)</string>
-    <string name="PREF_VK_KEY_SIZES">Tamanhos de chave</string>
-    <string name="PREF_VK_NAV_KEYS">Joystick: </string>
-    <string name="PREF_VK_SOFT_KEYS">Teclas: </string>
-    <string name="PREF_VK_NUM_KEYS">Dígitos: </string>
-    <string name="PREF_VK_FIRE_KEY">Selec: </string>
-    <string name="PREF_VK_SIZE_HINT">Tamanho</string>
     <string name="SIZE_PRESETS">Predefinições</string>
     <string name="SWAP_SIZES">Tamanhos de swap</string>
     <string name="PREF_SYS_PROPS">Propriedades do sistema</string>
@@ -82,7 +72,6 @@
     <string name="pref_orientation_land">Paisagem</string>
     <string name="error">Erro</string>
     <string name="message_clear_data">Você tem certeza que deseja limpar os dados do aplicativo?</string>
-    <string name="PREF_VK_TYPE">Tipo de teclado</string>
     <string name="pref_vk_type_phone">Telefone</string>
     <string name="pref_vk_type_phone_arrows">Telefone (setas)</string>
     <string name="PREF_LAYOUT">Esquema</string>
@@ -110,9 +99,6 @@
     <string name="FORCE_CLOSE_CONFIRMATION">Força-fechamento do aplicativo pode resultar em perda de dados ou até mesmo danificar completamente! \nProceder?</string>
     <string name="CONFIRMATION_REQUIRED">Confirmação Necessária</string>
     <string name="select_dialog_title">Selecione MIDlet</string>
-    <string name="crash_dialog_message">Você quer enviar o relatório de erro para o desenvolvedor?</string>
-    <string name="crash_dialog_title">Erro detectado</string>
-    <string name="report_crash">Enviar</string>
     <string name="layout_edit_finished">Modo edição terminado</string>
     <string name="layout_edit_finish">Terminar o modo de edição</string>
     <string name="layout_edit_mode">Editar Teclas</string>
@@ -125,7 +111,6 @@
     <string name="pref_theme_light">Claro</string>
     <string name="pref_theme_night">Escuro</string>
     <string name="pref_theme_title">Tema</string>
-    <string name="pref_requires_restart_summary">Requer reinicialização</string>
     <string name="pref_enable_actionbar_title">Habilitar ActionBar</string>
     <string name="pref_enable_actionbar_summary">Tela completa no app</string>
     <string name="pref_enable_statusbar_title">Ativar barra de estado</string>
@@ -140,7 +125,6 @@
     <string name="pref_app_sort_date">Data</string>
     <string name="pref_map_keys">Mapeamentos de teclas</string>
     <string name="pref_encoding_title">Codificação</string>
-    <string name="pref_default_settings">Configurações padrão</string>
     <string name="pref_emulator_dir">Diretório de trabalho</string>
     <string name="mapping_dialog_message">Mapeamento atual: %1$s</string>
     <string name="mapping_dialog_title">Pressione uma tecla</string>
@@ -153,7 +137,6 @@
     <string name="enter_name">Digite o nome</string>
     <string name="enter_new_name">Digite o novo nome</string>
     <string name="set_default_profile_description">Selecione este perfil como uma configuração padrão para todos os apps que serão instalados mais tarde</string>
-    <string name="error_name_exists">Já existe, digite outro nome</string>
     <string name="default_label">"%s (padrão)"</string>
     <string name="not_saved_exists">Já existe</string>
 </resources>

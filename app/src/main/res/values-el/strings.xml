@@ -30,7 +30,6 @@
     <string name="scoped_storage_warning">Τα δεδομένα είναι αποθηκευμένα σε μια τοποθεσία <b>η οποία θα διαγραφεί</b> όταν απεγκαταστήσετε την εφαρμογή:\n</string>
     <string name="midlet_name"><b>Όνομα: </b></string>
     <string name="midlet_size"><b>Μέγεθος: </b></string>
-    <string name="midlet_source"><b>Πηγή: </b></string>
     <string name="midlet_vendor"><b>Εκδότης: </b></string>
     <string name="midlet_version"><b>Έκδοση: </b></string>
     <string name="converting_wait">Γίνεται μετατροπή του αρχείου JAR...</string>
@@ -38,7 +37,6 @@
     <string name="install_done">Η εφαρμογή εγκαταστάθηκε με επιτυχία!</string>
     <string name="install_jar_non_matched_jad">Αυτή η εφαρμογή διαφέρει με αυτά που περιγράφονται στο αρχείο JAD.\nΘέλετε να γίνει αγνόηση του JAD και να γίνει εγκατάσταση ούτως η άλλως;</string>
     <string name="install_jar_needed">Επιλέξτε το αρχείο JAR</string>
-    <string name="invalid_resolution_not_saved">Μη έγκυρη ανάλυση: δεν έγινε αποθήκευση!</string>
     <string name="warn_install_from_net">Το αρχείο θα ληφθεί από το διαδίκτυο</string>
     <string name="reinstall">Η εφαρμογή είναι ήδη εγκατεστημένη.\n\nΘέλετε να κάνετε επανεγκατάσταση;\nΤα προηγούμενα δεδομένα θα αποθηκευτούν.</string>
     <string name="reinstall_newest">Να γίνει ενημέρωση της εφαρμογής στην έκδοση %1$s;\n\nΤρέχουσα έκδοση: %2$s\nΤα προηγούμενα δεδομένα θα αποθηκευτούν.</string>
@@ -53,7 +51,6 @@
     <string name="save_profile">Αποθήκευση προφίλ</string>
     <string name="PREF_SCREEN_OPTIONS">Ρυθμίσεις οθόνης</string>
     <string name="PREF_SCALE_RATIO">Κλίμακα (%)</string>
-    <string name="PREF_SCALE_TO_FIT">Παραμόρφωση</string>
     <string name="PREF_KEEP_ASPECT_RATIO">Διατήρηση αναλογιών</string>
     <string name="PREF_FILTER">Φιλτράρισμα</string>
     <string name="PREF_IMMEDIATE">Επεξεργασία σε πραγματικό χρόνο</string>
@@ -69,11 +66,9 @@
     <string name="PREF_FONT_SIZE_IN_SP">Οι τιμές σε πίξελ</string>
     <string name="PREF_BACKGROUND">Φόντο</string>
     <string name="PREF_VIRTUAL_KEYBOARD_OPTIONS">Εικονικό πληκτρολόγιο</string>
-    <string name="PREF_VK_SHOW">Εμφάνιση πληκτρολογίου</string>
     <string name="PREF_VK_FEEDBACK">Δόνηση</string>
     <string name="PREF_VK_FORCE_OPACITY">Αναγκαστική εφαρμογή αδιαφάνειας σε πλήκτρα εκτός οθόνης</string>
     <string name="PREF_TOUCH_INPUT">Λειτουργία αφής</string>
-    <string name="PREF_HW_ACCELERATION">Επιτάχυνση υλικού (ασταθής)</string>
     <string name="pref_graphics_software">Λογισμικό</string>
     <string name="pref_graphics_hw_gles">Επιτάχυνση υλικού (OpenGL ES)</string>
     <string name="pref_graphics_hw_view">Επιτάχυνση υλικού (παράθυρο)</string>
@@ -85,8 +80,6 @@
     <string name="PREF_VK_HIDE_DELAY">Απόκρυψη καθυστέρησης: </string>
     <string name="PREF_VK_SEL_FORE">Ετικέτες (πατημένα)</string>
     <string name="PREF_VK_SEL_BACK">Πλήκτρα (πατημένα)</string>
-    <string name="PREF_VK_KEY_SIZES"></string>
-    <string name="PREF_VK_SIZE_HINT">Μέγεθος</string>
     <string name="SIZE_PRESETS">Πρότυπα</string>
     <string name="SWAP_SIZES">Αλλαγή μεγεθών</string>
     <string name="PREF_SYS_PROPS">Ιδιότητες συστήματος</string>
@@ -97,7 +90,6 @@
     <string name="pref_orientation_land">Οριζόντια</string>
     <string name="error">Σφάλμα</string>
     <string name="message_clear_data">Θέλετε πραγματικά να διαγράψετε τα δεδομένα της εφαρμογής;</string>
-    <string name="PREF_VK_TYPE">Τύπος πληκτρολογίου</string>
     <string name="pref_vk_type_arrows">Βελάκια</string>
     <string name="pref_vk_type_arrows_numbers">Βελάκια &amp; αριθμοί</string>
     <string name="pref_vk_type_custom">Προσαρμοσμένο</string>
@@ -128,9 +120,6 @@
     <string name="saved">Αποθηκεύτηκε</string>
     <string name="FORCE_CLOSE_CONFIRMATION">Το αναγκαστικό κλείσιμο της εφαρμογής μπορεί να οδηγήσει σε απώλεια δεδομένων ή και στο να χαλάσει τελείως!\nΘέλετε να συνεχίσετε;</string>
     <string name="select_dialog_title">Επιλογή MIDlet</string>
-    <string name="crash_dialog_message">Θέλετε να στείλετε αναφορά σφάλματος στον δημιουργό της εφαρμογής;</string>
-    <string name="crash_dialog_title">Εντοπίστηκε σφάλμα</string>
-    <string name="report_crash">Αποστολή</string>
     <string name="layout_edit_finished">Η λειτουργία επεξεργασίας ολοκληρώθηκε</string>
     <string name="layout_edit_finish">Ολοκλήρωση λειτουργίας επεξεργασίας</string>
     <string name="layout_edit_mode">Λειτουργία επεξεργασίας πληκτρολογίου</string>
@@ -152,7 +141,6 @@
     <string name="pref_theme_night">Σκούρο</string>
     <string name="pref_theme_system">Χρήση ρυθμίσεων συστήματος</string>
     <string name="pref_theme_title">Θέμα</string>
-    <string name="pref_requires_restart_summary">Θα χρειαστεί επανεκκίνηση</string>
     <string name="pref_enable_actionbar_title">Ενεργοποίηση ActionBar</string>
     <string name="pref_enable_actionbar_summary">Για εφαρμογές σε πλήρης οθόνη</string>
     <string name="pref_enable_statusbar_title">Ενεργοποίηση γραμμής κατάστασης</string>
@@ -168,7 +156,6 @@
     <string name="pref_app_sort_vendor">Εκδότη</string>
     <string name="pref_map_keys">Αντιστοίχηση πλήκτρων</string>
     <string name="pref_encoding_title">Κωδικοποίηση</string>
-    <string name="pref_default_settings">Προεπιλεγμένες ρυθμίσεις</string>
     <string name="pref_emulator_dir">Τοποθεσία εφαρμογής</string>
     <string name="pref_screenshot_summary">Απενεργοποιεί τη μεγέθυνση και χρήση φίλτρων στα στιγμιότυπα</string>
     <string name="pref_screenshot_title">Καθαρά στιγμιότυπα</string>
