@@ -1,148 +1,149 @@
 # J2ME-Bloat
 
-J2ME-Bloat, eski Java ME (J2ME) oyunlarını ve uygulamalarını modern Android cihazlarda çalıştıran bir emülatördür. [J2ME Loader](https://github.com/nikita36078/J2ME-Loader) tabanlıdır.
-
-*English: J2ME-Bloat is a Java ME emulator for Android based on J2ME Loader. Add your own games as JAR/JAD files, a folder or a ZIP archive. See [English quick guide](#english-quick-guide) below.*
+J2ME-Bloat is a Java ME (J2ME) emulator for Android. It runs classic Java mobile games and apps on modern phones and tablets. It is based on [J2ME Loader](https://github.com/nikita36078/J2ME-Loader).
 
 <p>
-  <img src="screenshots/screen.jpg" width="200" alt="Ekran görüntüsü 1">
-  <img src="screenshots/screen2.jpg" width="200" alt="Ekran görüntüsü 2">
-  <img src="screenshots/screen3.jpg" width="200" alt="Ekran görüntüsü 3">
+  <img src="screenshots/screen.jpg" width="200" alt="Screenshot 1">
+  <img src="screenshots/screen2.jpg" width="200" alt="Screenshot 2">
+  <img src="screenshots/screen3.jpg" width="200" alt="Screenshot 3">
 </p>
 
-## Özellikler
+## Features
 
-- 2D ve 3D J2ME oyunları (Mascot Capsule 3D dahil)
-- JAR/JAD dosyalarından, bir klasörden veya **ZIP arşivinden toplu içe aktarma**
-- İlerleme çubuklu, iptal edilebilen içe aktarma; hatalı dosyaların listesi kopyalanabilir
-- Material 3 tasarımlı, açık/koyu temalı oyun kütüphanesi
-- Özelleştirilebilir sanal klavye ve dokunmatik kontroller
-- Her oyun için ayrı ekran, ölçekleme ve kontrol ayarları
+- Runs most 2D and 3D J2ME games, including Mascot Capsule 3D titles
+- Imports games from JAR/JAD files, a whole folder or a **ZIP archive**
+- Batch imports with a progress bar, a cancel button and a copyable list of failed files
+- Material 3 game library with light and dark themes
+- Customizable virtual keyboard and touch controls
+- Separate screen, scaling and control settings for every game
 
-## Kurulum
+## Install
 
-1. [Releases](https://github.com/mesflit/J2ME-Bloat/releases/tag/continuous) sayfasından en son `.apk` dosyasını indir.
-2. Dosyayı aç ve kur. Android "bilinmeyen kaynaklar" izni isterse, dosyayı açtığın uygulamaya (tarayıcı, dosya yöneticisi) izin ver.
-3. Yeni sürümler aynı imzayla yayınlanır; yeni APK'yı doğrudan eskisinin üzerine kurabilirsin. Oyunların ve ayarların silinmez.
+1. Open [Releases](https://github.com/mesflit/J2ME-Bloat/releases/latest) and download the `.apk` file.
+2. Open the file to install it. If Android asks, allow installing apps from your browser or file manager.
+3. To update, install the newer APK over the old one. Every release is signed with the same key, so your games and settings stay.
 
-> **J2ME Loader'dan veya eski J2ME-Bloat sürümlerinden geçiş:** Paket adı artık `com.mesflit.j2mebloat`. Bu yüzden eski sürümler ayrı bir uygulama olarak görünür. Eskisini kaldırıp oyunlarını yeniden ekleyebilir ya da *Ayarlar → Import/export data* seçeneğiyle eski uygulamadan dışa aktarıp yenisine içe aktarabilirsin.
+> **Coming from J2ME Loader or an older J2ME-Bloat build?** The package name is now `com.mesflit.j2mebloat`, so older builds show up as a separate app. Use **Settings → Import/export data** in the old app to export your games and settings, import them in the new app, then uninstall the old one.
 
-## Oyun ekleme rehberi
+## Adding games
 
-J2ME-Bloat içinde oyun gelmez; kendi sahip olduğun oyun dosyalarını eklersin. Ana ekranda sağ alttaki **Oyun ekle** düğmesine dokun ve bir yöntem seç.
+J2ME-Bloat does not include any games. You add game files that you own. Tap **Add games** in the bottom-right corner and pick one of these:
 
-### 1. JAR / JAD dosyaları
-
-Bir veya birden fazla dosya seç. Birden fazla dosya seçersen hepsi sırayla kurulur.
-
-- `.jar` dosyası tek başına yeterlidir.
-- Oyunun `.jad` dosyası da varsa ikisini birlikte seç. J2ME-Bloat eşleşen JAR'ı kendisi bulur.
-- `.kjx` dosyaları da desteklenir.
-
-### 2. ZIP arşivi
-
-Oyunlarını tek bir `.zip` dosyasında topladıysan arşivi seçmen yeterli.
-
-- Arşivin içindeki tüm `.jar`, `.jad` ve `.kjx` dosyaları bulunur ve kurulur. Alt klasörler de taranır.
-- Arşiv içindeki arşivler (örneğin `oyunlar.zip` içinde `oyun1.zip`) de açılır.
-- Dosyalar önce geçici olarak çıkarılır, kurulum bitince silinir. Büyük arşivler için cihazda arşiv boyutu kadar boş alan olmalı.
-- Dosya yöneticisinde bir ZIP'e dokunup "J2ME-Bloat ile aç" dersen de aynı şekilde içe aktarılır.
-
-### 3. Klasör
-
-Oyunların telefonda bir klasördeyse klasörü seç. Klasör ve tüm alt klasörleri taranır; içerideki ZIP arşivleri de açılır.
-
-### İçe aktarma sırasında
-
-- İlerleme çubuğu kaç oyunun kurulduğunu gösterir. Ekran bu sırada kapanmaz.
-- **İptal** düğmesi, o an kurulan oyun bitince işlemi durdurur. O ana kadar kurulanlar kütüphanede kalır.
-- Bitince kurulan ve başarısız olan oyun sayısı gösterilir. **Hatalı listeyi kopyala** ile başarısız dosyaların adlarını panoya alabilirsin.
-
-## Oyunları kullanma
-
-- Oyunu başlatmak için kütüphanede ona dokun.
-- Uzun basarak menüyü aç: **Ayarlar** (çözünürlük, ölçekleme, kontroller, klavye düzeni), **Yeniden adlandır**, **Kısayol oluştur**, **Yeniden kur** ve **Sil**.
-- Üst çubuktaki düğmelerle arama yapabilir, liste/ızgara görünümü arasında geçebilir ve sıralamayı değiştirebilirsin.
-
-### Sık karşılaşılan sorunlar
-
-| Sorun | Çözüm |
+| Option | What it does |
 |---|---|
-| Oyun çok yavaş | Oyun ayarlarında filtrelemeyi kapat. |
-| Görüntü titriyor | "Immediate processing mode" seçeneğini aç. |
-| Ekran çok küçük/büyük | Oyun ayarlarından ekran çözünürlüğünü oyunun gerçek çözünürlüğüne (örn. 240×320) ayarla. |
-| Güncelleme "uygulama yüklenmedi" hatası veriyor | Elindeki sürüm farklı bir anahtarla imzalanmış. Bir kez kaldırıp yeni sürümü kur; sonraki güncellemeler üzerine kurulur. |
-| ZIP'ten hiç oyun bulunamadı | Arşivde `.jar`/`.jad`/`.kjx` dosyası olduğundan emin ol. RAR ve 7z desteklenmez; önce ZIP'e çevir. |
+| **JAR / JAD files** | Install one or more game files. Select the `.jad` together with its `.jar` and they are matched automatically. `.kjx` files work too. |
+| **ZIP archive** | Install every `.jar`, `.jad` and `.kjx` inside a `.zip`, including subfolders and ZIPs inside the ZIP. |
+| **Folder** | Scan a folder and all its subfolders. ZIP archives in the folder are opened as well. |
 
-## Derleme
+You can also tap a `.zip` or `.jar` file in your file manager and choose **Open with J2ME-Bloat**.
 
-Gereksinimler: Android SDK, Android NDK, JDK 21.
+While importing:
+
+- The progress bar shows how many games are done, and the screen stays on.
+- **Cancel** stops after the current game. Games installed so far stay in your library.
+- At the end you see how many games were installed and which ones failed. **Copy failed list** puts the failed file names on the clipboard.
+- Files from a ZIP are extracted temporarily and deleted afterwards. For a big archive, keep at least as much free space as the archive size.
+
+## Getting games and making a ZIP
+
+### Where your games can come from
+
+- **Your old phone.** Games you bought years ago are often still on your old Nokia, Sony Ericsson, Samsung or Motorola phone or its memory card. Connect the phone (or the card, with a card reader) to a computer and look for `.jar` and `.jad` files, usually in folders such as `Games`, `Java`, `Applications` or `Other`. On some phones you can also send a game over Bluetooth to your Android device. Old PC sync tools such as Nokia PC Suite can back up installed apps too.
+- **Old backups.** Search old computer folders, CDs and memory cards from previous phones for `.jar`, `.jad` and `.zip` files.
+- **Free and open-source games.** Many developers publish J2ME games and homebrew with a license that allows sharing. A good place to start is the [j2me topic on GitHub](https://github.com/topics/j2me). Check each project's license before you redistribute it.
+- **Your own games.** If you develop J2ME apps, install your own builds directly.
+
+Only use games that you own or that are licensed for free distribution. Many sites host commercial J2ME games without permission from their publishers; those games are still under copyright, so please don't download them from such sites or share them.
+
+### Packing games into a ZIP
+
+Putting your games in one ZIP makes it easy to move them to a new phone and import them in one step.
+
+- **Android:** in your file manager (for example Files by Google or your phone's built-in one), select the game files or the folder that holds them, then choose **Compress** or **Create ZIP**.
+- **Windows:** select the files, right-click and choose **Send to → Compressed (zipped) folder** (on Windows 11: **Compress to ZIP file**).
+- **macOS:** select the files, right-click and choose **Compress**.
+- **Linux:** run `zip -r my-games.zip my-games/`.
+
+Tips:
+
+- Keep each game's `.jad` and `.jar` together with the same base name (for example `Game.jad` and `Game.jar`).
+- Subfolders are fine, for example one folder per game or per screen size.
+- Only ZIP is supported. Convert RAR or 7z archives to ZIP first.
+
+## Playing
+
+- Tap a game to start it.
+- Long-press a game for **Settings** (resolution, scaling, controls, keyboard layout), **Rename**, **Create shortcut**, **Reinstall** and **Delete**.
+- Use the toolbar to search, switch between list and grid view, and change the sort order.
+
+### Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| The game is slow | Turn off filtering in the game's settings. |
+| The image flickers | Turn on "Immediate processing mode" in the game's settings. |
+| The screen is too small or too big | Set the screen resolution in the game's settings to the game's real resolution, for example 240×320. |
+| "App not installed" when updating | The installed build was signed with a different key. Uninstall it once and install the new release; later updates install over it. |
+| No games found in a ZIP | Make sure the archive contains `.jar`, `.jad` or `.kjx` files. RAR and 7z are not supported. |
+
+## Building
+
+Requirements: Android SDK, Android NDK and JDK 21.
 
 ```sh
-# Hata ayıklama sürümü
-./gradlew :app:assembleOpenDebug
-
-# İmzalı sürüm (imzalama ayarları için aşağıya bak)
 ./gradlew :app:assembleOpenRelease
 ```
 
-Çıktılar `app/build/outputs/apk/` altında oluşur.
+The APK is written to `app/build/outputs/apk/open/release/`.
 
-Yerel imzalı derleme için proje kök dizinine `keystore.properties` dosyası koy (bu dosya git'e eklenmez):
+For a signed local build, create `keystore.properties` in the project root (it is ignored by git):
 
 ```properties
-storeFile=/tam/yol/release.jks
+storeFile=/absolute/path/to/release.jks
 storePassword=...
 keyAlias=...
 keyPassword=...
 ```
 
-## Otomatik sürümler (GitHub Actions)
+Without it, the APK is signed with your local debug key.
 
-`master` dalına her gönderimde `.github/workflows/release.yml` APK'yı derler ve [continuous](https://github.com/mesflit/J2ME-Bloat/releases/tag/continuous) sürümüne yükler.
+## Automatic releases
 
-Android, bir güncellemeyi ancak önceki sürümle **aynı anahtarla** imzalanmışsa üzerine kurar. Daha önce anahtar tanımlı olmadığı için her derleme rastgele bir debug anahtarıyla imzalanıyordu ve güncellemeler bu yüzden kurulmuyordu. Artık iş akışı sabit bir anahtar ister; anahtar yoksa ya da APK debug anahtarıyla imzalanmışsa derleme hata verir. Ayrıca sürüm kodu her commit'te artar.
+Every push to `master` builds a signed APK with `.github/workflows/release.yml` and publishes it as a new release named `J2ME-Bloat 2.0.<build number>`. The build number is the commit count, so each release can be installed over the previous one.
 
-Kurulum tek seferliktir:
+Android only installs an update when it is signed with the **same key** as the installed version. The workflow therefore needs a fixed signing key stored in the repository secrets. If the key is missing, or the APK ends up signed with a debug key, the build fails instead of publishing an APK that would not install as an update.
 
-1. Bir imza anahtarı oluştur (JDK ile gelen `keytool` ile). Bu dosyayı ve şifreyi **güvenli bir yerde sakla**; kaybedersen kullanıcılar bir sonraki güncellemeyi üzerine kuramaz.
+One-time setup:
+
+1. Create a signing key with `keytool` (included with the JDK). **Keep the file and the password safe.** If you lose them, users cannot install the next update over their current version.
 
    ```sh
    keytool -genkeypair -v -keystore release.jks -alias j2mebloat \
      -keyalg RSA -keysize 4096 -validity 10000 -storetype PKCS12
    ```
 
-2. Anahtarı base64'e çevir:
+2. Encode the key as base64:
 
    ```sh
    base64 -w0 release.jks > release.jks.b64      # Linux
    base64 -i release.jks -o release.jks.b64      # macOS
    ```
 
-3. GitHub'da depo → **Settings → Secrets and variables → Actions → New repository secret** ile şunları ekle:
+3. In the repository, open **Settings → Secrets and variables → Actions → New repository secret** and add:
 
-   | Secret | Değer |
+   | Secret | Value |
    |---|---|
-   | `SIGNING_KEY` | `release.jks.b64` dosyasının içeriği |
-   | `KEY_STORE_PASSWORD` | Anahtar deposu şifresi |
-   | `KEY_ALIAS` | `j2mebloat` (veya seçtiğin takma ad) |
-   | `KEY_PASSWORD` | Anahtar şifresi (PKCS12'de depo şifresiyle aynı; boş bırakılabilir) |
+   | `SIGNING_KEY` | Contents of `release.jks.b64` |
+   | `KEY_STORE_PASSWORD` | Keystore password |
+   | `KEY_ALIAS` | `j2mebloat` (or the alias you chose) |
+   | `KEY_PASSWORD` | Key password (same as the keystore password for PKCS12; may be left empty) |
 
-4. **Actions → Automated CI builds → Run workflow** ile derlemeyi başlat. Özet sayfasında APK'nın imza parmak izi (SHA-256) görünür; her sürümde aynı olmalıdır.
+4. Push to `master`, or open **Actions → Release → Run workflow**. The run summary shows the APK's SHA-256 signing fingerprint, which should be the same for every release.
 
-Daha önce `SIGNING_KEY` ve `KEYSTORE_PROPERTIES` secret'larını kullandıysan onlar da çalışmaya devam eder.
+## Legal
 
-## English quick guide
+J2ME-Bloat does not include or distribute any games. Games belong to their developers and publishers. Only add games that you own or that are licensed for free distribution.
 
-- **Install:** download the latest APK from [Releases](https://github.com/mesflit/J2ME-Bloat/releases/tag/continuous). New builds install over old ones.
-- **Add games:** tap **Add games** and pick JAR/JAD files, a ZIP archive (nested archives and subfolders are scanned) or a folder. Imports show progress, can be cancelled, and list any files that failed.
-- **Play:** tap a game to start it; long-press for per-game settings, rename, shortcut, reinstall or delete.
-- **Automatic releases:** add the `SIGNING_KEY` (base64 keystore), `KEY_STORE_PASSWORD`, `KEY_ALIAS` and `KEY_PASSWORD` repository secrets. Every build is then signed with the same key, so updates install over each other.
+## License and credits
 
-## Yasal not
-
-J2ME-Bloat içinde oyun bulunmaz. Oyunlar geliştiricilerinin ve yayıncılarının mülküdür; yalnızca sahip olduğun veya kullanma hakkın olan oyunları ekle.
-
-## Lisans ve teşekkür
-
-Uygulama kaynak kodu Apache License 2.0 ile lisanslanmıştır (bkz. [LICENSE](LICENSE)). J2ME-Bloat, Nikita Shakarun ve katkıda bulunanların [J2ME Loader](https://github.com/nikita36078/J2ME-Loader) projesine dayanır.
+The source code is licensed under the Apache License 2.0 (see [LICENSE](LICENSE)). J2ME-Bloat is based on [J2ME Loader](https://github.com/nikita36078/J2ME-Loader) by Nikita Shakarun and contributors.

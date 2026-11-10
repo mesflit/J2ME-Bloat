@@ -1,4 +1,4 @@
-name: Automated CI builds
+name: Release
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-release:
-    name: Build release APK
+    name: Build and publish release
     runs-on: ubuntu-latest
 
     steps:
@@ -90,15 +90,21 @@ jobs:
             echo "REQUIRE_RELEASE_KEY=true"
           } >> "$GITHUB_ENV"
 
+      - name: Compute version
+        run: |
+          count="$(git rev-list --count HEAD)"
+          echo "VERSION_CODE=$count" >> "$GITHUB_ENV"
+          echo "VERSION_NAME=2.0.$count" >> "$GITHUB_ENV"
+
       - name: Build release APK
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon :app:assembleDevRelease
+          ./gradlew --no-daemon :app:assembleOpenRelease
 
       - name: Collect APK and verify signature
         run: |
           mkdir -p dist
-          cp app/build/outputs/apk/dev/release/*.apk dist/
+          cp app/build/outputs/apk/open/release/*.apk dist/
 
           apksigner="$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -n1)apksigner"
           for apk in dist/*.apk; do
@@ -124,34 +130,19 @@ jobs:
           path: dist/*.apk
           if-no-files-found: error
 
-      - name: Move continuous tag
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          base="repos/$GITHUB_REPOSITORY/git"
-
-          if gh api "$base/ref/tags/continuous" >/dev/null 2>&1; then
-            gh api -X PATCH "$base/refs/tags/continuous" \
-              -f sha="$GITHUB_SHA" \
-              -F force=true >/dev/null
-          else
-            gh api -X POST "$base/refs" \
-              -f ref="refs/tags/continuous" \
-              -f sha="$GITHUB_SHA" >/dev/null
-          fi
-
-      - name: Update GitHub release
+      - name: Publish GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: continuous
+          tag: v${{ env.VERSION_NAME }}
           commit: ${{ github.sha }}
-          name: Automated CI builds
+          name: J2ME-Bloat ${{ env.VERSION_NAME }}
           body: |
-            Automated build of the latest commit on master.
+            Automatic release built from ${{ github.sha }}.
 
-            Every build is signed with the same release key, so it installs as an
-            update over the previous one — your games and settings are kept.
-          prerelease: true
+            Download the APK below and install it. Every release is signed with
+            the same key, so it installs as an update over the previous version
+            and keeps your games and settings.
+          makeLatest: true
           allowUpdates: true
           removeArtifacts: true
           artifactErrorsFailBuild: true

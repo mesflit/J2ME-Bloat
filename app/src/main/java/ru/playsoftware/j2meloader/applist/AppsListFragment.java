@@ -524,7 +524,11 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private void onDbUpdated(List<AppItem> items) {
 		adapter.setItems(items);
 		if (appUri != null) {
-			InstallerDialog.newInstance(appUri).show(getParentFragmentManager(), "installer");
+			if (ImportSources.isZip(FileUtils.getDisplayName(requireContext(), appUri))) {
+				BatchInstallerDialog.newInstanceForZip(appUri).show(getParentFragmentManager(), "installer");
+			} else {
+				InstallerDialog.newInstance(appUri).show(getParentFragmentManager(), "installer");
+			}
 			appUri = null;
 		}
 	}

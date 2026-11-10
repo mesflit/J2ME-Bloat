@@ -38,7 +38,7 @@ android {
         targetSdk TARGET_SDK
         // Grows with every commit, so each CI build can be installed over the previous one.
         versionCode computeVersionCode()
-        versionName "1.8.2"
+        versionName "2.0.${computeVersionCode()}"
 
         resValue 'string', 'app_name', rootProject.name
 
@@ -107,7 +107,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro', 'proguard-common.pro'
 
-            versionNameSuffix "-open"
         }
 
         fdroid {
