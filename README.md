@@ -1,5 +1,7 @@
 J2ME-Bloat
 
+![Total Downloads](https://img.shields.io/github/downloads/mesflit/J2ME-Bloat/total?style=for-the-badge&label=Downloads&color=blue)
+
 J2ME-Bloat is an Android Java ME (J2ME) emulator based on "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader).
 
 It allows you to run classic Java mobile games and applications on modern Android devices.
