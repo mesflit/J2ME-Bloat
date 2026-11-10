@@ -21,7 +21,7 @@ J2ME-Bloat includes a large collection of bundled Java games.
 
 Browse the complete game list:
 
-"View All Games (GAMES.md)" (GAMES.md)
+"View All Games [GAMES.md](GAMES.md)"
 
 The game list is automatically generated from the bundled JAR files. Different versions, resolutions and regional releases may appear separately.
 
