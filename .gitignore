@@ -39,3 +39,11 @@ captures/
 .externalNativeBuild
 .cxx
 keystore.properties
+
+# Games must never be bundled in the repository or the APK
+app/src/main/assets/games/
+
+# Signing secrets
+keystore.properties
+*.jks
+*.keystore

@@ -46,6 +46,7 @@
         tools:ignore="RtlEnabled">
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme.Library"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTask">

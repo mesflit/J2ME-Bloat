@@ -16,4 +16,32 @@
     <color name="config_card">#ffffff</color>
 
     <color name="nnf_separator_color">@color/nnf_light_separator_color</color>
+
+    <!-- Material 3 light palette for the game library screen -->
+    <color name="m3_primary">#4A54A6</color>
+    <color name="m3_on_primary">#FFFFFF</color>
+    <color name="m3_primary_container">#DFE0FF</color>
+    <color name="m3_on_primary_container">#020865</color>
+    <color name="m3_secondary">#5B5D72</color>
+    <color name="m3_on_secondary">#FFFFFF</color>
+    <color name="m3_secondary_container">#E0E1F9</color>
+    <color name="m3_on_secondary_container">#181A2C</color>
+    <color name="m3_tertiary">#77536D</color>
+    <color name="m3_on_tertiary">#FFFFFF</color>
+    <color name="m3_tertiary_container">#FFD7F1</color>
+    <color name="m3_on_tertiary_container">#2D1228</color>
+    <color name="m3_background">#FBF8FF</color>
+    <color name="m3_on_background">#1B1B21</color>
+    <color name="m3_surface">#FBF8FF</color>
+    <color name="m3_on_surface">#1B1B21</color>
+    <color name="m3_surface_variant">#E3E1EC</color>
+    <color name="m3_on_surface_variant">#46464F</color>
+    <color name="m3_outline">#777680</color>
+    <color name="m3_outline_variant">#C7C5D0</color>
+    <color name="m3_surface_container_low">#F5F2FA</color>
+    <color name="m3_surface_container">#EFEDF4</color>
+    <color name="m3_surface_container_high">#E9E7EF</color>
+    <color name="m3_surface_container_highest">#E4E1E9</color>
+    <color name="m3_error">#BA1A1A</color>
+    <color name="m3_on_error">#FFFFFF</color>
 </resources>

@@ -48,7 +48,7 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	private List<AppItem> list = new ArrayList<>();
 	private final AppFilter appFilter = new AppFilter();
 	private CharSequence filterConstraint;
-	private View emptyView;
+	private EmptyStateListener emptyStateListener;
 	private int layout = LAYOUT_TYPE_LIST;
 
 	AppsListAdapter(View.OnCreateContextMenuListener contextMenuListener) {
@@ -100,8 +100,18 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 		return appFilter;
 	}
 
-	void setEmptyView(View emptyView) {
-		this.emptyView = emptyView;
+	/** Called whenever the list becomes empty or non-empty. */
+	interface EmptyStateListener {
+		/**
+		 * @param empty        nothing is shown in the list
+		 * @param libraryEmpty no games are installed at all (as opposed to no search matches)
+		 * @param query        the current search query
+		 */
+		void onEmptyStateChanged(boolean empty, boolean libraryEmpty, CharSequence query);
+	}
+
+	void setEmptyStateListener(EmptyStateListener listener) {
+		this.emptyStateListener = listener;
 	}
 
 	void setLayout(int layout) {
@@ -196,16 +206,8 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 			filterConstraint = constraint;
 			//noinspection unchecked
 			submitList((List<AppItem>) results.values);
-			if (results.count > 0) {
-				emptyView.setVisibility(View.GONE);
-			} else {
-				if (list.isEmpty()) {
-					((TextView) emptyView).setText(R.string.no_data_for_display);
-				} else {
-					String msg = emptyView.getResources().getString(R.string.msg_no_matches, constraint);
-					((TextView) emptyView).setText(msg);
-				}
-				emptyView.setVisibility(View.VISIBLE);
+			if (emptyStateListener != null) {
+				emptyStateListener.onEmptyStateChanged(results.count == 0, list.isEmpty(), constraint);
 			}
 		}
 	}

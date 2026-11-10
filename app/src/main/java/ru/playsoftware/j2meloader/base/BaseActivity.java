@@ -28,16 +28,21 @@ public class BaseActivity extends AppCompatActivity {
 			getTheme().applyStyle(R.style.ThemeOverlay_App_Dark, true);
 		}
 		super.onCreate(savedInstanceState);
-		EdgeToEdge.enable(
-				this,
-				SystemBarStyle.dark(ContextCompat.getColor(this, R.color.primary)),
-				SystemBarStyle.dark(Color.BLACK)
-		);
+		EdgeToEdge.enable(this, getStatusBarStyle(), getNavigationBarStyle());
 		View view = findViewById(android.R.id.content);
 		ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
 			Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 			v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
 			return WindowInsetsCompat.CONSUMED;
 		});
+	}
+
+	/** Style of the status bar. Screens with a different toolbar color override this. */
+	protected SystemBarStyle getStatusBarStyle() {
+		return SystemBarStyle.dark(ContextCompat.getColor(this, R.color.primary));
+	}
+
+	protected SystemBarStyle getNavigationBarStyle() {
+		return SystemBarStyle.dark(Color.BLACK);
 	}
 }

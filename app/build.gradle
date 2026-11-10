@@ -7,9 +7,25 @@ plugins {
 
 def midletArchivesBaseName
 
-// Release signing configuration
+// Release signing configuration.
+// Values come from environment variables (CI) or from keystore.properties (local builds).
+// Every release must be signed with the same key, otherwise Android refuses to install
+// an update over the previous version.
+def keystoreProps = new Properties()
 def keystorePropsFile = rootProject.file("keystore.properties")
-def hasReleaseKeystore = keystorePropsFile.exists()
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+def signingValue = { String envName, String propName ->
+    def value = System.getenv(envName)
+    return value ? value : keystoreProps.getProperty(propName)
+}
+def releaseStoreFile = signingValue('SIGNING_STORE_FILE', 'storeFile')
+def releaseStorePassword = signingValue('SIGNING_STORE_PASSWORD', 'storePassword')
+def releaseKeyAlias = signingValue('SIGNING_KEY_ALIAS', 'keyAlias')
+def releaseKeyPassword = signingValue('SIGNING_KEY_PASSWORD', 'keyPassword')
+def hasReleaseKeystore = releaseStoreFile && releaseStorePassword && releaseKeyAlias && releaseKeyPassword
+def requireReleaseKey = System.getenv('REQUIRE_RELEASE_KEY') == 'true'
 
 android {
     compileSdk COMPILE_SDK
@@ -17,10 +33,11 @@ android {
     namespace 'ru.playsoftware.j2meloader'
 
     defaultConfig {
-        applicationId "ru.playsoftware.j2meloader"
+        applicationId "com.mesflit.j2mebloat"
         minSdk MIN_SDK
         targetSdk TARGET_SDK
-        versionCode 101
+        // Grows with every commit, so each CI build can be installed over the previous one.
+        versionCode computeVersionCode()
         versionName "1.8.2"
 
         resValue 'string', 'app_name', rootProject.name
@@ -36,16 +53,14 @@ android {
     signingConfigs {
         release {
             if (hasReleaseKeystore) {
-                Properties keystoreProps = new Properties()
-
-                keystorePropsFile.withInputStream {
-                    keystoreProps.load(it)
-                }
-
-                keyAlias keystoreProps['keyAlias']
-                keyPassword keystoreProps['keyPassword']
-                storeFile file(keystoreProps['storeFile'])
-                storePassword keystoreProps['storePassword']
+                // Relative paths are resolved against the project root, absolute paths as is.
+                storeFile rootProject.file(releaseStoreFile)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            } else if (requireReleaseKey) {
+                throw new GradleException(
+                        'Release signing key is missing. See "Automatic releases" in README.md.')
             }
         }
     }
@@ -170,7 +185,7 @@ androidComponents {
         if (variant.buildType == 'debug' && variant.flavorName != 'midlet') {
             variant.resValues.put(
                     variant.makeResValueKey('string', 'app_name'),
-                    new ResValue('JL-Debug', null)
+                    new ResValue('J2ME-Bloat Debug', null)
             )
         }
 
@@ -193,6 +208,19 @@ androidComponents {
 static def generateVersionCode() {
     def result = "git rev-list HEAD --count".execute().text.trim()
     return result.toInteger()
+}
+
+static def computeVersionCode() {
+    def env = System.getenv('VERSION_CODE')
+    if (env) {
+        return env.toInteger()
+    }
+    try {
+        // Never go below the version code of the last manually numbered release.
+        return Math.max(101, generateVersionCode())
+    } catch (Exception ignored) {
+        return 101
+    }
 }
 
 def getMidletManifestProperties() {

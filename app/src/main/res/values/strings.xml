@@ -16,7 +16,7 @@
     <string name="about_message">This app allows you to launch J2ME apps and games on Android. It supports most 2D and 3D games (including Mascot Capsule 3D ones).&lt;BR></string>
     <string name="help_message">&#8226; Enabling filtering in some cases can greatly reduce performance. Disable this option if game is too slow.&lt;BR>&#8226; Image flickering issues can be fixed by enabling the "Immediate processing mode" option.</string>
     <string name="about_discord" translatable="false">&lt;BR>Discord: &lt;a href="https://discord.gg/Ag4rcpz">discord.gg/Ag4rcpz&lt;/a></string>
-    <string name="about_github" translatable="false">&lt;BR>GitHub: &lt;a href="https://github.com/nikita36078/J2ME-Loader">github.com/nikita36078/J2ME-Loader&lt;/a></string>
+    <string name="about_github" translatable="false">&lt;BR>GitHub: &lt;a href="https://github.com/mesflit/J2ME-Bloat">github.com/mesflit/J2ME-Bloat&lt;/a>&lt;BR>Based on J2ME Loader: &lt;a href="https://github.com/nikita36078/J2ME-Loader">github.com/nikita36078/J2ME-Loader&lt;/a></string>
     <string name="about_emugen_wiki" translatable="false">&lt;BR>EmuGen Wiki: &lt;a href="https://emulation.gametechwiki.com/index.php/J2ME_Loader">emulation.gametechwiki.com/index.php/J2ME_Loader&lt;/a></string>
     <string name="about_4pda" translatable="false">&lt;BR>4PDA: &lt;a href="https://4pda.to/forum/index.php?showtopic=824201">4pda.to/forum/index.php?showtopic=824201&lt;/a></string>
     <string name="about_xda" translatable="false">&lt;BR>XDA: &lt;a href="https://forum.xda-developers.com/android/apps-games/app-j2me-loader-t3777889">forum.xda-developers.com/android/apps-games/app-j2me-loader-t3777889&lt;/a></string>
@@ -297,4 +297,24 @@
     <string name="alert_rewrite_profile">A profile named \"%1$s\" already exists.\nDo you want to overwrite it?</string>
     <string name="msg_no_matches">No matches for \"%1$s\"</string>
     <string name="msg_unsupported_soundbank">Unsupported soundbank, default bank is used!</string>
+
+    <!-- Game import -->
+    <string name="add_games">Add games</string>
+    <string name="library_empty_title">Your library is empty</string>
+    <string name="library_empty_message">Add your own J2ME games as JAR/JAD files, a whole folder or a ZIP archive. They will appear here.</string>
+    <string name="import_option_files">JAR / JAD files</string>
+    <string name="import_option_files_desc">Pick one or more game files</string>
+    <string name="import_option_zip">ZIP archive</string>
+    <string name="import_option_zip_desc">Install every game inside a .zip file</string>
+    <string name="import_option_folder">Folder</string>
+    <string name="import_option_folder_desc">Scan a folder and its subfolders</string>
+    <string name="import_title">Import games</string>
+    <string name="import_scanning">Looking for games…</string>
+    <string name="import_scanning_found">Found %1$d files…</string>
+    <string name="import_nothing_found">No JAR, JAD or KJX files were found.</string>
+    <string name="import_read_error">Could not read the selected source: %1$s</string>
+    <string name="import_cancelling">Stopping after the current game…</string>
+    <string name="import_cancelled">Import cancelled.</string>
+    <string name="import_copy_failed">Copy failed list</string>
+    <string name="import_copied">Copied to clipboard</string>
 </resources>

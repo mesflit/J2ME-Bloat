@@ -55,6 +55,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -70,8 +71,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +90,9 @@ import ru.playsoftware.j2meloader.appsdb.AppRepository;
 import ru.playsoftware.j2meloader.config.Config;
 import ru.playsoftware.j2meloader.config.ConfigActivity;
 import ru.playsoftware.j2meloader.config.ProfilesActivity;
+import ru.playsoftware.j2meloader.databinding.BottomSheetImportBinding;
 import ru.playsoftware.j2meloader.databinding.FragmentAppsListBinding;
+import ru.playsoftware.j2meloader.databinding.ItemImportOptionBinding;
 import ru.playsoftware.j2meloader.info.AboutDialogFragment;
 import ru.playsoftware.j2meloader.info.HelpDialogFragment;
 import ru.playsoftware.j2meloader.settings.SettingsActivity;
@@ -95,6 +100,7 @@ import ru.playsoftware.j2meloader.util.AppUtils;
 import ru.playsoftware.j2meloader.util.FileUtils;
 import ru.playsoftware.j2meloader.util.LogUtils;
 import ru.woesss.j2me.installer.BatchInstallerDialog;
+import ru.woesss.j2me.installer.ImportSources;
 import ru.woesss.j2me.installer.InstallerDialog;
 
 public class AppsListFragment extends Fragment implements MenuProvider {
@@ -103,6 +109,21 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private final ActivityResultLauncher<String> openFileLauncher = registerForActivityResult(
 			FileUtils.getFilePicker(),
 			this::onPickFileResult);
+	private final ActivityResultLauncher<String[]> openZipLauncher = registerForActivityResult(
+			new ActivityResultContracts.OpenDocument(),
+			this::onPickZipResult);
+	private final ActivityResultLauncher<Uri> openFolderLauncher = registerForActivityResult(
+			new ActivityResultContracts.OpenDocumentTree(),
+			this::onPickFolderResult);
+	private static final String[] ZIP_MIME_TYPES = {
+			"application/zip",
+			"application/x-zip",
+			"application/x-zip-compressed",
+			"multipart/x-zip",
+			"application/octet-stream"
+	};
+	/** Approximate width of a grid cell, used to compute the number of columns. */
+	private static final int GRID_CELL_WIDTH_DP = 96;
 	private final AppsListAdapter adapter = new AppsListAdapter(this);
 	private Uri appUri;
 	private SharedPreferences preferences;
@@ -110,7 +131,6 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private Disposable searchViewDisposable;
 	private GridLayoutManager layoutManager;
 	private FragmentAppsListBinding binding;
-	private DividerItemDecoration itemDecoration;
 
 	public static AppsListFragment newInstance(Uri data) {
 		AppsListFragment fragment = new AppsListFragment();
@@ -146,40 +166,122 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		MenuHost menuHost = requireActivity();
 		menuHost.addMenuProvider(this, getViewLifecycleOwner());
 
-		adapter.setEmptyView(binding.empty);
+		adapter.setEmptyStateListener(this::onEmptyStateChanged);
 		int viewType = preferences.getInt(PREF_APPS_VIEW, AppsListAdapter.LAYOUT_TYPE_GRID);
-		int spanCount;
-		if (viewType == AppsListAdapter.LAYOUT_TYPE_GRID) {
-			spanCount = getResources().getConfiguration().screenWidthDp / 90;
-		} else {
-			spanCount = 1;
-			itemDecoration = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
-			binding.list.addItemDecoration(itemDecoration);
-		}
 		adapter.setLayout(viewType);
-		layoutManager = new GridLayoutManager(requireContext(), spanCount);
+		layoutManager = new GridLayoutManager(requireContext(), getSpanCount(viewType));
 		requireActivity().addOnConfigurationChangedListener(configuration -> {
 			if (adapter.getItemViewType(0) == AppsListAdapter.LAYOUT_TYPE_GRID) {
-				layoutManager.setSpanCount(configuration.screenWidthDp / 90);
+				layoutManager.setSpanCount(Math.max(1, configuration.screenWidthDp / GRID_CELL_WIDTH_DP));
 			}
 		});
 		binding.list.setLayoutManager(layoutManager);
 		binding.list.setAdapter(adapter);
-		binding.floatingActionButton.setOnClickListener(v -> {
-			String path = preferences.getString(PREF_LAST_PATH, null);
-			if (path == null) {
-				File dir = Environment.getExternalStorageDirectory();
-				if (dir.canRead()) {
-					path = dir.getAbsolutePath();
+		binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+				if (binding == null) {
+					return;
+				}
+				if (dy > 0) {
+					binding.floatingActionButton.shrink();
+				} else if (dy < 0) {
+					binding.floatingActionButton.extend();
 				}
 			}
-			try {
-				openFileLauncher.launch(path);
-			} catch (ActivityNotFoundException e) {
-				Toast.makeText(getContext(), R.string.error_no_picker, Toast.LENGTH_SHORT).show();
-				e.printStackTrace();
-			}
 		});
+		binding.floatingActionButton.setOnClickListener(v -> showImportSheet());
+		binding.emptyAction.setOnClickListener(v -> showImportSheet());
+	}
+
+	private int getSpanCount(int viewType) {
+		if (viewType != AppsListAdapter.LAYOUT_TYPE_GRID) {
+			return 1;
+		}
+		return Math.max(1, getResources().getConfiguration().screenWidthDp / GRID_CELL_WIDTH_DP);
+	}
+
+	private void onEmptyStateChanged(boolean empty, boolean libraryEmpty, CharSequence query) {
+		if (binding == null) {
+			return;
+		}
+		binding.emptyState.setVisibility(empty ? View.VISIBLE : View.GONE);
+		if (!empty) {
+			return;
+		}
+		if (libraryEmpty) {
+			binding.emptyTitle.setText(R.string.library_empty_title);
+			binding.emptyMessage.setText(R.string.library_empty_message);
+			binding.emptyAction.setVisibility(View.VISIBLE);
+		} else {
+			binding.emptyTitle.setText(R.string.no_data_for_display);
+			binding.emptyMessage.setText(getString(R.string.msg_no_matches, query));
+			binding.emptyAction.setVisibility(View.GONE);
+		}
+	}
+
+	/** Lets the user choose how to add games: files, a ZIP archive or a folder. */
+	private void showImportSheet() {
+		BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+		BottomSheetImportBinding sheet = BottomSheetImportBinding.inflate(getLayoutInflater());
+		bindImportOption(sheet.importFiles, R.drawable.ic_import_file,
+				R.string.import_option_files, R.string.import_option_files_desc, () -> {
+					dialog.dismiss();
+					pickFiles();
+				});
+		bindImportOption(sheet.importZip, R.drawable.ic_import_zip,
+				R.string.import_option_zip, R.string.import_option_zip_desc, () -> {
+					dialog.dismiss();
+					launchPicker(() -> openZipLauncher.launch(ZIP_MIME_TYPES));
+				});
+		bindImportOption(sheet.importFolder, R.drawable.ic_import_folder,
+				R.string.import_option_folder, R.string.import_option_folder_desc, () -> {
+					dialog.dismiss();
+					launchPicker(() -> openFolderLauncher.launch(null));
+				});
+		dialog.setContentView(sheet.getRoot());
+		dialog.show();
+	}
+
+	private static void bindImportOption(ItemImportOptionBinding option, int icon, int title,
+										 int subtitle, Runnable action) {
+		option.optionIcon.setImageResource(icon);
+		option.optionTitle.setText(title);
+		option.optionSubtitle.setText(subtitle);
+		option.getRoot().setOnClickListener(v -> action.run());
+	}
+
+	private void launchPicker(Runnable launch) {
+		try {
+			launch.run();
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(getContext(), R.string.error_no_picker, Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+	}
+
+	private void pickFiles() {
+		String path = preferences.getString(PREF_LAST_PATH, null);
+		if (path == null) {
+			File dir = Environment.getExternalStorageDirectory();
+			if (dir.canRead()) {
+				path = dir.getAbsolutePath();
+			}
+		}
+		String startPath = path;
+		launchPicker(() -> openFileLauncher.launch(startPath));
+	}
+
+	private void onPickZipResult(Uri uri) {
+		if (uri != null) {
+			BatchInstallerDialog.newInstanceForZip(uri).show(getParentFragmentManager(), "installer");
+		}
+	}
+
+	private void onPickFolderResult(Uri uri) {
+		if (uri != null) {
+			BatchInstallerDialog.newInstanceForFolder(uri).show(getParentFragmentManager(), "installer");
+		}
 	}
 
 	private void alertDbError(Throwable throwable) {
@@ -203,7 +305,9 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		preferences.edit()
 				.putString(PREF_LAST_PATH, uris.get(0).getPath())
 				.apply();
-		if (uris.size() == 1) {
+		if (uris.size() == 1 && ImportSources.isZip(FileUtils.getDisplayName(requireContext(), uris.get(0)))) {
+			BatchInstallerDialog.newInstanceForZip(uris.get(0)).show(getParentFragmentManager(), "installer");
+		} else if (uris.size() == 1) {
 			InstallerDialog.newInstance(uris.get(0)).show(getParentFragmentManager(), "installer");
 		} else {
 			BatchInstallerDialog.newInstance(uris).show(getParentFragmentManager(), "installer");
@@ -390,19 +494,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 			} else {
 				item.setIcon(R.drawable.ic_action_apps_view_list);
 			}
-			int spanCount;
-			if (viewType == AppsListAdapter.LAYOUT_TYPE_GRID) {
-				spanCount = getResources().getConfiguration().screenWidthDp / 90;
-				if (itemDecoration != null) {
-					binding.list.removeItemDecoration(itemDecoration);
-				}
-			} else {
-				spanCount = 1;
-				if (itemDecoration == null) {
-					itemDecoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
-				}
-				binding.list.addItemDecoration(itemDecoration);
-			}
+			int spanCount = getSpanCount(viewType);
 			layoutManager.setSpanCount(spanCount);
 			adapter.setLayout(viewType);
 			adapter.notifyDataSetChanged();

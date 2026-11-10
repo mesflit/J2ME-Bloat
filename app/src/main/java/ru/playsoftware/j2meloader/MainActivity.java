@@ -11,13 +11,14 @@ package ru.playsoftware.j2meloader;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
+import androidx.activity.SystemBarStyle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -26,10 +27,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.color.MaterialColors;
+
 import java.io.File;
 import java.util.Map;
-
-import io.reactivex.schedulers.Schedulers;
 
 import ru.playsoftware.j2meloader.applist.AppListModel;
 import ru.playsoftware.j2meloader.applist.AppsListFragment;
@@ -38,7 +39,8 @@ import ru.playsoftware.j2meloader.config.Config;
 import ru.playsoftware.j2meloader.util.FileUtils;
 import ru.playsoftware.j2meloader.util.PickDirResultContract;
 
-import ru.woesss.j2me.installer.BundledGamesInstaller;
+import ru.woesss.j2me.installer.BatchInstallerDialog;
+import ru.woesss.j2me.installer.ImportSources;
 import ru.woesss.j2me.installer.InstallerDialog;
 
 import static ru.playsoftware.j2meloader.util.Constants.PREF_EMULATOR_DIR;
@@ -46,8 +48,6 @@ import static ru.playsoftware.j2meloader.util.Constants.PREF_STORAGE_WARNING_SHO
 import static ru.playsoftware.j2meloader.util.Constants.PREF_TOOLBAR;
 
 public class MainActivity extends BaseActivity {
-
-    private static final String TAG = "MainActivity";
 
     private static final String[] STORAGE_PERMISSIONS = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -67,8 +67,6 @@ public class MainActivity extends BaseActivity {
 
     private SharedPreferences preferences;
     private AppListModel appListModel;
-
-    private boolean bundledGamesImportStarted;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,6 +136,29 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+     * The library uses a surface-colored toolbar, so the status bar follows it.
+     */
+    @Override
+    protected SystemBarStyle getStatusBarStyle() {
+        int surface = MaterialColors.getColor(
+                this,
+                com.google.android.material.R.attr.colorSurface,
+                0xFF131318
+        );
+        int nightMode = getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+            return SystemBarStyle.dark(surface);
+        }
+        return SystemBarStyle.light(surface, surface);
+    }
+
+    @Override
+    protected SystemBarStyle getNavigationBarStyle() {
+        return getStatusBarStyle();
+    }
+
+    /**
      * Initializes the application directory on Android 10+.
      */
     private void initializeScopedStorage() {
@@ -150,8 +171,6 @@ public class MainActivity extends BaseActivity {
         }
 
         appListModel.onWorkDirReady();
-
-        startBundledGamesImport();
     }
 
     /**
@@ -170,8 +189,6 @@ public class MainActivity extends BaseActivity {
 
             appListModel.onWorkDirReady();
 
-            startBundledGamesImport();
-
             return;
         }
 
@@ -185,37 +202,6 @@ public class MainActivity extends BaseActivity {
         }
 
         alertCreateDir();
-    }
-
-    /**
-     * Starts importing games bundled inside the APK.
-     */
-    private void startBundledGamesImport() {
-
-        if (bundledGamesImportStarted || appListModel == null) {
-            return;
-        }
-
-        bundledGamesImportStarted = true;
-
-        Log.i(TAG, "Starting bundled games import");
-
-        BundledGamesInstaller.install(
-                getApplication(),
-                appListModel.getAppRepository()
-        )
-        .subscribeOn(Schedulers.io())
-        .subscribe(
-                () -> Log.i(
-                        TAG,
-                        "Bundled games imported successfully"
-                ),
-                error -> Log.e(
-                        TAG,
-                        "Bundled games import failed",
-                        error
-                )
-        );
     }
 
     /**
@@ -375,8 +361,6 @@ public class MainActivity extends BaseActivity {
                 .apply();
 
         appListModel.onWorkDirReady();
-
-        startBundledGamesImport();
     }
 
     /**
@@ -391,7 +375,13 @@ public class MainActivity extends BaseActivity {
 
         Uri uri = intent.getData();
 
-        if (uri != null) {
+        if (uri != null && ImportSources.isZip(FileUtils.getDisplayName(this, uri))) {
+            BatchInstallerDialog.newInstanceForZip(uri)
+                    .show(
+                            getSupportFragmentManager(),
+                            "installer"
+                    );
+        } else if (uri != null) {
             InstallerDialog.newInstance(uri)
                     .show(
                             getSupportFragmentManager(),

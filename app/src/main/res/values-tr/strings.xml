@@ -202,4 +202,24 @@
     <string name="default_label">"%s (varsayılan)"</string>
     <string name="not_saved_exists">Zaten mevcut</string>
     <string name="alert_rewrite_profile">\"%1$s\" zaten var. \nDeğiştirmek istiyor musunuz?</string>
+
+    <!-- Game import -->
+    <string name="add_games">Oyun ekle</string>
+    <string name="library_empty_title">Kütüphanen boş</string>
+    <string name="library_empty_message">Kendi J2ME oyunlarını JAR/JAD dosyası, klasör ya da ZIP arşivi olarak ekle. Burada görünecekler.</string>
+    <string name="import_option_files">JAR / JAD dosyaları</string>
+    <string name="import_option_files_desc">Bir veya birden fazla oyun dosyası seç</string>
+    <string name="import_option_zip">ZIP arşivi</string>
+    <string name="import_option_zip_desc">Bir .zip dosyasındaki tüm oyunları kur</string>
+    <string name="import_option_folder">Klasör</string>
+    <string name="import_option_folder_desc">Bir klasörü ve alt klasörlerini tara</string>
+    <string name="import_title">Oyunları içe aktar</string>
+    <string name="import_scanning">Oyunlar aranıyor…</string>
+    <string name="import_scanning_found">%1$d dosya bulundu…</string>
+    <string name="import_nothing_found">JAR, JAD veya KJX dosyası bulunamadı.</string>
+    <string name="import_read_error">Seçilen kaynak okunamadı: %1$s</string>
+    <string name="import_cancelling">Mevcut oyundan sonra durduruluyor…</string>
+    <string name="import_cancelled">İçe aktarma iptal edildi.</string>
+    <string name="import_copy_failed">Hatalı listeyi kopyala</string>
+    <string name="import_copied">Panoya kopyalandı</string>
 </resources>
