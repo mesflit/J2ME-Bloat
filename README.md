@@ -1,67 +1,42 @@
 J2ME-Bloat
 
-<p align="center">
-  <img src="screenshots/screen.jpg" width="180">
-</p><h3 align="center">Java ME Gaming, Ready to Go.</h3><p align="center">
-  <a href="https://github.com/mesflit/J2ME-Bloat">
-    <img src="https://img.shields.io/badge/GitHub-Repository-181717?logo=github" alt="GitHub">
-  </a>
-  <a href="https://github.com/mesflit/J2ME-Bloat/releases">
-    <img src="https://img.shields.io/github/v/release/mesflit/J2ME-Bloat?display_name=tag" alt="Latest Release">
-  </a>
-  <a href="https://github.com/mesflit/J2ME-Bloat/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/mesflit/J2ME-Bloat" alt="License">
-  </a>
-</p>J2ME-Bloat is an Android-based Java ME (J2ME) emulator derived from "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader).
+J2ME-Bloat is an Android Java ME (J2ME) emulator based on "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader).
 
-It allows you to play classic Java mobile games on modern Android devices, with built-in game support, virtual controls, customizable settings and compatibility features.
+It allows you to run classic Java mobile games and applications on modern Android devices.
 
 Features
 
-- Java ME (J2ME) game emulation.
-- Support for many 2D and 3D games.
-- Built-in game collection.
-- Games bundled directly into the APK.
-- Automatic game installation on first launch.
-- Virtual keyboard and touchscreen controls.
+- Java ME (J2ME) application emulation.
+- Support for 2D and 3D games.
+- Built-in collection of thousands of J2ME games.
+- Automatic game import on first launch.
+- Customizable virtual keyboard and touchscreen controls.
 - Individual settings for each game.
-- Screen scaling and display customization.
-- Support for Mascot Capsule 3D games.
+- Display scaling and screen configuration.
+- Mascot Capsule 3D support.
 
-Bundled Games
+Game Collection
 
-J2ME-Bloat supports including games directly in the application package.
+J2ME-Bloat includes a large collection of bundled Java games.
 
-To add games to your own build, place your ".jar" files inside:
+Browse the complete game list:
 
-app/src/main/assets/games/
+"View All Games (GAMES.md)" (GAMES.md)
 
-Example:
+The game list is automatically generated from the bundled JAR files. Different versions, resolutions and regional releases may appear separately.
 
-games/
-├── Game1.jar
-├── Game2.jar
-├── Game3.jar
-└── Game4.jar
+Screenshots
 
-During the build process, these files are packaged into the APK.
-
-On the first launch, bundled games are automatically imported into the emulator's game library.
-
-No manual JAR installation is required.
-
-Build Instructions
+<!-- Add screenshots here -->Building
 
 Requirements
 
-- Android Studio or Android SDK
-- JDK compatible with the project
-- Gradle wrapper
+- Android SDK
+- Android NDK
+- JDK
+- Gradle
 
 Build Debug APK
-
-git clone https://github.com/mesflit/J2ME-Bloat.git
-cd J2ME-Bloat
 
 ./gradlew :app:assembleOpenDebug
 
@@ -69,50 +44,20 @@ Build Release APK
 
 ./gradlew :app:assembleOpenRelease
 
-Generated APK files:
+Build outputs are located in:
 
 app/build/outputs/apk/open/
 
-Compatibility
+Based On
 
-J2ME-Bloat is designed to run Java ME games from classic mobile phones, including devices from:
-
-- Nokia
-- Sony Ericsson
-- Samsung
-- Motorola
-- LG
-
-Game compatibility depends on the original JAR, Java ME APIs and device-specific implementations.
-
-Screenshots
-
-<!-- Add your screenshots here -->Downloads
-
-All releases and downloadable builds are available on GitHub.
-
-<p align="center">
-  <a href="https://github.com/mesflit/J2ME-Bloat/releases">
-    <img src="https://img.shields.io/badge/Download-GitHub%20Releases-blue?style=for-the-badge&logo=github" alt="Download from GitHub">
-  </a>
-</p>Repository: https://github.com/mesflit/J2ME-Bloat
-
-Releases: https://github.com/mesflit/J2ME-Bloat/releases
-
-Credits
-
-J2ME-Bloat is based on the open-source "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader) project.
-
-Special thanks to:
-
-- "Nikita Shakarun" (https://github.com/nikita36078)
-- "woesss" (https://github.com/woesss)
-- "NaikSoftware" (https://github.com/NaikSoftware)
-
-Thanks to all contributors who helped make Java ME emulation possible on Android.
+J2ME-Bloat is based on "J2ME Loader" (https://github.com/nikita36078/J2ME-Loader).
 
 License
 
-This project retains the original project's Apache License 2.0 licensing terms.
+The application source code retains the Apache License 2.0 licensing terms.
 
-See "LICENSE" (LICENSE) for details.
+Bundled game files are copyrighted by their respective developers and publishers. Their inclusion does not imply ownership or permission to redistribute them. Please respect the rights and licenses of the original copyright holders.
+
+---
+
+J2ME-Bloat — Bringing classic Java mobile games back to Android.
