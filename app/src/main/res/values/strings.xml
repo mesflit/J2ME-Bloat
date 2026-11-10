@@ -295,6 +295,10 @@
     <string name="import_cancelled">Import cancelled.</string>
     <string name="import_copy_failed">Copy failed list</string>
     <string name="import_copied">Copied to clipboard</string>
+    <string name="import_background">Run in background</string>
+    <string name="import_notification_title">Importing games</string>
+    <string name="import_notification_done">Import finished</string>
+    <string name="import_already_running">Another import is still running</string>
     <plurals name="games_count">
         <item quantity="one">%d game</item>
         <item quantity="other">%d games</item>

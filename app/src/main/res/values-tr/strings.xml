@@ -203,6 +203,10 @@
     <string name="import_cancelled">İçe aktarma iptal edildi.</string>
     <string name="import_copy_failed">Hatalı listeyi kopyala</string>
     <string name="import_copied">Panoya kopyalandı</string>
+    <string name="import_background">Arka planda sürdür</string>
+    <string name="import_notification_title">Oyunlar içe aktarılıyor</string>
+    <string name="import_notification_done">İçe aktarma tamamlandı</string>
+    <string name="import_already_running">Süren başka bir içe aktarma var</string>
     <string name="install_multiple_progress">%1$d / %2$d kuruluyor…</string>
     <string name="install_multiple_done">Kurulan: %1$d</string>
     <string name="install_multiple_updated">Güncellenen: %1$d</string>

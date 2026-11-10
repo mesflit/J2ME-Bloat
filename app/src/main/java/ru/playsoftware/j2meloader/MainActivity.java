@@ -39,7 +39,9 @@ import ru.playsoftware.j2meloader.config.Config;
 import ru.playsoftware.j2meloader.util.FileUtils;
 import ru.playsoftware.j2meloader.util.PickDirResultContract;
 
+import ru.woesss.j2me.installer.BatchImporter;
 import ru.woesss.j2me.installer.BatchInstallerDialog;
+import ru.woesss.j2me.installer.ImportService;
 import ru.woesss.j2me.installer.ImportSources;
 import ru.woesss.j2me.installer.InstallerDialog;
 
@@ -97,6 +99,8 @@ public class MainActivity extends BaseActivity {
                     .beginTransaction()
                     .replace(R.id.container, fragment)
                     .commit();
+
+            showRunningImport(intent);
         }
 
         preferences =
@@ -364,6 +368,23 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+     * Opens the dialog of the background import when its notification was tapped.
+     *
+     * @return true if the intent came from that notification
+     */
+    private boolean showRunningImport(Intent intent) {
+        if (!ImportService.ACTION_SHOW_IMPORT.equals(intent.getAction())) {
+            return false;
+        }
+        if (BatchImporter.get().getCurrentState().phase != BatchImporter.PHASE_IDLE
+                && getSupportFragmentManager().findFragmentByTag("installer") == null) {
+            BatchInstallerDialog.newInstanceForRunning()
+                    .show(getSupportFragmentManager(), "installer");
+        }
+        return true;
+    }
+
+    /**
      * Handles incoming JAR/JAD installation intents.
      */
     @Override
@@ -372,6 +393,10 @@ public class MainActivity extends BaseActivity {
         super.onNewIntent(intent);
 
         setIntent(intent);
+
+        if (showRunningImport(intent)) {
+            return;
+        }
 
         Uri uri = intent.getData();
 

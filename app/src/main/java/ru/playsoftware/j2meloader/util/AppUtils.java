@@ -33,6 +33,7 @@ import java.util.ListIterator;
 import ru.playsoftware.j2meloader.applist.AppItem;
 import ru.playsoftware.j2meloader.appsdb.AppRepository;
 import ru.playsoftware.j2meloader.config.Config;
+import ru.woesss.j2me.installer.BatchImporter;
 import ru.woesss.j2me.jar.Descriptor;
 
 public class AppUtils {
@@ -125,7 +126,9 @@ public class AppUtils {
 
 	public static void updateDb(AppRepository appRepository, List<AppItem> items) {
 		File tmp = new File(Config.getAppDir(), ".tmp");
-		if (tmp.exists()) {
+		// A background import may be installing into this directory right now.
+		boolean importing = BatchImporter.isRunning();
+		if (tmp.exists() && !importing) {
 			// TODO: 30.07.2021 incomplete installation - maybe can continue?
 			FileUtils.deleteDirectory(tmp);
 		}
@@ -138,6 +141,9 @@ public class AppUtils {
 			return;
 		}
 		List<String> appFoldersList = new ArrayList<>(Arrays.asList(appFolders));
+		if (importing) {
+			appFoldersList.remove(tmp.getName());
+		}
 		// Delete invalid app items from db
 		ListIterator<AppItem> iterator = items.listIterator(items.size());
 		while (iterator.hasPrevious()) {

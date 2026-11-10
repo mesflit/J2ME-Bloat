@@ -41,6 +41,8 @@ While importing:
 
 - The progress bar shows how many games are done, and the screen stays on.
 - **Cancel** stops after the current game. Games installed so far stay in your library.
+- **Run in background** hides the window. The import continues with a progress notification, even if you leave the app; tap the notification to open it again. On Android 13 and newer the app asks for permission to show notifications.
+- Games that are already in your library are skipped; a newer version updates the installed game.
 - At the end you see how many games were installed and which ones failed. **Copy failed list** puts the failed file names on the clipboard.
 - Files from a ZIP are extracted temporarily and deleted afterwards. For a big archive, keep at least as much free space as the archive size.
 

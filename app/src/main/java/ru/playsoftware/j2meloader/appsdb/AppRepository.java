@@ -55,6 +55,8 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 	private final MutableSortSQLiteQuery query = new MutableSortSQLiteQuery();
 
 	private final SharedPreferences preferences;
+	/** The owning view model plus every background job that still writes to the database. */
+	private int holders = 1;
 	private AppDatabase db;
 	private AppItemDao appItemDao;
 
@@ -155,10 +157,34 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 		}
 	}
 
-	/** Releases everything; called when the owning view model is destroyed. */
+	/** Keeps the repository usable after its view model is destroyed, until {@link #release()}. */
+	public synchronized void retain() {
+		holders++;
+	}
+
+	/** Gives up a hold; the last one closes the database. */
+	public synchronized void release() {
+		if (--holders == 0) {
+			preferences.unregisterOnSharedPreferenceChangeListener(this);
+			close();
+		}
+	}
+
+	/** Called when the owning view model is destroyed. */
 	public void dispose() {
-		preferences.unregisterOnSharedPreferenceChangeListener(this);
-		close();
+		release();
+	}
+
+	/** Reads the list again, for changes made through another repository instance. */
+	public void refresh() {
+		AppItemDao dao = appItemDao;
+		if (dao == null || db == null) {
+			return;
+		}
+		Disposable disposable = dao.getAllSingle(query)
+				.subscribeOn(Schedulers.io())
+				.subscribe(listLiveData::postValue, errorsLiveData::postValue);
+		compositeDisposable.add(disposable);
 	}
 
 	@Override

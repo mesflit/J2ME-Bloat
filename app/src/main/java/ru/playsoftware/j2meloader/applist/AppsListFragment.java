@@ -103,6 +103,7 @@ import ru.playsoftware.j2meloader.settings.SettingsActivity;
 import ru.playsoftware.j2meloader.util.AppUtils;
 import ru.playsoftware.j2meloader.util.FileUtils;
 import ru.playsoftware.j2meloader.util.LogUtils;
+import ru.woesss.j2me.installer.BatchImporter;
 import ru.woesss.j2me.installer.BatchInstallerDialog;
 import ru.woesss.j2me.installer.ImportSources;
 import ru.woesss.j2me.installer.InstallerDialog;
@@ -142,6 +143,8 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private Disposable searchViewDisposable;
 	private GridLayoutManager layoutManager;
 	private FragmentAppsListBinding binding;
+	private int importedGames;
+	private int importPhase;
 
 	public static AppsListFragment newInstance(Uri data) {
 		AppsListFragment fragment = new AppsListFragment();
@@ -163,6 +166,22 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		appRepository = appListModel.getAppRepository();
 		appRepository.observeErrors(this, this::alertDbError);
 		appRepository.observeApps(this, this::onDbUpdated);
+		BatchImporter.get().getState().observe(this, this::onImportProgress);
+	}
+
+	/**
+	 * A background import can outlive the screen that started it. It then writes through
+	 * the database of that old screen, so this list has to be told to read again.
+	 */
+	private void onImportProgress(BatchImporter.State s) {
+		int games = s.installed + s.updated;
+		boolean changed = games != importedGames || s.phase != importPhase;
+		importedGames = games;
+		importPhase = s.phase;
+		if (changed && s.phase != BatchImporter.PHASE_IDLE
+				&& !BatchImporter.get().usesRepository(appRepository)) {
+			appRepository.refresh();
+		}
 	}
 
 	@Override
@@ -197,6 +216,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 				}
 			}
 		});
+		binding.fastScroller.attach(binding.list);
 		binding.floatingActionButton.setOnClickListener(v -> showImportSheet());
 		binding.emptyAction.setOnClickListener(v -> showImportSheet());
 	}
@@ -605,6 +625,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		adapter.setEmptyStateListener(null);
 		adapter.clearIconCache();
 		if (binding != null) {
+			binding.fastScroller.detach();
 			binding.list.setAdapter(null);
 		}
 		if (searchViewDisposable != null) {

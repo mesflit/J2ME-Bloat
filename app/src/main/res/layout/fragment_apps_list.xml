@@ -14,12 +14,20 @@
         android:paddingTop="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="96dp"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
         tools:itemCount="12"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/list_row_grid_jar"
         tools:spanCount="4" />
+
+    <!-- Draggable scroll bar; ends above the "Add games" button. -->
+    <ru.playsoftware.j2meloader.applist.FastScrollBar
+        android:id="@+id/fast_scroller"
+        android:layout_width="28dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="88dp" />
 
     <!-- Shown when the library is empty or the search has no results. -->
     <LinearLayout
