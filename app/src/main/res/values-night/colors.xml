@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--dark theme colors-->
+    <color name="primary">#262e37</color>
+    <color name="primary_dark">#20272f</color>
+    <color name="accent">#0099ff</color>
+    <color name="background">#20272f</color>
+    <color name="text_primary">#ffffff</color>
+    <color name="text_secondary">#dedede</color>
+    <color name="btn_bg_normal">#0099ff</color>
+    <color name="btn_bg_pressed">#005D8C</color>
+    <color name="config_card">#262e37</color>
+
+    <color name="nnf_separator_color">@color/nnf_dark_separator_color</color>
+
+    <!-- Material 3 dark palette for the game library screen -->
+    <color name="m3_primary">#BCC2FF</color>
+    <color name="m3_on_primary">#1B247A</color>
+    <color name="m3_primary_container">#333C8E</color>
+    <color name="m3_on_primary_container">#DFE0FF</color>
+    <color name="m3_secondary">#C4C5DD</color>
+    <color name="m3_on_secondary">#2D2F42</color>
+    <color name="m3_secondary_container">#434659</color>
+    <color name="m3_on_secondary_container">#E0E1F9</color>
+    <color name="m3_tertiary">#E6BAD7</color>
+    <color name="m3_on_tertiary">#44263D</color>
+    <color name="m3_tertiary_container">#5D3C55</color>
+    <color name="m3_on_tertiary_container">#FFD7F1</color>
+    <color name="m3_background">#131318</color>
+    <color name="m3_on_background">#E4E1E9</color>
+    <color name="m3_surface">#131318</color>
+    <color name="m3_on_surface">#E4E1E9</color>
+    <color name="m3_surface_variant">#46464F</color>
+    <color name="m3_on_surface_variant">#C7C5D0</color>
+    <color name="m3_outline">#918F9A</color>
+    <color name="m3_outline_variant">#46464F</color>
+    <color name="m3_surface_container_low">#1B1B21</color>
+    <color name="m3_surface_container">#1F1F25</color>
+    <color name="m3_surface_container_high">#2A292F</color>
+    <color name="m3_surface_container_highest">#35343A</color>
+    <color name="m3_error">#FFB4AB</color>
+    <color name="m3_on_error">#690005</color>
+</resources>
