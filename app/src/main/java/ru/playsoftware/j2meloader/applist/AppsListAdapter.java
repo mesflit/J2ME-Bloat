@@ -18,7 +18,10 @@
 
 package ru.playsoftware.j2meloader.applist;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import ru.playsoftware.j2meloader.R;
 import ru.playsoftware.j2meloader.config.Config;
@@ -44,7 +49,16 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	static final int LAYOUT_TYPE_LIST = 0;
 	static final int LAYOUT_TYPE_GRID = 1;
 
+	/** Memory used for decoded game icons, so that scrolling does not decode them again. */
+	private static final int ICON_CACHE_SIZE = 8 * 1024 * 1024;
+
 	private final View.OnCreateContextMenuListener contextMenuListener;
+	private final LruCache<String, Bitmap> iconCache = new LruCache<String, Bitmap>(ICON_CACHE_SIZE) {
+		@Override
+		protected int sizeOf(String key, Bitmap value) {
+			return value.getByteCount();
+		}
+	};
 	private List<AppItem> list = new ArrayList<>();
 	private final AppFilter appFilter = new AppFilter();
 	private CharSequence filterConstraint;
@@ -60,8 +74,10 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 
 			@Override
 			public boolean areContentsTheSame(@NonNull AppItem oldItem, @NonNull AppItem newItem) {
-				return oldItem.getTitle().equals(newItem.getTitle()) &&
-						oldItem.getVersion().equals(newItem.getVersion());
+				return Objects.equals(oldItem.getTitle(), newItem.getTitle()) &&
+						Objects.equals(oldItem.getVersion(), newItem.getVersion()) &&
+						Objects.equals(oldItem.getAuthor(), newItem.getAuthor()) &&
+						Objects.equals(oldItem.getImagePath(), newItem.getImagePath());
 			}
 		});
 		this.contextMenuListener = contextMenuListener;
@@ -87,12 +103,49 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 
 	@Override
 	public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
-		holder.onBind(getItem(position));
+		AppItem item = getItem(position);
+		holder.onBind(item, loadIcon(item));
+	}
+
+	private Bitmap loadIcon(AppItem item) {
+		String path = item.getImagePathExt();
+		if (path == null) {
+			return null;
+		}
+		Bitmap bitmap = iconCache.get(path);
+		if (bitmap == null) {
+			bitmap = BitmapFactory.decodeFile(path);
+			if (bitmap != null) {
+				iconCache.put(path, bitmap);
+			}
+		}
+		return bitmap;
 	}
 
 	void setItems(List<AppItem> items) {
-		list = items;
+		list = items == null ? new ArrayList<>() : items;
+		// A reinstalled game keeps its icon path but may have a new icon.
+		iconCache.evictAll();
 		appFilter.filter(filterConstraint);
+	}
+
+	/** Frees the cached icons; called when the list view is destroyed. */
+	void clearIconCache() {
+		iconCache.evictAll();
+	}
+
+	/**
+	 * Prepares text for case-insensitive search. The root locale and the dotless/dotted
+	 * "i" handling make "fifa" match "FIFA" on devices set to Turkish as well.
+	 */
+	static String normalize(CharSequence text) {
+		if (text == null) {
+			return "";
+		}
+		return text.toString()
+				.toLowerCase(Locale.ROOT)
+				.replace('\u0131', 'i')
+				.replace("\u0307", "");
 	}
 
 	@Override
@@ -103,11 +156,11 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 	/** Called whenever the list becomes empty or non-empty. */
 	interface EmptyStateListener {
 		/**
-		 * @param empty        nothing is shown in the list
-		 * @param libraryEmpty no games are installed at all (as opposed to no search matches)
-		 * @param query        the current search query
+		 * @param shown number of games shown in the list
+		 * @param total number of games installed (larger than {@code shown} while searching)
+		 * @param query the current search query
 		 */
-		void onEmptyStateChanged(boolean empty, boolean libraryEmpty, CharSequence query);
+		void onEmptyStateChanged(int shown, int total, CharSequence query);
 	}
 
 	void setEmptyStateListener(EmptyStateListener listener) {
@@ -135,18 +188,19 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 			name = listTitle;
 
 			itemView.setOnClickListener(v -> {
-				AppsListAdapter adapter = (AppsListAdapter) getBindingAdapter();
-				if (adapter != null) {
-					AppItem item = adapter.getItem(getLayoutPosition());
+				// The bound item is kept in the tag; a position can be stale during list updates.
+				Object tag = v.getTag();
+				if (tag instanceof AppItem) {
+					AppItem item = (AppItem) tag;
 					Config.startApp(v.getContext(), item.getTitle(), item.getPathExt(), false);
 				}
 			});
 			itemView.setOnCreateContextMenuListener(contextMenuListener);
 		}
 
-		void onBind(AppItem item) {
-			Drawable icon = Drawable.createFromPath(item.getImagePathExt());
-			if (icon != null) {
+		void onBind(AppItem item, Bitmap iconBitmap) {
+			if (iconBitmap != null) {
+				BitmapDrawable icon = new BitmapDrawable(itemView.getResources(), iconBitmap);
 				icon.setFilterBitmap(false);
 				this.icon.setImageDrawable(icon);
 			} else {
@@ -168,8 +222,8 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 		}
 
 		@Override
-		void onBind(AppItem item) {
-			super.onBind(item);
+		void onBind(AppItem item, Bitmap iconBitmap) {
+			super.onBind(item, iconBitmap);
 			author.setText(item.getAuthor());
 			version.setText(item.getVersion());
 		}
@@ -180,14 +234,17 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
+			// Read the field once: it can be replaced on the main thread meanwhile.
+			List<AppItem> list = AppsListAdapter.this.list;
 			if (isEmpty(constraint)) {
 				results.count = list.size();
 				results.values = list;
 			} else {
+				String query = normalize(constraint).trim();
 				ArrayList<AppItem> resultList = new ArrayList<>();
 				for (AppItem item : list) {
-					if (item.getTitle().toLowerCase().contains(constraint) ||
-							item.getAuthor().toLowerCase().contains(constraint)) {
+					if (normalize(item.getTitle()).contains(query) ||
+							normalize(item.getAuthor()).contains(query)) {
 						resultList.add(item);
 					}
 				}
@@ -207,7 +264,7 @@ class AppsListAdapter extends ListAdapter<AppItem, AppsListAdapter.AppViewHolder
 			//noinspection unchecked
 			submitList((List<AppItem>) results.values);
 			if (emptyStateListener != null) {
-				emptyStateListener.onEmptyStateChanged(results.count == 0, list.isEmpty(), constraint);
+				emptyStateListener.onEmptyStateChanged(results.count, list.size(), constraint);
 			}
 		}
 	}

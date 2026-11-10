@@ -222,4 +222,15 @@
     <string name="import_cancelled">İçe aktarma iptal edildi.</string>
     <string name="import_copy_failed">Hatalı listeyi kopyala</string>
     <string name="import_copied">Panoya kopyalandı</string>
+    <string name="install_multiple_progress">%1$d / %2$d kuruluyor…</string>
+    <string name="install_multiple_done">Kurulan: %1$d</string>
+    <string name="install_multiple_updated">Güncellenen: %1$d</string>
+    <string name="install_multiple_skipped">Zaten kütüphanede (atlandı): %1$d</string>
+    <string name="install_multiple_failed">Başarısız: %1$d</string>
+    <string name="install_multiple_more">…ve %1$d tane daha</string>
+    <plurals name="games_count">
+        <item quantity="one">%d oyun</item>
+        <item quantity="other">%d oyun</item>
+    </plurals>
+    <string name="games_count_filtered">%2$d oyundan %1$d tanesi</string>
 </resources>

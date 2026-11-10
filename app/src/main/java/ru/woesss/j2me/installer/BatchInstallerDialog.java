@@ -41,10 +41,13 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -64,6 +67,9 @@ import ru.woesss.j2me.jar.Descriptor;
 /**
  * Installs many MIDlets in one go. The sources can be a list of files,
  * a ZIP archive or a folder; archives and folders are scanned first.
+ *
+ * Games that are already in the library are not installed again: the same or an
+ * older version is skipped, a newer version updates the installed game.
  */
 public class BatchInstallerDialog extends DialogFragment {
 	private static final String ARG_URIS = "BatchInstallerDialog.uris";
@@ -76,15 +82,20 @@ public class BatchInstallerDialog extends DialogFragment {
 
 	private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 	private final AtomicBoolean cancelled = new AtomicBoolean();
-	private final List<Uri> uriQueue = new ArrayList<>();
+	private final ArrayDeque<Uri> uriQueue = new ArrayDeque<>();
 	private final List<String> failedNames = new ArrayList<>();
 	private final Map<Uri, String> uriNames = new HashMap<>();
+	/** Games already handled in this batch, e.g. a JAR that was installed through its JAD. */
+	private final Set<String> handledGames = new HashSet<>();
 	private boolean started;
 	private boolean finished;
 	private boolean jarAttempted;
+	private boolean updating;
 	private int total;
 	private int processed;
 	private int installed;
+	private int updated;
+	private int skipped;
 	private String currentSourceName;
 	private File stagingDir;
 
@@ -160,7 +171,11 @@ public class BatchInstallerDialog extends DialogFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		// Drop the views so that a finished import does not keep the dialog window alive.
 		binding = null;
+		mDialog = null;
+		btnClose = null;
+		btnCopy = null;
 	}
 
 	@Override
@@ -192,61 +207,75 @@ public class BatchInstallerDialog extends DialogFragment {
 		int type = args.getInt(ARG_SOURCE_TYPE, SOURCE_FILES);
 		binding.installationStatus.setText(R.string.loading_info);
 		showProgress(true);
+		ArrayList<Uri> uris = null;
+		Uri source = null;
 		if (type == SOURCE_FILES) {
-			ArrayList<Uri> uris = args.getParcelableArrayList(ARG_URIS);
+			uris = args.getParcelableArrayList(ARG_URIS);
 			if (uris == null || uris.isEmpty()) {
 				dismissAllowingStateLoss();
 				return;
 			}
-			startInstall(uris);
 		} else {
-			Uri source = args.getParcelable(ARG_SOURCE);
+			source = args.getParcelable(ARG_SOURCE);
 			if (source == null) {
 				dismissAllowingStateLoss();
 				return;
 			}
-			scanSource(source, type);
 		}
+		prepare(uris, source, type);
 	}
 
-	/** Looks for installable files in a ZIP archive or folder off the main thread. */
-	private void scanSource(Uri source, int type) {
+	/**
+	 * Collects the files to install off the main thread: scans the ZIP archive or
+	 * folder (if any) and resolves the display name of every file.
+	 */
+	private void prepare(@Nullable List<Uri> files, @Nullable Uri source, int type) {
 		Context context = requireContext().getApplicationContext();
-		stagingDir = ImportSources.newStagingDir(context);
-		File dir = stagingDir;
-		mDialog.setMessage(FileUtils.getDisplayName(context, source));
-		binding.installationStatus.setText(R.string.import_scanning);
-		View root = binding.getRoot();
-		ImportSources.Listener listener = (count, name) ->
-				root.post(() -> {
-					if (binding != null && isAdded() && !cancelled.get()) {
-						binding.installationStatus.setText(
-								getString(R.string.import_scanning_found, count));
-					}
-				});
+		ImportSources.Listener listener = null;
+		File dir = null;
+		if (source != null) {
+			stagingDir = ImportSources.newStagingDir(context);
+			dir = stagingDir;
+			mDialog.setMessage(FileUtils.getDisplayName(context, source));
+			binding.installationStatus.setText(R.string.import_scanning);
+			View root = binding.getRoot();
+			listener = (count, name) ->
+					root.post(() -> {
+						if (binding != null && isAdded() && !cancelled.get()) {
+							binding.installationStatus.setText(
+									getString(R.string.import_scanning_found, count));
+						}
+					});
+		}
+		File staging = dir;
+		ImportSources.Listener scanListener = listener;
 		Disposable disposable = Single.fromCallable(() -> {
+					List<Uri> uris;
 					if (type == SOURCE_ZIP) {
-						return ImportSources.fromZip(context, source, dir, cancelled, listener);
+						uris = ImportSources.fromZip(context, source, staging, cancelled, scanListener);
+					} else if (type == SOURCE_FOLDER) {
+						uris = ImportSources.fromTree(context, source, staging, cancelled, scanListener);
 					} else {
-						return ImportSources.fromTree(context, source, dir, cancelled, listener);
+						uris = files;
 					}
+					return new Prepared(context, uris, cancelled);
 				})
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe(uris -> {
-					if (!isAdded()) {
+				.subscribe(prepared -> {
+					if (!isAlive()) {
 						return;
 					}
 					if (cancelled.get()) {
 						onFinished();
-					} else if (uris.isEmpty()) {
+					} else if (prepared.uris.isEmpty()) {
 						showResult(getString(R.string.import_nothing_found));
 					} else {
-						startInstall(uris);
+						startInstall(prepared);
 					}
 				}, e -> {
 					e.printStackTrace();
-					if (!isAdded()) {
+					if (!isAlive()) {
 						return;
 					}
 					if (cancelled.get()) {
@@ -259,16 +288,18 @@ public class BatchInstallerDialog extends DialogFragment {
 		compositeDisposable.add(disposable);
 	}
 
-	private void startInstall(List<Uri> uris) {
-		total = uris.size();
-		uriQueue.addAll(uris);
+	/** False once the dialog is gone; late results of background work are then ignored. */
+	private boolean isAlive() {
+		return isAdded() && binding != null && mDialog != null;
+	}
+
+	private void startInstall(Prepared prepared) {
+		total = prepared.uris.size();
+		uriQueue.addAll(prepared.uris);
+		uriNames.putAll(prepared.names);
 		binding.installationProgress.setIndeterminate(false);
 		binding.installationProgress.setMax(total);
 		binding.installationProgress.setProgress(0);
-		Context context = requireContext();
-		for (Uri uri : uris) {
-			uriNames.put(uri, FileUtils.getDisplayName(context, uri));
-		}
 		nextFile();
 	}
 
@@ -291,10 +322,14 @@ public class BatchInstallerDialog extends DialogFragment {
 			onFinished();
 			return;
 		}
-		Uri uri = uriQueue.remove(0);
+		Uri uri = uriQueue.poll();
 		processed++;
 		jarAttempted = false;
+		updating = false;
 		currentSourceName = uriNames.get(uri);
+		if (currentSourceName == null) {
+			currentSourceName = "";
+		}
 		binding.installationStatus.setText(getString(R.string.install_multiple_progress,
 				processed, total));
 		binding.installationProgress.setProgress(processed - 1);
@@ -309,7 +344,7 @@ public class BatchInstallerDialog extends DialogFragment {
 	}
 
 	private void onProgress(@NonNull Integer status) {
-		if (!isAdded()) {
+		if (!isAlive()) {
 			return;
 		}
 		Descriptor nd = installer.getNewDescriptor();
@@ -318,14 +353,28 @@ public class BatchInstallerDialog extends DialogFragment {
 		}
 		switch (status) {
 			case AppInstaller.STATUS_SUCCESS:
-				installed++;
+				if (updating) {
+					updated++;
+				} else {
+					installed++;
+				}
+				handledGames.add(gameKey(nd));
 				nextFile();
 				return;
 			case AppInstaller.STATUS_NEW:
-			case AppInstaller.STATUS_OLDEST:
-			case AppInstaller.STATUS_EQUAL:
 			case AppInstaller.STATUS_NEWEST:
+				if (handledGames.contains(gameKey(nd))) {
+					// A second copy of a game that this batch has already dealt with.
+					skipCurrentFile(false);
+					return;
+				}
+				updating = status == AppInstaller.STATUS_NEWEST;
 				convert();
+				return;
+			case AppInstaller.STATUS_EQUAL:
+			case AppInstaller.STATUS_OLDEST:
+				// The game is already in the library: do not install it again.
+				skipCurrentFile(handledGames.add(gameKey(nd)));
 				return;
 			default:
 				if ((status == AppInstaller.STATUS_NEED_JAD || status == AppInstaller.STATUS_UNMATCHED)
@@ -334,6 +383,22 @@ public class BatchInstallerDialog extends DialogFragment {
 				}
 				failCurrentFile();
 		}
+	}
+
+	private static String gameKey(@Nullable Descriptor descriptor) {
+		if (descriptor == null) {
+			return "";
+		}
+		return descriptor.getName() + '\n' + descriptor.getVendor();
+	}
+
+	/** @param count whether this file counts as a skipped game in the summary */
+	private void skipCurrentFile(boolean count) {
+		if (count) {
+			skipped++;
+		}
+		installer.deleteTemp();
+		nextFile();
 	}
 
 	private boolean installFromSelectedJar() {
@@ -345,10 +410,8 @@ public class BatchInstallerDialog extends DialogFragment {
 		if (jar == null) {
 			return false;
 		}
-		if (uriQueue.remove(jar)) {
-			processed++;
-			binding.installationProgress.setProgress(processed - 1);
-		}
+		// The JAR stays in the queue. If this JAD turns out to be broken the JAR is still
+		// installed on its own, otherwise it is recognized as already handled and ignored.
 		Disposable disposable = installer.updateInfo(jar)
 				.subscribeOn(Schedulers.computation())
 				.observeOn(AndroidSchedulers.mainThread())
@@ -367,28 +430,20 @@ public class BatchInstallerDialog extends DialogFragment {
 		String jarUrl = nd.getJarUrl();
 		if (jarUrl != null) {
 			int i = Math.max(jarUrl.lastIndexOf('/'), jarUrl.lastIndexOf('\\'));
-			candidates.add(jarUrl.substring(i + 1).toLowerCase());
+			candidates.add(jarUrl.substring(i + 1).toLowerCase(Locale.ROOT));
 		}
-		String current = currentSourceName.toLowerCase();
+		String current = currentSourceName.toLowerCase(Locale.ROOT);
 		int dot = current.lastIndexOf('.');
 		if (dot > 0) {
 			candidates.add(current.substring(0, dot) + ".jar");
 		}
-		Uri processedUri = null;
 		for (Map.Entry<Uri, String> entry : uriNames.entrySet()) {
-			String name = entry.getValue().toLowerCase();
-			if (!name.endsWith(".jar") || !candidates.contains(name)) {
-				continue;
-			}
-			Uri uri = entry.getKey();
-			if (uriQueue.contains(uri)) {
-				return uri;
-			}
-			if (processedUri == null) {
-				processedUri = uri;
+			String name = entry.getValue().toLowerCase(Locale.ROOT);
+			if (name.endsWith(".jar") && candidates.contains(name)) {
+				return entry.getKey();
 			}
 		}
-		return processedUri;
+		return null;
 	}
 
 	private void convert() {
@@ -424,13 +479,10 @@ public class BatchInstallerDialog extends DialogFragment {
 
 	private void onError(Throwable e) {
 		e.printStackTrace();
-		if (!isAdded()) {
+		if (!isAlive()) {
 			return;
 		}
-		addFailedName();
-		installer.deleteTemp();
-		installer.clearCache();
-		nextFile();
+		failCurrentFile();
 	}
 
 	private void onFinished() {
@@ -439,6 +491,12 @@ public class BatchInstallerDialog extends DialogFragment {
 			message.append(getString(R.string.import_cancelled)).append('\n');
 		}
 		message.append(getString(R.string.install_multiple_done, installed));
+		if (updated > 0) {
+			message.append('\n').append(getString(R.string.install_multiple_updated, updated));
+		}
+		if (skipped > 0) {
+			message.append('\n').append(getString(R.string.install_multiple_skipped, skipped));
+		}
 		if (!failedNames.isEmpty()) {
 			message.append('\n');
 			message.append(getString(R.string.install_multiple_failed, failedNames.size()));
@@ -492,5 +550,30 @@ public class BatchInstallerDialog extends DialogFragment {
 		int visibility = show ? View.VISIBLE : View.GONE;
 		binding.installationProgress.setVisibility(visibility);
 		binding.installationStatus.setVisibility(visibility);
+	}
+
+	/** The files to install, with their display names. Built on a background thread. */
+	private static final class Prepared {
+		final List<Uri> uris;
+		final Map<Uri, String> names = new HashMap<>();
+
+		Prepared(Context context, List<Uri> source, AtomicBoolean cancelled) {
+			// Drop files that were found more than once, e.g. picked twice.
+			uris = new ArrayList<>(new java.util.LinkedHashSet<>(source));
+			for (Uri uri : uris) {
+				if (cancelled.get()) {
+					break;
+				}
+				names.put(uri, FileUtils.getDisplayName(context, uri));
+			}
+			// Descriptors first: a JAD is installed together with its JAR and adds its
+			// attributes to the game, which would be lost if the JAR came first.
+			Collections.sort(uris, (a, b) -> Boolean.compare(isJad(b), isJad(a)));
+		}
+
+		private boolean isJad(Uri uri) {
+			String name = names.get(uri);
+			return name != null && name.toLowerCase(Locale.ROOT).endsWith(".jad");
+		}
 	}
 }

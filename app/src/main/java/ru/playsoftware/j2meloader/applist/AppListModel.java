@@ -29,7 +29,7 @@ public class AppListModel extends ViewModel {
 
 	@Override
 	protected void onCleared() {
-		appRepository.close();
+		appRepository.dispose();
 	}
 
 	public void onWorkDirReady() {

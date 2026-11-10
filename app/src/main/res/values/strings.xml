@@ -57,6 +57,8 @@
     <string name="install_jar_needed">Select the JAR file</string>
     <string name="install_multiple_progress">Installing %1$d of %2$d…</string>
     <string name="install_multiple_done">Installed: %1$d</string>
+    <string name="install_multiple_updated">Updated: %1$d</string>
+    <string name="install_multiple_skipped">Already in library (skipped): %1$d</string>
     <string name="install_multiple_failed">Failed: %1$d</string>
     <string name="install_multiple_more">…and %1$d more</string>
     <string name="invalid_resolution_not_saved">Invalid resolutions: not saved!</string>
@@ -317,4 +319,9 @@
     <string name="import_cancelled">Import cancelled.</string>
     <string name="import_copy_failed">Copy failed list</string>
     <string name="import_copied">Copied to clipboard</string>
+    <plurals name="games_count">
+        <item quantity="one">%d game</item>
+        <item quantity="other">%d games</item>
+    </plurals>
+    <string name="games_count_filtered">%1$d of %2$d games</string>
 </resources>

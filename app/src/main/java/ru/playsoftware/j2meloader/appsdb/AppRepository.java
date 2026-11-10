@@ -54,6 +54,7 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 	private final ErrorObserver errorObserver = new ErrorObserver(errorsLiveData);
 	private final MutableSortSQLiteQuery query = new MutableSortSQLiteQuery();
 
+	private final SharedPreferences preferences;
 	private AppDatabase db;
 	private AppItemDao appItemDao;
 
@@ -62,7 +63,7 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 			throw new IllegalStateException("You must get instance from 'AppListModel'");
 		}
 		Context context = EmulatorApplication.getInstance();
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		preferences.registerOnSharedPreferenceChangeListener(this);
 		String emulatorDir = Config.getEmulatorDir();
 		File dir = new File(emulatorDir);
@@ -100,6 +101,19 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 		execute(appItemDao.insert(item));
 	}
 
+	/**
+	 * Inserts the item and waits until it is written. The batch installer relies on this
+	 * to see games installed earlier in the same batch. Must not be called on the main thread.
+	 */
+	public void insertSync(AppItem item) {
+		try {
+			appItemDao.insert(item).blockingAwait();
+		} catch (RuntimeException e) {
+			errorsLiveData.postValue(e);
+			throw e;
+		}
+	}
+
 	public void insert(List<AppItem> items) {
 		execute(appItemDao.insert(items));
 	}
@@ -128,17 +142,29 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 		return appItemDao.get(id);
 	}
 
+	public AppItem getByPath(String path) {
+		return appItemDao.getByPath(path);
+	}
+
 	public void close() {
+		// Stop the list subscriptions before closing the database they read from.
+		compositeDisposable.clear();
 		if (db != null) {
 			db.close();
+			db = null;
 		}
-		compositeDisposable.clear();
+	}
+
+	/** Releases everything; called when the owning view model is destroyed. */
+	public void dispose() {
+		preferences.unregisterOnSharedPreferenceChangeListener(this);
+		close();
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
 		if (PREF_APP_SORT.equals(key)) {
-			if (query.setSort(sp.getInt(PREF_APP_SORT, 0))) {
+			if (query.setSort(sp.getInt(PREF_APP_SORT, 0)) && appItemDao != null) {
 				Disposable disposable = appItemDao.getAllSingle(query)
 						.subscribeOn(Schedulers.io())
 						.subscribe(listLiveData::postValue, errorsLiveData::postValue);
@@ -146,6 +172,9 @@ public class AppRepository implements SharedPreferences.OnSharedPreferenceChange
 			}
 		} else if (PREF_EMULATOR_DIR.equals(key)) {
 			String workDir = sp.getString(key, null);
+			if (workDir == null) {
+				return;
+			}
 			if (db != null) {
 				if ((workDir + Config.APPS_DB_NAME).equals(db.getOpenHelper().getDatabaseName())) {
 					return;

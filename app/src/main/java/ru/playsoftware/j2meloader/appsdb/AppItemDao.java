@@ -65,4 +65,7 @@ public interface AppItemDao {
 
 	@Query("SELECT * FROM apps WHERE id = :id")
 	AppItem get(int id);
+
+	@Query("SELECT * FROM apps WHERE path = :path")
+	AppItem getByPath(String path);
 }

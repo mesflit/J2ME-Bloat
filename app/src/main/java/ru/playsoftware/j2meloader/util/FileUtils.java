@@ -63,7 +63,7 @@ public class FileUtils {
 		for (File file : list) {
 			File to = new File(dst, file.getName());
 			if (file.isDirectory()) {
-				copyFiles(src, to, filter);
+				copyFiles(file, to, filter);
 			} else {
 				try {
 					copyFileUsingChannel(file, to);

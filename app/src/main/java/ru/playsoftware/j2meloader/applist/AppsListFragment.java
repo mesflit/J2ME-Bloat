@@ -31,6 +31,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -58,12 +59,15 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.core.util.Consumer;
 import androidx.core.view.MenuHost;
 import androidx.core.view.MenuProvider;
 import androidx.core.widget.TextViewCompat;
@@ -125,6 +129,13 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	/** Approximate width of a grid cell, used to compute the number of columns. */
 	private static final int GRID_CELL_WIDTH_DP = 96;
 	private final AppsListAdapter adapter = new AppsListAdapter(this);
+	/** Keeps the grid column count in sync with the window width. */
+	private final Consumer<Configuration> configurationListener = configuration -> {
+		GridLayoutManager manager = this.layoutManager;
+		if (manager != null && this.adapter.getItemViewType(0) == AppsListAdapter.LAYOUT_TYPE_GRID) {
+			manager.setSpanCount(Math.max(1, configuration.screenWidthDp / GRID_CELL_WIDTH_DP));
+		}
+	};
 	private Uri appUri;
 	private SharedPreferences preferences;
 	private AppRepository appRepository;
@@ -170,11 +181,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		int viewType = preferences.getInt(PREF_APPS_VIEW, AppsListAdapter.LAYOUT_TYPE_GRID);
 		adapter.setLayout(viewType);
 		layoutManager = new GridLayoutManager(requireContext(), getSpanCount(viewType));
-		requireActivity().addOnConfigurationChangedListener(configuration -> {
-			if (adapter.getItemViewType(0) == AppsListAdapter.LAYOUT_TYPE_GRID) {
-				layoutManager.setSpanCount(Math.max(1, configuration.screenWidthDp / GRID_CELL_WIDTH_DP));
-			}
-		});
+		requireActivity().addOnConfigurationChangedListener(configurationListener);
 		binding.list.setLayoutManager(layoutManager);
 		binding.list.setAdapter(adapter);
 		binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -201,10 +208,13 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		return Math.max(1, getResources().getConfiguration().screenWidthDp / GRID_CELL_WIDTH_DP);
 	}
 
-	private void onEmptyStateChanged(boolean empty, boolean libraryEmpty, CharSequence query) {
+	private void onEmptyStateChanged(int shown, int total, CharSequence query) {
 		if (binding == null) {
 			return;
 		}
+		showGameCount(shown, total);
+		boolean empty = shown == 0;
+		boolean libraryEmpty = total == 0;
 		binding.emptyState.setVisibility(empty ? View.VISIBLE : View.GONE);
 		if (!empty) {
 			return;
@@ -217,6 +227,25 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 			binding.emptyTitle.setText(R.string.no_data_for_display);
 			binding.emptyMessage.setText(getString(R.string.msg_no_matches, query));
 			binding.emptyAction.setVisibility(View.GONE);
+		}
+	}
+
+	/** Shows the number of installed games under the title in the toolbar. */
+	private void showGameCount(int shown, int total) {
+		FragmentActivity activity = getActivity();
+		if (!(activity instanceof AppCompatActivity)) {
+			return;
+		}
+		ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+		if (actionBar == null) {
+			return;
+		}
+		if (total == 0) {
+			actionBar.setSubtitle(null);
+		} else if (shown == total) {
+			actionBar.setSubtitle(getResources().getQuantityString(R.plurals.games_count, total, total));
+		} else {
+			actionBar.setSubtitle(getString(R.string.games_count_filtered, shown, total));
 		}
 	}
 
@@ -434,8 +463,14 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		menuInflater.inflate(R.menu.main, menu);
 		final MenuItem searchItem = menu.findItem(R.id.action_search);
 		SearchView searchView = (SearchView) searchItem.getActionView();
-		searchViewDisposable = Observable.create((ObservableOnSubscribe<String>) emitter ->
-						searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+		searchView.setQueryHint(getString(R.string.search));
+		// The menu is recreated on invalidation: do not leave the old subscription behind.
+		if (searchViewDisposable != null) {
+			searchViewDisposable.dispose();
+		}
+		searchViewDisposable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
+					emitter.setCancellable(() -> searchView.setOnQueryTextListener(null));
+					searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 							@Override
 							public boolean onQueryTextSubmit(String query) {
 								emitter.onNext(query);
@@ -447,8 +482,9 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 								emitter.onNext(newText);
 								return true;
 							}
-						})).debounce(300, TimeUnit.MILLISECONDS)
-				.map(String::toLowerCase)
+						});
+				}).debounce(300, TimeUnit.MILLISECONDS)
+				.map(AppsListAdapter::normalize)
 				.distinctUntilChanged()
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(charSequence -> adapter.getFilter().filter(charSequence));
@@ -564,6 +600,18 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		// The adapter and the listeners outlive the view; detach them so it can be collected.
+		requireActivity().removeOnConfigurationChangedListener(configurationListener);
+		adapter.setEmptyStateListener(null);
+		adapter.clearIconCache();
+		if (binding != null) {
+			binding.list.setAdapter(null);
+		}
+		if (searchViewDisposable != null) {
+			searchViewDisposable.dispose();
+			searchViewDisposable = null;
+		}
+		layoutManager = null;
 		binding = null;
 	}
 

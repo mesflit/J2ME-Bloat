@@ -51,7 +51,7 @@ public class EmulatorApplication extends Application {
 	private static EmulatorApplication instance;
 
 	private final SharedPreferences.OnSharedPreferenceChangeListener themeListener = (sharedPreferences, key) -> {
-		if (key.equals(Constants.PREF_THEME)) {
+		if (Constants.PREF_THEME.equals(key)) {
 			setNightMode(sharedPreferences.getString(Constants.PREF_THEME, null));
 		}
 	};

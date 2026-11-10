@@ -116,7 +116,7 @@ public class AppInstaller {
 			return;
 		}
 		boolean isLocal;
-		boolean isContentUri = uri.getScheme().equals("content");
+		boolean isContentUri = "content".equals(uri.getScheme());
 		if ("http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
 			downloadJad();
 			isLocal = false;
@@ -198,6 +198,9 @@ public class AppInstaller {
 				int restSize = lenJadFileContent;
 				while (restSize > 0) {
 					int readSize = dis.read(buf, 0, Math.min(restSize, bufSize));
+					if (readSize < 0) {
+						throw new IOException("Unexpected end of KJX file");
+					}
 					fos.write(buf, 0, readSize);
 					restSize -= readSize;
 				}
@@ -213,10 +216,9 @@ public class AppInstaller {
 
 			srcFile = jadFile;
 			srcJar = jarFile;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException | RuntimeException e) {
+			// Previously swallowed, which made a broken KJX fail later with a confusing error.
+			throw new ConverterException("Can't read KJX file", e);
 		}
 	}
 
@@ -276,8 +278,10 @@ public class AppInstaller {
 			throw new ConverterException("Can't create cache dir");
 		}
 		tmpDir = new File(targetDir.getParent(), ".tmp");
+		// Leftovers of an interrupted installation must not end up in this app.
+		FileUtils.deleteDirectory(tmpDir);
 		if (!tmpDir.isDirectory() && !tmpDir.mkdirs())
-			throw new ConverterException("Can't create directory: '" + targetDir + "'");
+			throw new ConverterException("Can't create directory: '" + tmpDir + "'");
 		if (srcJar == null) {
 			srcJar = new File(cacheDir, "tmp.jar");
 			downloadJar();
@@ -345,7 +349,8 @@ public class AppInstaller {
 			}
 		}
 		currentApp = app;
-		appRepository.insert(app);
+		// Synchronous, so the next file of a batch already sees this game in the library.
+		appRepository.insertSync(app);
 		clearCache();
 		deleteTemp();
 		emitter.onSuccess(STATUS_SUCCESS);
@@ -387,12 +392,46 @@ public class AppInstaller {
 		String vendor = newDesc.getVendor();
 		currentApp = appRepository.get(name, vendor);
 		if (currentApp == null) {
+			currentApp = findRenamedApp(name, vendor);
+		}
+		if (currentApp == null) {
 			generatePathName(name.replaceAll(FileUtils.ILLEGAL_FILENAME_CHARS, "").trim());
 			return STATUS_NEW;
 		}
 		appDirName = currentApp.getPath();
 		targetDir = new File(Config.getAppDir(), appDirName);
 		return newDesc.compareVersion(currentApp.getVersion());
+	}
+
+	/**
+	 * Finds an installed game whose library title was changed by the user. Such a game
+	 * is not found by title, so compare against the descriptor stored in its folder.
+	 */
+	private AppItem findRenamedApp(String name, String vendor) {
+		String base = name.replaceAll(FileUtils.ILLEGAL_FILENAME_CHARS, "").trim();
+		String appsDir = Config.getAppDir();
+		for (int i = 0; ; i++) {
+			String dirName = i == 0 ? base : base + "_" + i;
+			File dir = new File(appsDir, dirName);
+			if (!dir.exists()) {
+				return null;
+			}
+			File conf = new File(dir, Config.MIDLET_MANIFEST_FILE);
+			if (dirName.isEmpty() || !conf.isFile()) {
+				continue;
+			}
+			try {
+				Descriptor installed = new Descriptor(conf, false);
+				if (name.equals(installed.getName()) && vendor.equals(installed.getVendor())) {
+					AppItem item = appRepository.getByPath(dirName);
+					if (item != null) {
+						return item;
+					}
+				}
+			} catch (IOException | RuntimeException e) {
+				Log.w(TAG, "Can't read descriptor of " + dir, e);
+			}
+		}
 	}
 
 	private void generatePathName(String name) {
