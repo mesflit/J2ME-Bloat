@@ -1280,8 +1280,8 @@ public abstract class Canvas extends Displayable {
 			this.overlayView = activity.binding.overlayView;
 			DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
 			padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, metrics);
-			textColor = ContextCompat.getColor(activity, R.color.accent);
-			bgColor = ContextCompat.getColor(activity, R.color.background);
+			textColor = ContextCompat.getColor(activity, R.color.emu_accent);
+			bgColor = ContextCompat.getColor(activity, R.color.emu_bar);
 			notifyChanged();
 		}
 

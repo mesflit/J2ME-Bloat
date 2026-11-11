@@ -33,6 +33,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -111,7 +112,7 @@ public class InstallerDialog extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 		binding = DialogInstallerBinding.inflate(LayoutInflater.from(getContext()));
-		mDialog = new AlertDialog.Builder(requireActivity(), getTheme())
+		mDialog = new MaterialAlertDialogBuilder(requireActivity(), getTheme())
 				.setIcon(R.mipmap.ic_launcher)
 				.setView(binding.getRoot())
 				.setTitle("MIDlet installer")

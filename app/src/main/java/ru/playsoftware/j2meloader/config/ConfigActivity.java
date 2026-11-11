@@ -60,6 +60,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
@@ -163,7 +164,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 						}
 					}
 				}
-				new AlertDialog.Builder(this)
+				new MaterialAlertDialogBuilder(this)
 						.setTitle(R.string.error)
 						.setMessage(getString(R.string.err_missing_app, storageName))
 						.setPositiveButton(R.string.exit, (d, w) -> finish())
@@ -481,7 +482,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 
 	private void showCharsetPicker(View v) {
 		String[] charsets = Charset.availableCharsets().keySet().toArray(new String[0]);
-		new AlertDialog.Builder(this).setItems(charsets, (d, w) -> {
+		new MaterialAlertDialogBuilder(this).setItems(charsets, (d, w) -> {
 			String text = binding.systemProperties.getText().toString();
 			String key = "microedition.encoding:";
 			int idx = text.lastIndexOf(key);
@@ -841,7 +842,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 	}
 
 	private void showClearDataDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
 				.setTitle(android.R.string.dialog_alert_title)
 				.setMessage(R.string.message_clear_data)
 				.setPositiveButton(android.R.string.ok, (d, w) -> FileUtils.clearDirectory(dataDir))
@@ -866,7 +867,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 			binding.screenWidth.setText(binding.screenHeight.getText().toString());
 			binding.screenHeight.setText(tmp);
 		} else if (id == R.id.show_font_size_presets) {
-			new AlertDialog.Builder(this)
+			new MaterialAlertDialogBuilder(this)
 					.setTitle(getString(R.string.SIZE_PRESETS))
 					.setItems(fontPresetTitles.toArray(new String[0]),
 							(dialog, which) -> {
@@ -897,7 +898,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 
 	private void showScreenPresets(View v) {
 		presetsAdapter = new ResolutionAdapter();
-		presetsDialog = new AlertDialog.Builder(this)
+		presetsDialog = new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.SIZE_PRESETS)
 				.setAdapter(presetsAdapter, (d, which) -> {
 					String string = screenPresets.get(which);
@@ -926,17 +927,17 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 		PopupMenu popup = new PopupMenu(this, anchor);
 		Menu menu = popup.getMenu();
 		SpannableString editLabel = new SpannableString(getString(R.string.edit));
-		editLabel.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.btn_bg_normal)), 0, editLabel.length(), 0);
+		editLabel.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.m3_primary)), 0, editLabel.length(), 0);
 		menu.add(0, 0, 0, editLabel);
 		SpannableString deleteLabel = new SpannableString(getString(R.string.action_context_delete));
-		deleteLabel.setSpan(new ForegroundColorSpan(Color.RED), 0, deleteLabel.length(), 0);
+		deleteLabel.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.m3_error)), 0, deleteLabel.length(), 0);
 		menu.add(0, 1, 1, deleteLabel);
 		popup.setOnMenuItemClickListener(menuItem -> {
 			if (menuItem.getItemId() == 0) {
 				showEditResolutionDialog(preset);
 			} else {
 				if (presetsDialog != null) presetsDialog.dismiss();
-				new AlertDialog.Builder(this)
+				new MaterialAlertDialogBuilder(this)
 						.setTitle(R.string.delete_resolution_title)
 						.setMessage(getString(R.string.delete_resolution_message, preset))
 						.setPositiveButton(R.string.action_context_delete, (d, w) -> deleteCustomPreset(preset))
@@ -955,7 +956,7 @@ public class ConfigActivity extends BaseActivity implements View.OnClickListener
 		DialogChangePresetBinding dialogBinding = DialogChangePresetBinding.inflate(LayoutInflater.from(this));
 		dialogBinding.etWidth.setText(currentWidth);
 		dialogBinding.etHeight.setText(currentHeight);
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.edit_resolution_title)
 				.setView(dialogBinding.getRoot())
 				.setPositiveButton(R.string.save, (d, w) -> {

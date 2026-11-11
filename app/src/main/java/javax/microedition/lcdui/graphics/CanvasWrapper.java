@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -16,10 +17,16 @@ import javax.microedition.util.ContextHolder;
 public class CanvasWrapper {
 	private static final float TEXT_SIZE_KEYBOARD = 22;
 
-	private final Paint drawPaint = new Paint();
-	private final Paint fillPaint = new Paint();
-	private final Paint textPaint = new Paint();
+	/** Outline width of the virtual keys, in dp */
+	private static final float STROKE_WIDTH_KEYBOARD = 1.5f;
+
+	// Overlay shapes and labels are anti-aliased, otherwise round keys look jagged
+	private final Paint drawPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private final Paint fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private final Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private final Paint arrowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private final Paint imgPaint = new Paint();
+	private final Path arrowPath = new Path();
 	private final float textSize;
 
 	private float textAscent;
@@ -32,8 +39,13 @@ public class CanvasWrapper {
 		drawPaint.setStyle(Paint.Style.STROKE);
 		fillPaint.setStyle(Paint.Style.FILL);
 
-		// init text paint
 		Resources res = ContextHolder.getAppContext().getResources();
+		drawPaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+				STROKE_WIDTH_KEYBOARD, res.getDisplayMetrics()));
+		arrowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+		arrowPaint.setStrokeJoin(Paint.Join.ROUND);
+
+		// init text paint
 		Typeface typeface = Typeface.createFromAsset(res.getAssets(), "Roboto-Regular.ttf");
 		textPaint.setTypeface(typeface);
 		textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_KEYBOARD, res.getDisplayMetrics());
@@ -102,6 +114,30 @@ public class CanvasWrapper {
 
 	public void setTextColor(int color) {
 		textPaint.setColor(color);
+		arrowPaint.setColor(color);
+	}
+
+	/**
+	 * Draws a solid arrow head with rounded corners in the current text color.
+	 *
+	 * @param cx      center of the arrow
+	 * @param cy      center of the arrow
+	 * @param size    distance from the center to the tip
+	 * @param degrees direction, clockwise: 0 - up, 90 - right, 180 - down, 270 - left
+	 */
+	public void fillArrow(float cx, float cy, float size, float degrees) {
+		arrowPaint.setStrokeWidth(size * 0.35f);
+		arrowPath.rewind();
+		// the centroid of the triangle is in the center of the key
+		arrowPath.moveTo(0, -size * 0.8f);
+		arrowPath.lineTo(size * 0.8f, size * 0.4f);
+		arrowPath.lineTo(-size * 0.8f, size * 0.4f);
+		arrowPath.close();
+		canvas.save();
+		canvas.translate(cx, cy);
+		canvas.rotate(degrees);
+		canvas.drawPath(arrowPath, arrowPaint);
+		canvas.restore();
 	}
 
 	public void drawBackgroundedText(String text) {

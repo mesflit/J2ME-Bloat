@@ -33,6 +33,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class ConfigFilesActivity extends BaseActivity {
 	private void showHelp() {
 		int helpMessage = type == FileType.SHADERS ? R.string.config_files_shader_help :
 				R.string.config_files_soundbank_help;
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.help)
 				.setMessage(helpMessage)
 				.show();
@@ -210,7 +211,7 @@ public class ConfigFilesActivity extends BaseActivity {
 		if (file == null) {
 			return;
 		}
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.delete_file_title)
 				.setMessage(getString(R.string.delete_file_message, file.getName()))
 				.setPositiveButton(R.string.action_context_delete, (dialog, which) -> {

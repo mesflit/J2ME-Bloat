@@ -56,7 +56,7 @@ public class FilteredFilePickerActivity extends AbstractFilePickerActivity<File>
 		super.onCreate(savedInstanceState);
 		EdgeToEdge.enable(
 				this,
-				SystemBarStyle.dark(ContextCompat.getColor(this, R.color.primary)),
+				SystemBarStyle.dark(ContextCompat.getColor(this, R.color.picker_toolbar)),
 				SystemBarStyle.dark(Color.BLACK)
 		);
 		View view = findViewById(android.R.id.content);

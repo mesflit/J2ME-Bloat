@@ -58,6 +58,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -286,7 +287,7 @@ public class MicroActivity extends AppCompatActivity {
 	}
 
 	private void showMidletDialog(String[] names, final String[] classes) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.select_dialog_title)
 				.setItems(names, (d, n) -> {
 					String clazz = classes[n];
@@ -301,7 +302,7 @@ public class MicroActivity extends AppCompatActivity {
 	}
 
 	void showErrorDialog(String message) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.error)
 				.setMessage(message)
@@ -321,7 +322,7 @@ public class MicroActivity extends AppCompatActivity {
 	private void setupInsets() {
 		EdgeToEdge.enable(
 				this,
-				SystemBarStyle.dark(ContextCompat.getColor(this, R.color.primary)),
+				SystemBarStyle.dark(ContextCompat.getColor(this, R.color.emu_bar)),
 				SystemBarStyle.dark(Color.BLACK)
 		);
 
@@ -410,7 +411,7 @@ public class MicroActivity extends AppCompatActivity {
 	}
 
 	public void showExitConfirmation() {
-		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+		AlertDialog.Builder alertBuilder = new MaterialAlertDialogBuilder(this);
 		alertBuilder.setTitle(R.string.CONFIRMATION_REQUIRED)
 				.setMessage(R.string.FORCE_CLOSE_CONFIRMATION)
 				.setPositiveButton(android.R.string.ok, (d, w) -> {
@@ -603,7 +604,7 @@ public class MicroActivity extends AppCompatActivity {
 		final VirtualKeyboard vk = ContextHolder.getVk();
 		boolean[] states = vk.getKeysVisibility();
 		boolean[] changed = states.clone();
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.hide_buttons)
 				.setMultiChoiceItems(vk.getKeyNames(), changed, (dialog, which, isChecked) -> {})
 				.setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -615,7 +616,7 @@ public class MicroActivity extends AppCompatActivity {
 	}
 
 	private void showSaveVkAlert(boolean keepScreenPreferred) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this);
 		builder.setTitle(R.string.CONFIRMATION_REQUIRED);
 		builder.setMessage(R.string.pref_vk_save_alert);
 		builder.setNegativeButton(android.R.string.no, null);
@@ -648,7 +649,7 @@ public class MicroActivity extends AppCompatActivity {
 
 	private void showSetLayoutDialog() {
 		final VirtualKeyboard vk = ContextHolder.getVk();
-		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.layout_switch)
 				.setSingleChoiceItems(R.array.PREF_VK_TYPE_ENTRIES, vk.getLayout(), null)
 				.setPositiveButton(android.R.string.ok, (d, w) -> {
@@ -679,7 +680,7 @@ public class MicroActivity extends AppCompatActivity {
 		int paddingVertical = (int) (density * 16);
 		int paddingHorizontal = (int) (density * 8);
 		editText.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.PREF_LIMIT_FPS)
 				.setView(linearLayout)
 				.setPositiveButton(android.R.string.ok, (d, w) -> {

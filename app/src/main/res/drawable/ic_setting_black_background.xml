@@ -2,7 +2,7 @@
     android:width="48dp"
     android:height="48dp"
     android:alpha="0.8"
-    android:tint="#122A4F"
+    android:tint="?attr/colorOnSurfaceVariant"
     android:viewportWidth="24"
     android:viewportHeight="24">
     <group

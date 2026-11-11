@@ -29,7 +29,16 @@ import javax.microedition.util.ContextHolder;
 import ru.playsoftware.j2meloader.util.SparseIntArrayAdapter;
 
 public class ProfileModel {
-	public static final int VERSION = 3;
+	public static final int VERSION = 4;
+
+	// Default look of the emulator screen and the virtual keys, taken from the app's dark palette
+	private static final int SCREEN_BG_COLOR = 0x131318;
+	private static final int VK_ALPHA = 100;
+	private static final int VK_BG_COLOR = 0x2A292F;
+	private static final int VK_FG_COLOR = 0xE4E1E9;
+	private static final int VK_BG_COLOR_SELECTED = 0xBCC2FF;
+	private static final int VK_FG_COLOR_SELECTED = 0x1B247A;
+	private static final int VK_OUTLINE_COLOR = 0x918F9A;
 	/** True if this is a new profile (not yet saved to file) */
 	public final transient boolean isNew;
 
@@ -174,13 +183,35 @@ public class ProfileModel {
 		isNew = false;
 	}
 
+	/**
+	 * Replaces the look that old versions used by default (gray keys with navy labels on a gray
+	 * background) with the current one. Colors that the user has changed are left alone.
+	 */
+	void updateLegacyColors() {
+		if (vkBgColor == 0xD0D0D0 && vkFgColor == 0x000080
+				&& vkBgColorSelected == 0x000080 && vkFgColorSelected == 0xFFFFFF
+				&& vkOutlineColor == 0xFFFFFF) {
+			vkBgColor = VK_BG_COLOR;
+			vkFgColor = VK_FG_COLOR;
+			vkBgColorSelected = VK_BG_COLOR_SELECTED;
+			vkFgColorSelected = VK_FG_COLOR_SELECTED;
+			vkOutlineColor = VK_OUTLINE_COLOR;
+			if (vkAlpha == 64) {
+				vkAlpha = VK_ALPHA;
+			}
+			if (screenBackgroundColor == 0xD0D0D0) {
+				screenBackgroundColor = SCREEN_BG_COLOR;
+			}
+		}
+	}
+
 	public ProfileModel(File dir) {
 		this.dir = dir;
 		isNew = true;
 		version = VERSION;
 		screenWidth = 240;
 		screenHeight = 320;
-		screenBackgroundColor = 0xD0D0D0;
+		screenBackgroundColor = SCREEN_BG_COLOR;
 		screenScaleType = 1;
 		screenGravity = 1;
 		screenScaleRatio = 100;
@@ -197,13 +228,13 @@ public class ProfileModel {
 		touchInput = true;
 
 		vkButtonShape = VirtualKeyboard.ROUND_RECT_SHAPE;
-		vkAlpha = 64;
+		vkAlpha = VK_ALPHA;
 
-		vkBgColor = 0xD0D0D0;
-		vkFgColor = 0x000080;
-		vkBgColorSelected = 0x000080;
-		vkFgColorSelected = 0xFFFFFF;
-		vkOutlineColor = 0xFFFFFF;
+		vkBgColor = VK_BG_COLOR;
+		vkFgColor = VK_FG_COLOR;
+		vkBgColorSelected = VK_BG_COLOR_SELECTED;
+		vkFgColorSelected = VK_FG_COLOR_SELECTED;
+		vkOutlineColor = VK_OUTLINE_COLOR;
 		systemProperties = ContextHolder.getAssetAsString("defaults/system.props");
 	}
 }

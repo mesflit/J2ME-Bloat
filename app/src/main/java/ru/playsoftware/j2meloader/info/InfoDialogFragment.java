@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import ru.playsoftware.j2meloader.R;
 
@@ -39,10 +40,10 @@ public class InfoDialogFragment extends DialogFragment {
 		tv.setText(Html.fromHtml(getString(R.string.about_message)));
 		tv.setTextSize(16);
 		float density = getResources().getDisplayMetrics().density;
-		int paddingHorizontal = (int) (density * 20);
+		int paddingHorizontal = (int) (density * 24);
 		int paddingVertical = (int) (density * 14);
 		tv.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, 0);
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(activity);
 		builder.setTitle(R.string.app_name)
 				.setIcon(R.mipmap.ic_launcher)
 				.setView(tv);

@@ -33,6 +33,7 @@ import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.LocaleListCompat;
 import androidx.preference.ListPreference;
@@ -178,7 +179,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 		File file = new File(uri.getPath());
 		String path = file.getAbsolutePath();
 		if (!FileUtils.initWorkDir(file)) {
-			new AlertDialog.Builder(requireActivity())
+			new MaterialAlertDialogBuilder(requireActivity())
 					.setTitle(R.string.error)
 					.setCancelable(false)
 					.setMessage(getString(R.string.create_apps_dir_failed, path))

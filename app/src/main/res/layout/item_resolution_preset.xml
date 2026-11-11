@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
     <ImageView
         android:id="@+id/custom_icon"
@@ -21,7 +21,7 @@
         android:layout_height="18dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_edit_custom"
-        app:tint="@color/btn_bg_normal"
+        app:tint="?attr/colorPrimary"
         android:visibility="gone" />
 
 </LinearLayout>

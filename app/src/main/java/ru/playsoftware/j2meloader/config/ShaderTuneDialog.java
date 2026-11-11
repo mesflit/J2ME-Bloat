@@ -27,6 +27,7 @@ import java.text.DecimalFormat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import ru.playsoftware.j2meloader.R;
 import ru.playsoftware.j2meloader.config.ShaderInfo.Setting;
@@ -115,7 +116,7 @@ public class ShaderTuneDialog extends DialogFragment {
 		parentBinding.negativeButton.setOnClickListener(v1 -> dismiss());
 		parentBinding.positiveButton.setOnClickListener(v1 -> onClickOk());
 		parentBinding.neutralButton.setOnClickListener(v1 -> onClickReset());
-		return new AlertDialog.Builder(requireActivity())
+		return new MaterialAlertDialogBuilder(requireActivity())
 			.setTitle(R.string.shader_tuning)
 			.setView(parentBinding.getRoot())
 			.create();

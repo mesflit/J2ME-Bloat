@@ -24,6 +24,7 @@ import javax.microedition.util.ContextHolder;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.DialogFragment;
 import ru.playsoftware.j2meloader.R;
@@ -34,7 +35,7 @@ public class LicensesDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		String string = ContextHolder.getAssetAsString("licenses.html");
 		CharSequence message = HtmlCompat.fromHtml(string, HtmlCompat.FROM_HTML_MODE_LEGACY);
-		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
 		builder.setTitle(R.string.licenses)
 				.setIcon(R.mipmap.ic_launcher)
 				.setMessage(message);

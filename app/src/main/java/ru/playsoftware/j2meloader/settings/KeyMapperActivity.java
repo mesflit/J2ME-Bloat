@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.google.gson.GsonBuilder;
 
@@ -238,7 +239,7 @@ public class KeyMapperActivity extends BaseActivity implements View.OnClickListe
 	}
 
 	private void alertMenuKey() {
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setMessage(R.string.alert_map_menu)
 				.setTitle(R.string.warning)
 				.setNegativeButton(R.string.save, (d, w) -> {

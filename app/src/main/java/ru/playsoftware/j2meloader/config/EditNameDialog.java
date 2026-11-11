@@ -29,6 +29,7 @@ import java.io.File;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import ru.playsoftware.j2meloader.R;
 import ru.playsoftware.j2meloader.databinding.DialogChangeNameBinding;
@@ -73,7 +74,7 @@ public class EditNameDialog extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		binding = DialogChangeNameBinding.inflate(LayoutInflater.from(getContext()));
 
-		AlertDialog dialog = new AlertDialog.Builder(requireActivity())
+		AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
 				.setTitle(mTitle).setView(binding.getRoot()).create();
 		if (!TextUtils.isEmpty(mOldName)) {
 			binding.editText.setText(mOldName);

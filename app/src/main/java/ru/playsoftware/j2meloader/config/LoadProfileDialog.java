@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
@@ -68,7 +69,7 @@ public class LoadProfileDialog extends DialogFragment {
 				android.R.layout.simple_list_item_single_choice, profiles);
 		binding.list.setOnItemClickListener(this::onItemClick);
 		binding.list.setAdapter(adapter);
-		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity());
 		builder.setTitle(R.string.load_profile)
 				.setView(binding.getRoot())
 				.setPositiveButton(android.R.string.ok, (dialog, which) -> {

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingStart="24dp"
-    android:paddingTop="8dp"
+    android:paddingTop="16dp"
     android:paddingEnd="24dp"
     android:paddingBottom="8dp">
 
@@ -13,17 +13,19 @@
         android:id="@+id/backup_export"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawablePadding="8dp"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
         android:text="@string/pref_export_data"
-        app:drawableStartCompat="@drawable/ic_setting_export" />
+        app:icon="@drawable/ic_setting_export"
+        app:iconGravity="textStart" />
 
     <Button
         android:id="@+id/backup_import"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawablePadding="8dp"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
         android:text="@string/pref_import_data"
-        app:drawableStartCompat="@drawable/ic_setting_import" />
+        app:icon="@drawable/ic_setting_import"
+        app:iconGravity="textStart" />
 
 </LinearLayout>

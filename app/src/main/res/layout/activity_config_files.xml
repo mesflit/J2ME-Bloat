@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/no_data_for_display"
-        android:textSize="18sp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurfaceVariant"
         tools:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

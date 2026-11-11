@@ -11,23 +11,21 @@ package ru.playsoftware.j2meloader;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
-import androidx.activity.SystemBarStyle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.color.MaterialColors;
 
 import java.io.File;
 import java.util.Map;
@@ -140,29 +138,6 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * The library uses a surface-colored toolbar, so the status bar follows it.
-     */
-    @Override
-    protected SystemBarStyle getStatusBarStyle() {
-        int surface = MaterialColors.getColor(
-                this,
-                com.google.android.material.R.attr.colorSurface,
-                0xFF131318
-        );
-        int nightMode = getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK;
-        if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
-            return SystemBarStyle.dark(surface);
-        }
-        return SystemBarStyle.light(surface, surface);
-    }
-
-    @Override
-    protected SystemBarStyle getNavigationBarStyle() {
-        return getStatusBarStyle();
-    }
-
-    /**
      * Initializes the application directory on Android 10+.
      */
     private void initializeScopedStorage() {
@@ -213,7 +188,7 @@ public class MainActivity extends BaseActivity {
      */
     private void alertDirCannotCreate(String emulatorDir) {
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.error)
                 .setCancelable(false)
                 .setMessage(
@@ -249,7 +224,7 @@ public class MainActivity extends BaseActivity {
                 )
         ) {
 
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setTitle(android.R.string.dialog_alert_title)
                     .setCancelable(false)
                     .setMessage(R.string.permission_request_failed)
@@ -286,7 +261,7 @@ public class MainActivity extends BaseActivity {
                 getString(R.string.scoped_storage_warning)
                         + Config.getEmulatorDir();
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.warning)
                 .setCancelable(false)
                 .setMessage(message)
@@ -327,7 +302,7 @@ public class MainActivity extends BaseActivity {
                 lblChange
         );
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(android.R.string.dialog_alert_title)
                 .setCancelable(false)
                 .setMessage(msg)

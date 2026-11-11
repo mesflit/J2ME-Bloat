@@ -3,6 +3,7 @@ package ru.playsoftware.j2meloader.base;
 import static ru.playsoftware.j2meloader.util.Constants.PREF_BLACK_BACKGROUND;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +12,12 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.SystemBarStyle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.material.color.MaterialColors;
 
 import ru.playsoftware.j2meloader.R;
 
@@ -37,12 +39,19 @@ public class BaseActivity extends AppCompatActivity {
 		});
 	}
 
-	/** Style of the status bar. Screens with a different toolbar color override this. */
+	/** The toolbar is surface-colored, so the system bars follow it. */
 	protected SystemBarStyle getStatusBarStyle() {
-		return SystemBarStyle.dark(ContextCompat.getColor(this, R.color.primary));
+		int surface = MaterialColors.getColor(this,
+				com.google.android.material.R.attr.colorSurface, Color.BLACK);
+		int nightMode = getResources().getConfiguration().uiMode
+				& Configuration.UI_MODE_NIGHT_MASK;
+		if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+			return SystemBarStyle.dark(surface);
+		}
+		return SystemBarStyle.light(surface, surface);
 	}
 
 	protected SystemBarStyle getNavigationBarStyle() {
-		return SystemBarStyle.dark(Color.BLACK);
+		return getStatusBarStyle();
 	}
 }

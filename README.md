@@ -13,10 +13,10 @@ J2ME-Bloat is a Java ME (J2ME) emulator for Android. It runs classic Java mobile
 - Runs most 2D and 3D J2ME games, including Mascot Capsule 3D titles
 - Imports games from JAR/JAD files, a whole folder or a **ZIP archive**
 - Batch imports with a progress bar, a cancel button and a copyable list of failed files
-- Material 3 game library with light and dark themes
+- Material 3 design on every screen (library, game settings, key mapping, dialogs), with light and dark themes
 - Favorites that stay at the top of the library, and multi-select to delete or favorite many games at once (long-press a game)
 - Draggable scroll bar with a letter indicator for long lists
-- Customizable virtual keyboard and touch controls
+- Customizable virtual keyboard and touch controls with a modern dark look
 - Separate screen, scaling and control settings for every game
 
 ## Install

@@ -163,6 +163,9 @@ public class ProfilesManager {
 				}
 				params.screenGravity = 1;
 
+			case 3:
+				params.updateLegacyColors();
+
 				params.version = ProfileModel.VERSION;
 				ProfilesManager.saveConfig(params);
 				break;

@@ -24,6 +24,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
 
@@ -178,7 +179,7 @@ public class Alert extends Screen implements DialogInterface.OnClickListener {
 
 	public AlertDialog prepareDialog() {
 		Context context = ContextHolder.getActivity();
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(context);
 
 		builder.setTitle(getTitle());
 		builder.setMessage(getString());

@@ -61,6 +61,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
@@ -417,7 +418,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 		int paddingVertical = (int) (density * 16);
 		int paddingHorizontal = (int) (density * 8);
 		editText.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(activity)
 				.setTitle(R.string.action_context_rename)
 				.setView(linearLayout)
 				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
@@ -436,7 +437,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	}
 
 	private void alertDelete(AppItem item) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity())
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(requireActivity())
 				.setTitle(android.R.string.dialog_alert_title)
 				.setMessage(R.string.message_delete)
 				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
@@ -506,7 +507,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 			return;
 		}
 		int count = items.size();
-		new AlertDialog.Builder(requireActivity())
+		new MaterialAlertDialogBuilder(requireActivity())
 				.setTitle(android.R.string.dialog_alert_title)
 				.setMessage(getResources().getQuantityString(R.plurals.message_delete_selected, count, count))
 				.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
@@ -697,7 +698,7 @@ public class AppsListFragment extends Fragment implements MenuProvider {
 	private void showSortDialog() {
 		int variant = preferences.getInt(PREF_APP_SORT, 0);
 		FragmentActivity activity = requireActivity();
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+		AlertDialog.Builder builder = new MaterialAlertDialogBuilder(activity)
 				.setTitle(R.string.pref_app_sort_title)
 				.setAdapter(new SortAdapter(activity, variant), (d, v) -> setSort(v));
 		builder.show();

@@ -11,16 +11,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
         <!-- Screen -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/screen_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:padding="5dp">
+            android:padding="12dp">
 
 
             <TextView
@@ -100,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/screen_config_options_title" />
 
-            <androidx.appcompat.widget.AppCompatCheckBox
+            <CheckBox
                 android:id="@+id/keep_aspect_ratio_toggle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
@@ -111,8 +116,9 @@
 
             <Button
                 android:id="@+id/select_screen_background_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_margin="4dp"
                 android:text="@string/PREF_BACKGROUND"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
@@ -143,8 +149,8 @@
                 android:layout_height="@dimen/height_config_row"
                 android:gravity="center_vertical"
                 android:text="@string/PREF_SCALE_RATIO"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/screen_background_hex_color"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
@@ -173,8 +179,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/PREF_ORIENTATION"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scale_ratio_hint"
@@ -185,8 +191,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
                 android:entries="@array/PREF_ORIENTATION_ENTRIES"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrier_screen_config"
                 app:layout_constraintTop_toTopOf="@+id/screen_orientation_hint" />
@@ -199,8 +205,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/pref_screen_gravity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/screen_orientation_hint"
@@ -211,8 +217,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
                 android:entries="@array/pref_screen_gravity_entries"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrier_screen_config"
                 app:layout_constraintTop_toBottomOf="@+id/screen_orientation_hint" />
@@ -225,8 +231,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/pref_screen_scale_type"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/screen_gravity_hint"
@@ -237,13 +243,13 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
                 android:entries="@array/pref_scale_type_entries"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrier_screen_config"
                 app:layout_constraintTop_toBottomOf="@+id/screen_gravity_hint" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/filtering_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -254,7 +260,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scale_type_hint" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/immediate_processing_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -273,8 +279,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/pref_graphics_mode_title"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/immediate_processing_toggle"
@@ -286,8 +292,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
                 android:entries="@array/pref_graphics_mode_entries"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrier_screen_config"
                 app:layout_constraintTop_toBottomOf="@+id/immediate_processing_toggle" />
@@ -296,7 +302,7 @@
                 android:id="@+id/shader_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
+                android:minHeight="48dp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -309,16 +315,16 @@
                     android:gravity="center_vertical"
                     android:text="@string/PREF_SHADER_FILTER"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?attr/textColorSecondary"
-                    android:textSize="15sp" />
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/shader_selector"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="?attr/textColorSecondary"
-                    android:textSize="15sp" />
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/tune_selected_shader"
@@ -340,7 +346,7 @@
                     app:srcCompat="@drawable/ic_add" />
             </LinearLayout>
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/parallel_screen_redrawing_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -353,7 +359,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/shader_root"
                 tools:visibility="visible" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/force_fullscreen_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -364,7 +370,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/parallel_screen_redrawing_toggle" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/show_fps_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -384,8 +390,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/PREF_LIMIT_FPS"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/barrier_screen_config"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/show_fps_toggle"
@@ -423,9 +429,12 @@
             android:id="@+id/font_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:padding="5dp"
+            android:padding="12dp"
             app:elevation="2dp">
 
             <TextView
@@ -517,8 +526,9 @@
 
             <Button
                 android:id="@+id/show_font_size_presets"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_margin="4dp"
                 android:gravity="center"
                 android:text="@string/SIZE_PRESETS"
@@ -526,7 +536,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/font_size_medium" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/show_font_sizes_in_scaled_pixels_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -536,7 +546,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/show_font_size_presets" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/enable_anti_aliasing_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -553,9 +563,15 @@
             android:id="@+id/input_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:paddingTop="10dp"
+            android:paddingStart="7dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="8dp"
             app:elevation="2dp">
 
             <TextView
@@ -567,7 +583,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/enable_touch_input_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -590,8 +606,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/PREF_LAYOUT"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@+id/input_config_barrier"
                 app:layout_constraintStart_toStartOf="parent"
@@ -606,8 +622,8 @@
                 android:layout_marginRight="5dp"
                 android:entries="@array/PREF_LAYOUT_ENTRIES"
                 android:gravity="end"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/input_config_barrier"
                 app:layout_constraintTop_toBottomOf="@+id/enable_touch_input_toggle" />
@@ -615,8 +631,9 @@
 
             <Button
                 android:id="@+id/show_key_mappings"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginHorizontal="9dp"
                 android:layout_marginVertical="4dp"
                 android:text="@string/pref_map_keys"
@@ -639,7 +656,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/show_key_mappings"
                 tools:visibility="visible" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/show_virtual_keyboard_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -662,8 +679,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/pref_button_shape_title"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@+id/input_config_barrier"
                 app:layout_constraintStart_toStartOf="parent"
@@ -677,15 +694,15 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:entries="@array/pref_button_shape_entries"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/input_config_barrier"
                 app:layout_constraintTop_toBottomOf="@+id/show_virtual_keyboard_toggle" />
             <!-- End key shape type -->
 
             <!-- Keys vibration feedback -->
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/enable_haptic_feedback_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -706,8 +723,8 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/PREF_VK_ALPHA"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@+id/input_config_barrier"
                 app:layout_constraintStart_toStartOf="parent"
@@ -726,7 +743,7 @@
                 app:layout_constraintStart_toEndOf="@+id/input_config_barrier"
                 app:layout_constraintTop_toBottomOf="@+id/enable_haptic_feedback_toggle" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/force_opacity_for_offscreen_keys_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -748,8 +765,8 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/PREF_VK_HIDE_DELAY"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@+id/input_config_barrier"
                 app:layout_constraintStart_toStartOf="parent"
@@ -779,8 +796,8 @@
                 android:layout_marginRight="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/PREF_UNIT_MS"
-                android:textColor="?attr/textColorSecondary"
-                android:textSize="15sp"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/force_opacity_for_offscreen_keys_toggle" />
 
@@ -789,8 +806,9 @@
 
             <Button
                 android:id="@+id/update_keyboard_not_pressed_button_label_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginLeft="9dp"
@@ -821,8 +839,9 @@
 
             <Button
                 android:id="@+id/update_keyboard_not_pressed_button_background_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginLeft="9dp"
@@ -853,8 +872,9 @@
 
             <Button
                 android:id="@+id/update_keyboard_pressed_button_label_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginLeft="9dp"
@@ -886,8 +906,9 @@
 
             <Button
                 android:id="@+id/update_keyboard_pressed_button_background_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginLeft="9dp"
@@ -920,8 +941,9 @@
 
             <Button
                 android:id="@+id/update_keyboard_outline_color"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="4dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginLeft="9dp"
@@ -966,9 +988,12 @@
             android:id="@+id/audio_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:padding="5dp">
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/audio_config_title"
@@ -982,7 +1007,7 @@
                 android:id="@+id/soundbank_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/audio_config_title">
@@ -993,16 +1018,16 @@
                     android:gravity="center_vertical"
                     android:text="Soundbank:"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?attr/textColorSecondary"
-                    android:textSize="15sp" />
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/soundbank_selector"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="?attr/textColorSecondary"
-                    android:textSize="15sp" />
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/browse_soundbanks"
@@ -1020,9 +1045,12 @@
             android:id="@+id/system_properties_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:padding="5dp"
+            android:padding="12dp"
             app:elevation="2dp">
 
             <TextView
@@ -1035,8 +1063,9 @@
 
             <Button
                 android:id="@+id/update_encoding"
+                style="@style/ConfigButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_margin="4dp"
                 android:text="@string/pref_encoding_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1063,9 +1092,15 @@
             android:id="@+id/other_config_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="6dp"
             android:background="?attr/bg_config_card"
-            android:paddingTop="10dp"
+            android:paddingStart="7dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="8dp"
             app:elevation="2dp">
 
             <TextView
@@ -1077,7 +1112,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/disable_pause_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
@@ -1090,11 +1125,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/config_other_title"
                 app:layout_constraintWidth_min="wrap" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/force_disable_lighting_toggle"
                 style="@style/SwitchStyle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_config_row"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:checked="false"
                 android:text="@string/PREF_FORCE_DISABLE_3D_LIGHTING"
                 app:layout_constraintEnd_toEndOf="parent"

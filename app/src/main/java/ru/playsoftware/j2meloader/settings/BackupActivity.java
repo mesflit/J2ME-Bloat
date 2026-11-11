@@ -34,6 +34,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -162,7 +163,7 @@ public class BackupActivity extends BaseActivity {
 		if (uri == null) {
 			return;
 		}
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.pref_import_data)
 				.setMessage(R.string.backup_import_confirm)
 				.setPositiveButton(R.string.pref_import_data, (dialog, which) -> startImport(uri))
@@ -192,7 +193,7 @@ public class BackupActivity extends BaseActivity {
 	private void onBackupError(Throwable throwable, int messageRes) {
 		Log.e(TAG, "Backup operation failed", throwable);
 		dismissProgress();
-		new AlertDialog.Builder(this)
+		new MaterialAlertDialogBuilder(this)
 				.setTitle(R.string.error)
 				.setMessage(messageRes)
 				.setPositiveButton(android.R.string.ok, null)
@@ -203,7 +204,7 @@ public class BackupActivity extends BaseActivity {
 		View view = getLayoutInflater().inflate(R.layout.dialog_progress, null);
 		progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setProgress(0);
-		progressDialog = new AlertDialog.Builder(this)
+		progressDialog = new MaterialAlertDialogBuilder(this)
 				.setTitle(titleRes)
 				.setView(view)
 				.setCancelable(false)

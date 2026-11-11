@@ -224,6 +224,16 @@ public class VirtualKeyboard implements Overlay, Runnable {
 		keypad[KEY_FIRE] = new VirtualKey(Canvas.KEY_FIRE, "F");
 		keypad[KEY_MENU] = new MenuKey();
 
+		// Direction keys show a drawn arrow instead of a font glyph
+		keypad[KEY_UP].arrowAngle = 0;
+		keypad[KEY_UP_RIGHT].arrowAngle = 45;
+		keypad[KEY_RIGHT].arrowAngle = 90;
+		keypad[KEY_DOWN_RIGHT].arrowAngle = 135;
+		keypad[KEY_DOWN].arrowAngle = 180;
+		keypad[KEY_DOWN_LEFT].arrowAngle = 225;
+		keypad[KEY_LEFT].arrowAngle = 270;
+		keypad[KEY_UP_LEFT].arrowAngle = 315;
+
 		layoutVariant = readLayoutType();
 
 		if (layoutVariant == -1) {
@@ -791,7 +801,7 @@ public class VirtualKeyboard implements Overlay, Runnable {
 			snapKey(i, 0);
 			VirtualKey key = keypad[i];
 			RectF rect = key.rect;
-			key.corners = (int) (Math.min(rect.width(), rect.height()) * 0.25F);
+			key.corners = (int) (Math.min(rect.width(), rect.height()) * 0.3F);
 			if (!isPhone && RectF.intersects(rect, virtualScreen)) {
 				obscuresVirtualScreen = true;
 				key.opaque = false;
@@ -1214,6 +1224,8 @@ public class VirtualKeyboard implements Overlay, Runnable {
 		boolean visible = true;
 		boolean opaque = true;
 		int corners;
+		/** Direction of the arrow drawn on the key in degrees, negative for a text label */
+		float arrowAngle = -1;
 		private final int hashCode;
 		private int repeatCount;
 
@@ -1261,7 +1273,12 @@ public class VirtualKeyboard implements Overlay, Runnable {
 					g.drawArc(rect, 0, 360);
 					break;
 			}
-			g.drawString(label, rect.centerX(), rect.centerY());
+			if (arrowAngle >= 0) {
+				float size = Math.min(rect.width(), rect.height()) * 0.2f;
+				g.fillArrow(rect.centerX(), rect.centerY(), size, arrowAngle);
+			} else {
+				g.drawString(label, rect.centerX(), rect.centerY());
+			}
 		}
 
 		@NonNull

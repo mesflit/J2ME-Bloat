@@ -17,16 +17,17 @@
             android:id="@+id/statusbar_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/primary" />
+            android:background="@color/emu_bar" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/emu_bar"
             android:descendantFocusability="blocksDescendants"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ThemeOverlay.App.EmulatorBar"
+            app:popupTheme="@style/ThemeOverlay.App.EmulatorPopup"
+            app:titleTextColor="@color/emu_on_bar"
             tools:title="MIDlet Title" />
 
         <FrameLayout

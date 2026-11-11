@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
@@ -56,7 +57,7 @@ public class SaveProfileDialog extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		configPath = requireArguments().getString(KEY_CONFIG_PATH);
 		binding = DialogSaveProfileBinding.inflate(LayoutInflater.from(getContext()));
-		AlertDialog dialog = new AlertDialog.Builder(requireActivity())
+		AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
 				.setTitle(R.string.save_profile).setView(binding.getRoot()).create();
 		binding.negativeButton.setOnClickListener(v1 -> dismiss());
 		binding.positiveButton.setOnClickListener(v1 -> {
@@ -78,7 +79,7 @@ public class SaveProfileDialog extends DialogFragment {
 	}
 
 	private void alertRewriteExists(String name) {
-		new AlertDialog.Builder(requireContext())
+		new MaterialAlertDialogBuilder(requireContext())
 				.setMessage(getString(R.string.alert_rewrite_profile, name))
 				.setPositiveButton(android.R.string.ok, (dialog, which) -> save(name))
 				.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
